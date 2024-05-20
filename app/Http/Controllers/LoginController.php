@@ -15,7 +15,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-    dump('doing testing  ');
         return view('Login/index');
     }
 
@@ -26,10 +25,10 @@ class LoginController extends Controller
             if ($userId) {
                 return redirect()->route('dashboard');
             } else {
-                return view('login.index');
+                return view('Login.index');
             }
         }
-        
+
         if ($request->isMethod('post')) {
             $credentials = $request->validate([
 
@@ -43,21 +42,21 @@ class LoginController extends Controller
                         return redirect()->intended('dashboard');
                     }else{
                         Auth::logout();
-                     
+
                     }
                 }
-    
+
                 return back()->withErrors([
                     'credentials_error' => 'The provided credentials do not match our records.',
                 ])->onlyInput('email');
         }
 
-   
+
     }
 
     public function logOut()
     {
-       
+
          Session::flush();
          Auth::logout();
          return Redirect('/');
@@ -65,7 +64,7 @@ class LoginController extends Controller
 
     public function forgotPasswordView()
     {
-        
+
         return view('auth.forgot-password');
     }
 
@@ -75,7 +74,7 @@ class LoginController extends Controller
             'email' => 'required|email',
         ]);
         $recipient = User::where('email', $request->email)->first();
-        
+
         if($recipient){
             $token = Str::random(64);
             DB::table('password_reset_tokens')->updateOrInsert(
@@ -109,9 +108,9 @@ class LoginController extends Controller
 
     public function resetPassword($token)
     {
-       
+
         $email = request()->input('email');
-        
+
         return view('auth.reset-password', ['token' => $token,'email' => $email]);
     }
 
@@ -124,7 +123,7 @@ class LoginController extends Controller
 
         $updatePassword = DB::table('password_reset_tokens')
         ->where([
-          'email' => $request->email, 
+          'email' => $request->email,
           'token' => $request->token
         ])
         ->first();
