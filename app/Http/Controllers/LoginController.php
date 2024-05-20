@@ -15,7 +15,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-    dump('doing testing');
+    dump('doing testing  ');
         return view('Login/index');
     }
 
