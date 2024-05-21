@@ -3,20 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SalaryController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+
 */
-
-
-
 
  Route::match(['get', 'post'], '/', [LoginController::class, 'index']);
  Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
@@ -28,9 +22,10 @@ use App\Http\Controllers\LoginController;
 
  Route::group(['middleware' => ['auth']], function() {  
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/salart-head', [SalaryController::class, 'index'])->name('salaryHead');
+    Route::post('/salaryHead', [SalaryController::class, 'store']);
  });
 
- 
 
 
 
