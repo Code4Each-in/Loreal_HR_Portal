@@ -23,11 +23,15 @@
                             </main>
                         </div>
                 </div>
-                </main>
+    </main>
 
   @include('layout.sections.footer')
 
   @include('layout.includes.js')
+  <script type="text/javascript">
+    $(document).ready(function() {});
+    </script>
+    @yield('js_scripts')
 
 
 </body>
