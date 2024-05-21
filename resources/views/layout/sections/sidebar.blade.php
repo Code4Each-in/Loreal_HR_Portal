@@ -30,9 +30,19 @@
               <i class="bi bi-circle"></i><span>Accordion</span>
             </a>
           </li>
-        
+
         </ul>
       </li> -->
     </ul>
 
   </aside>
+        <a class="nav-link collapsed" href="{{ route('user.listing') }}">
+          <i class="bi bi-person"></i>
+          <span>Users</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->

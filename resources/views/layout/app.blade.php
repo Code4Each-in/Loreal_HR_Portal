@@ -13,9 +13,9 @@
   <main id="main" class="main">
                     <div class="pagetitle">
                         <h1>@yield('sub-title')</h1>
-                    </div><!-- End Page Title -->  
+                    </div><!-- End Page Title -->
                 <div id="app">
-                        <div class="row">                             
+                        <div class="row">
                             <main class="col">
                                 <!--begin::Main-->
                                 @yield('content')
@@ -33,7 +33,7 @@
     </script>
     @yield('js_scripts')
 
-
+  @yield('js_scripts')
 </body>
 
 </html>

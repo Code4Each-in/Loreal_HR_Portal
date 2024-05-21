@@ -35,3 +35,14 @@ Route::group(['middleware' => ['auth']], function () {
     //Route for register
     Route::get('/registration', [UsersController::class, 'registration'])->name('register-user');
     Route::post('/register', [UsersController::class, 'register'])->name('user.create');
+
+    Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
+
+    Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
+
+    Route::post('/users/{id}/deactivate', [UsersController::class, 'deactivateUser'])->name('user.deactivate');
+
+
+
+
+

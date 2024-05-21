@@ -62,5 +62,26 @@ class UsersController extends Controller
     $users = User::all();
     return view('Users.listing', compact('users'));
 }
+public function activateUser(Request $request, $id)
+{
+    // Find the user by ID
+    $user = User::findOrFail($id);
+    // Set user status to active
+    $user->status = 1;
+    $user->save();
+
+    return response()->json(['status' => 'success']);
+}
+public function deactivateUser(Request $request, $id)
+    {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Set user status to inactive (0)
+        $user->status = 0;
+        $user->save();
+
+        return response()->json(['status' => 'success']);
+    }
 }
 
