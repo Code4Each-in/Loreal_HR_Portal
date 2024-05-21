@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SalaryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +29,9 @@ use App\Http\Controllers\SalaryController;
  });
 
 
-
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+    //Route for register
+    Route::get('/registration', [UsersController::class, 'registration'])->name('register-user');
+    Route::post('/register', [UsersController::class, 'register'])->name('user.create');
