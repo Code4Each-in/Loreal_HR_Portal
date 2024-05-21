@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::9SigswmWzm4MJaJI',
+            '_route' => 'generated::FXn8idRXtLfyfdZm',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::0VmMtxgQpxCK32hd',
+            '_route' => 'generated::DdPANERMQLSZGpTQ',
           ),
           1 => NULL,
           2 => 
@@ -164,7 +164,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::EMWEnkI2NHSEAQXd',
+            '_route' => 'generated::kBuKfcb4k4DcQ53b',
           ),
           1 => NULL,
           2 => 
@@ -239,13 +239,52 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::VLKcOqHQQpuRcZVh',
+            '_route' => 'generated::69ION6UnVUUCVDoP',
           ),
           1 => NULL,
           2 => 
           array (
             'GET' => 0,
             'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/salart-head' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'salaryHead',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/salaryHead' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::oIkhujZV3wTxVh4X',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -266,7 +305,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::2bIeEglVulIORUDX',
+            '_route' => 'generated::IojUBJK7fjSXfxxG',
           ),
           1 => 
           array (
@@ -444,7 +483,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::9SigswmWzm4MJaJI' => 
+    'generated::FXn8idRXtLfyfdZm' => 
     array (
       'methods' => 
       array (
@@ -461,13 +500,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000050c0000000000000000";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000052c0000000000000000";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::9SigswmWzm4MJaJI',
+        'as' => 'generated::FXn8idRXtLfyfdZm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -483,7 +522,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::0VmMtxgQpxCK32hd' => 
+    'generated::DdPANERMQLSZGpTQ' => 
     array (
       'methods' => 
       array (
@@ -505,7 +544,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::0VmMtxgQpxCK32hd',
+        'as' => 'generated::DdPANERMQLSZGpTQ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -559,7 +598,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::EMWEnkI2NHSEAQXd' => 
+    'generated::kBuKfcb4k4DcQ53b' => 
     array (
       'methods' => 
       array (
@@ -580,7 +619,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::EMWEnkI2NHSEAQXd',
+        'as' => 'generated::kBuKfcb4k4DcQ53b',
       ),
       'fallback' => false,
       'defaults' => 
@@ -669,7 +708,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::2bIeEglVulIORUDX' => 
+    'generated::IojUBJK7fjSXfxxG' => 
     array (
       'methods' => 
       array (
@@ -690,7 +729,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::2bIeEglVulIORUDX',
+        'as' => 'generated::IojUBJK7fjSXfxxG',
       ),
       'fallback' => false,
       'defaults' => 
@@ -742,7 +781,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::VLKcOqHQQpuRcZVh' => 
+    'generated::69ION6UnVUUCVDoP' => 
     array (
       'methods' => 
       array (
@@ -764,7 +803,82 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::VLKcOqHQQpuRcZVh',
+        'as' => 'generated::69ION6UnVUUCVDoP',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'salaryHead' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'salart-head',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SalaryController@index',
+        'controller' => 'App\\Http\\Controllers\\SalaryController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'salaryHead',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::oIkhujZV3wTxVh4X' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'salaryHead',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SalaryController@store',
+        'controller' => 'App\\Http\\Controllers\\SalaryController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::oIkhujZV3wTxVh4X',
       ),
       'fallback' => false,
       'defaults' => 
