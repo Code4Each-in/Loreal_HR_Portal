@@ -14,12 +14,15 @@ class UsersController extends Controller
     }
     public function register(UserRequest $request)
     {
-
+        // Validate the incoming request data
         $validatedData = $request->validated();
-        // dd($validatedData);
+
+        // Check if the email already exists in the database
         if (User::where('email', $validatedData['email'])->exists()) {
             return back()->withErrors(['email' => 'Email already exists'])->withInput();
         }
+
+        // Create a new user record
         User::create([
             'Fname' => $validatedData['fname'],
             'Lname' => $validatedData['lname'],
@@ -30,8 +33,13 @@ class UsersController extends Controller
             'address' => $validatedData['address'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
+
         ]);
+
+        // Retrieve the newly created user
         $user = User::where('email', $validatedData['email'])->first();
+
+        // Prepare notification messages
         $messages = [
             'subject' => 'Welcome to ' . config('app.name'),
             'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',',
@@ -43,42 +51,16 @@ class UsersController extends Controller
             'thanks-message' => 'Thank you for choosing our application!',
         ];
 
+        // Send registration successful notification
         $user->notify(new RegistrationSuccessful($messages));
+
         return redirect()->route('login')->with('success', 'Registration successful!');
     }
-    // public function register(UserRequest $request)
-    // {
-    //     // Validate the incoming request data
-    //     $validator = \Validator::make($request->all(), [
-    //         'fname' => 'required|string',
-    //         'lname' => 'required|string',
-    //         'phone' => 'required|string',
-    //         'city' => 'required|string',
-    //         'state' => 'required|string',
-    //         'zip' => 'required|string',
-    //         'address' => 'required|string',
-    //         'email' => 'required|email|unique:users,email',
-    //         'password' => 'required|string|min:6',
-    //     ]);
-
-
-    //     if ($validator->fails()) {
-    //         return back()->withErrors($validator)->withInput();
-    //     }
-
-    //     User::create([
-    //         'Fname' => $request->input('fname'),
-    //         'Lname' => $request->input('lname'),
-    //         'phone' => $request->input('phone'),
-    //         'city' => $request->input('city'),
-    //         'state' => $request->input('state'),
-    //         'zipcode' => $request->input('zip'),
-    //         'address' => $request->input('address'),
-    //         'email' => $request->input('email'),
-    //         'password' => bcrypt($request->input('password')),
-    //     ]);
-
-    //     return redirect()->route('register-user')->with('success', 'Registration successful!');
-    // }
+    public function showListing()
+{
+    // Retrieve all users
+    $users = User::all();
+    return view('Users.listing', compact('users'));
+}
 }
 
