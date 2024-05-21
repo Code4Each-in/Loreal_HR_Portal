@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Notifications\RegistrationSuccessful;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -62,26 +63,39 @@ class UsersController extends Controller
     $users = User::all();
     return view('Users.listing', compact('users'));
 }
-public function activateUser(Request $request, $id)
+// public function activateUser(Request $request, $id)
+// {
+//     // Find the user by ID
+//     $user = User::findOrFail($id);
+//     // Set user status to active
+//     $user->status = 1;
+//     $user->save();
+
+//     return response()->json(['status' => 'success']);
+// }
+// public function deactivateUser(Request $request, $id)
+//     {
+//         // Find the user by ID
+//         $user = User::findOrFail($id);
+
+//         // Set user status to inactive (0)
+//         $user->status = 0;
+//         $user->save();
+
+//         return response()->json(['status' => 'success']);
+//     }
+public function changePassword(Request $request)
 {
-    // Find the user by ID
-    $user = User::findOrFail($id);
-    // Set user status to active
-    $user->status = 1;
+    $request->validate([
+        'password' => 'required|min:6|confirmed',
+    ]);
+
+    // Update the user's password
+    $user = User::find(auth()->user()->id);
+    $user->password = Hash::make($request->password);
     $user->save();
 
-    return response()->json(['status' => 'success']);
+    return redirect()->back()->with('success', 'Password changed successfully');
 }
-public function deactivateUser(Request $request, $id)
-    {
-        // Find the user by ID
-        $user = User::findOrFail($id);
-
-        // Set user status to inactive (0)
-        $user->status = 0;
-        $user->save();
-
-        return response()->json(['status' => 'success']);
-    }
 }
 

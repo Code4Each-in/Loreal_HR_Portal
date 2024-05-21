@@ -33,16 +33,11 @@
 
         </ul>
       </li> -->
-    </ul>
-
-  </aside>
+      <li>
         <a class="nav-link collapsed" href="{{ route('user.listing') }}">
-          <i class="bi bi-person"></i>
-          <span>Users</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-
+            <i class="bi bi-person"></i>
+            <span>Users</span>
+            </a>
+      </li>
     </ul>
-
-  </aside><!-- End Sidebar-->
+  </aside>

@@ -21,9 +21,9 @@
                 <td>{{ $user->email }}</td>
                 <td>
                     @if ($user->status == 1)
-                    <button class="btn btn-danger inactive-btn" data-user-id="{{ $user->id }}">Inactive</button>
+                    <button class="btn btn-danger">Inactive</button>
                     @else
-                    <button class="btn btn-success active-btn" data-user-id="{{ $user->id }}">Active</button>
+                    <button class="btn btn-success">Active</button>
                     @endif
                 </td>
                 <td>
@@ -33,7 +33,7 @@
                     <a href="" class="btn btn-danger">
                         <i class="bi bi-trash"></i>
                     </a>
-                    <a href="" class="btn btn-warning">
+                    <a href="#" class="btn btn-warning change-password-btn" data-toggle="modal" data-target="#changePasswordModal">
                         <i class="bi bi-key"></i>
                     </a>
                 </td>
@@ -42,83 +42,67 @@
         </tbody>
     </table>
 </div>
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.change-password') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="password">New Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirm Password</label>
+                        <input type="password" name="password_confirmation" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js_scripts')
 <script>
-   $(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('.active-btn').click(function () {
-        var userId = $(this).data('user-id');
-        // Show confirmation dialog before activating the user
-        if (confirm('Are you sure you want to activate this user?')) {
-            activateUser(userId);
-        }
-    });
-
-    $('.inactive-btn').click(function () {
-        var userId = $(this).data('user-id');
-        // Show confirmation dialog before deactivating the user
-        if (confirm('Are you sure you want to deactivate this user?')) {
-            deactivateUser(userId);
-        }
-    });
-
-    function activateUser(userId) {
-    $.ajax({
-        url: '/users/' + userId + '/activate',
-        type: 'POST',
-        data: {_token: '{{ csrf_token() }}'},
-        success: function (response) {
-            if (response.status === 'success') {
-                var btn = $('.active-btn[data-user-id="' + userId + '"]');
-                btn.text('Inactive').removeClass('btn-success').addClass('btn-danger');
-
-                // Reassign the event listener for inactive buttons
-                btn.removeClass('active-btn').addClass('inactive-btn').off('click').click(function () {
-                    var userId = $(this).data('user-id');
-                    if (confirm('Are you sure you want to deactivate this user?')) {
-                        deactivateUser(userId);
-                    }
-                });
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        },
-        error: function () {
-            alert('Failed to activate user');
-        }
+        });
+        $('.change-password-btn').click(function(e) {
+            e.preventDefault();
+            $('#changePasswordModal').modal('show');
+        });
+
+        $('#changePasswordForm').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("user.change-password") }}',
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    $('#changePasswordModal').modal('hide');
+                    alert(response.success);
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+        });
     });
-}
-
-function deactivateUser(userId) {
-    $.ajax({
-        url: '/users/' + userId + '/deactivate',
-        type: 'POST',
-        data: {_token: '{{ csrf_token() }}'},
-        success: function (response) {
-            if (response.status === 'success') {
-                var btn = $('.inactive-btn[data-user-id="' + userId + '"]');
-                btn.text('Active').removeClass('btn-danger').addClass('btn-success');
-
-                // Reassign the event listener for active buttons
-                btn.removeClass('inactive-btn').addClass('active-btn').off('click').click(function () {
-                    var userId = $(this).data('user-id');
-                    if (confirm('Are you sure you want to activate this user?')) {
-                        activateUser(userId);
-                    }
-                });
-            }
-        },
-        error: function () {
-            alert('Failed to deactivate user');
-        }
-    });
-}
-
-});
-
 </script>
 @endsection
