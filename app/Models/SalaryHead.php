@@ -17,4 +17,5 @@ class SalaryHead extends Model
         'percentage'
 
     ];
+    protected $table = 'salary_heads';
 }
