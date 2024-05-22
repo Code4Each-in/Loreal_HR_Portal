@@ -31,7 +31,7 @@
             </a>
 
       </li>
-      <!-- <li class="nav-item">
+     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Salary</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -49,6 +49,11 @@
           <li>
             <a href="{{  url('basicGrade')}}">
               <i class="bi bi-circle"></i><span>Basic Grade</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{  url('allBasicGrade')}}">
+              <i class="bi bi-circle"></i><span>All Grade</span>
             </a>
           </li>
 

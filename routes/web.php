@@ -36,9 +36,13 @@ use App\Http\Controllers\BasicGradeController;
     // End salary Head
 
     // Basic with grade pay
+    
     Route::get('/basicGrade', [BasicGradeController::class, 'index']);
+    Route::get('/redirectURL', [BasicGradeController::class, 'redirectURL']);
     Route::post('/storegrade', [BasicGradeController::class, 'store']);
-    Route::get('/allBasicGrade', [BasicGradeController::class, 'show']);
+    Route::get('/allBasicGrade', [BasicGradeController::class, 'show'])->name('allBasicGrade');
+    Route::post('/editBasicGrade', [BasicGradeController::class, 'editBasicGrade']);
+    Route::post('/updateBasicGrade', [BasicGradeController::class, 'update']);
     Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
     
      // End Basic with grade pay

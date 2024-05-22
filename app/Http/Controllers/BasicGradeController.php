@@ -26,9 +26,8 @@ class BasicGradeController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->all());
         $validated = $request->validate([
-            'grade' => 'required',
+            'grade' => 'required|unique:basic_grades',
             'basic_salary' => 'required'
         ]);
 
@@ -36,6 +35,8 @@ class BasicGradeController extends Controller
             'grade'        => $request->grade,
             'basic_salary'        => $request->basic_salary
         ]);
+
+        return redirect()->route('allBasicGrade')->with('message', 'New Grade with Basic Salary Added   successfully!'); 
     }
 
     /**
@@ -58,9 +59,30 @@ class BasicGradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function editBasicGrade(Request $request)
     {
-        //
+        $id = $request->input('id');
+         $edit_data = BasicGrade::find($id);
+         echo json_encode($edit_data);
+    }
+
+    public function update(Request $request)
+    {
+       
+        $validated = $request->validate([
+            'grade' => 'required|unique:basic_grades',
+            'basic_salary' => 'required'
+        ]);
+   
+   
+
+      $edit_form_data = array(
+         "grade"        => $request->grade,
+         "basic_salary" =>$request->basic_salary
+      );
+
+      $update_basic_grades = BasicGrade::where("id", $request->sal_head_id)->update($edit_form_data); 
+
     }
 
     /**
@@ -71,6 +93,6 @@ class BasicGradeController extends Controller
         $id = $req->sal_head_id;
         $delete = BasicGrade::find($id)->delete();
 
-       // return redirect()->back()->with('message', 'Head Title Deleted Successfully');
+        return redirect()->route('allBasicGrade')->with('message', 'Deleted  successfully!'); 
     }
 }

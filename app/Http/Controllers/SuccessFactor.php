@@ -35,4 +35,9 @@ class SuccessFactor extends Controller
      {
         echo "Privacystatement";
      }
+
+     public function redirectURL()
+     {
+      
+     }
 }

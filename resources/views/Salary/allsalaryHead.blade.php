@@ -21,7 +21,7 @@
                                     <i class="bi bi-check-circle me-1"></i>
                                     {{ session()->get('message') }}
                         </div>
-                    @endif
+  @endif
     @foreach($allsalHead as $val)
     
     <tr> 
