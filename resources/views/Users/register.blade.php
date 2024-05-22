@@ -24,17 +24,17 @@
                                     @csrf
                                     <div class="col-6">
                                         <label for="fname" class="form-label">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="fname" class="form-control" id="fname" value="{{ old('fname') }}">
-                                        @if ($errors->has('fname'))
-                                        <span style="font-size: 12px;" class="text-danger">{{ $errors->first('fname') }}</span>
+                                        <input type="text" name="firstname" class="form-control" id="fname" value="{{ old('fname') }}">
+                                        @if ($errors->has('firstname'))
+                                        <span style="font-size: 12px;" class="text-danger">{{ $errors->first('firstname') }}</span>
                                         @endif
                                     </div>
 
                                     <div class="col-6">
                                         <label for="lname" class="form-label">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="lname" class="form-control" id="lname" value="{{ old('lname') }}">
-                                        @if ($errors->has('lname'))
-                                        <span style="font-size: 12px;" class="text-danger">{{ $errors->first('lname') }}</span>
+                                        <input type="text" name="lastname" class="form-control" id="lname" value="{{ old('lname') }}">
+                                        @if ($errors->has('lastname'))
+                                        <span style="font-size: 12px;" class="text-danger">{{ $errors->first('lastname') }}</span>
                                         @endif
                                     </div>
 

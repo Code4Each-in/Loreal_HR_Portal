@@ -22,9 +22,9 @@ use App\Http\Controllers\BasicGradeController;
  Route::get('/forgot-password', [LoginController::class, 'forgotPasswordView'])->name('forgot-password');
  Route::post('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot.password');
  Route::get('/reset/password/{token}', [LoginController::class, 'resetPassword']);
- Route::post('/reset/password', [LoginController::class, 'submitResetPasswordForm'])->name('submit.reset.password'); 
+ Route::post('/reset/password', [LoginController::class, 'submitResetPasswordForm'])->name('submit.reset.password');
 
- Route::group(['middleware' => ['auth']], function() {  
+ Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // Salary  head
     Route::get('/salart-head', [SalaryController::class, 'index'])->name('salaryHead');
@@ -66,3 +66,9 @@ use App\Http\Controllers\BasicGradeController;
     //End Success factor API
 
     
+    Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
+
+    // Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
+
+    // Route::post('/users/{id}/deactivate', [UsersController::class, 'deactivateUser'])->name('user.deactivate');
+    Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
