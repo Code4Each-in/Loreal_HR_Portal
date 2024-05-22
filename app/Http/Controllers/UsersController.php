@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
@@ -57,44 +58,93 @@ class UsersController extends Controller
 
         return redirect()->route('login')->with('success', 'Registration successful!');
     }
+
+
     public function showListing()
-{
-    // Retrieve all users
-    $users = User::all();
-    return view('Users.listing', compact('users'));
-}
-// public function activateUser(Request $request, $id)
-// {
-//     // Find the user by ID
-//     $user = User::findOrFail($id);
-//     // Set user status to active
-//     $user->status = 1;
-//     $user->save();
+    {
+        // Retrieve all users
+        $users = User::all();
+        return view('Users.listing', compact('users'));
+    }
 
-//     return response()->json(['status' => 'success']);
-// }
-// public function deactivateUser(Request $request, $id)
-//     {
-//         // Find the user by ID
-//         $user = User::findOrFail($id);
+    public function getUserById(Request $request)
+    {
+        //  print_r($request->id);
+        $user = User::find($request->id);
 
-//         // Set user status to inactive (0)
-//         $user->status = 0;
-//         $user->save();
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
 
-//         return response()->json(['status' => 'success']);
-//     }
-public function changePassword(Request $request)
-{
-    $request->validate([
-        'password' => 'required|min:6|confirmed',
-    ]);
+        return response()->json(['user' => $user]);
+    }
 
-    // Update the user's password
-    $user = User::find(auth()->user()->id);
-    $user->password = Hash::make($request->password);
-    $user->save();
+    // public function update(Request $request)
+    // {
+    //     // $firstname = $request->input('formData');
+    //     $formData = [];
+    //     parse_str($request->input('formData'), $formData);
 
-    return redirect()->back()->with('success', 'Password changed successfully');
-}
+    //     // Access individual form fields
+    //     $firstName = $formData['firstname'];
+    //     // $lastName = $formData['lastname'];
+    //     // dd($firstName, "djfghdj");
+
+    //     $user = User::find($request->id);
+    //     if (!$user) {
+    //         return response()->json(['error' => 'User not found'], 404);
+    //     }
+
+    //     $validatedData = $request->validate([
+    //         'firstname' => 'required',
+    //         'lastname' => 'required',
+    //         'phone' => 'required',
+    //         'city' => 'required',
+    //         'state' => 'required',
+    //         'zip' => 'required',
+    //         'address' => 'required',
+    //         'email' => 'required|email',
+    //     ]);
+    //     // Update the user data
+    //     $user->update([
+    //         'Fname' => $validatedData['firstname'],
+    //         'Lname' => $validatedData['lastname'],
+    //         'phone' => $validatedData['phone'],
+    //         'city' => $validatedData['city'],
+    //         'state' => $validatedData['state'],
+    //         'zipcode' => $validatedData['zip'],
+    //         'address' => $validatedData['address'],
+    //         'email' => $validatedData['email'],
+    //     ]);
+
+    //     return response()->json(["status" => 1 ,'success' => 'User data updated successfully']);
+    // }
+
+    public function destroy(Request $request)
+    {
+
+        $user = User::find($request->id);
+
+        if ($user) {
+            $user->delete();
+            return response()->json(['success' => 'User deleted successfully']);
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    }
+
+
+    public function changePassword(Request $request)
+    {
+        $id = ($request->user_id);
+        $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+        $data = array(
+            "password" => Hash::make($request->password)
+        );
+        // Update the user's password
+        User::where('id', $id)->update($data);
+        return redirect()->back()->with('success', 'Password changed successfully');
+    }
 }

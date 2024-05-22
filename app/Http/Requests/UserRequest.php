@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'zip' => 'required',
             'email' => 'required|email|max:255',
             'address' => 'required',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|numeric|min:10',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:10',
             'password' => 'required|min:6|confirmed'
         ];
     }
