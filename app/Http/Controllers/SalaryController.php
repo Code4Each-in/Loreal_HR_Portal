@@ -15,7 +15,7 @@ class SalaryController extends Controller
     {
          
         $validated = $req->validate([
-            'head_title' => 'required|max:255'
+            'head_title' => 'required|unique:salary_heads'
         ]);
         $method = $req->method;
         if($method ==  "wid_formula")
@@ -38,5 +38,10 @@ class SalaryController extends Controller
 
         return redirect()->route('salaryHead')
         ->with('message', 'Salary Head added successfully!');    
+    }
+
+    public  function allsalaryHead()
+    {
+        return view('Salary.allsalaryHead');
     }
 }

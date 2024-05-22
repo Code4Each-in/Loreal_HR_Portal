@@ -26,6 +26,7 @@ use App\Http\Controllers\SalaryController;
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/salart-head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
+    Route::get('/allsalaryHead', [SalaryController::class, 'allsalaryHead']);
  });
 
 
