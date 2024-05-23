@@ -60,12 +60,20 @@ use App\Http\Controllers\BasicGradeController;
     Route::post('/register', [UsersController::class, 'register'])->name('user.create');
 
     // Success factor API
-    Route::get('/succesFactor-signin', [SuccessFactor::class, 'signin']);
-    Route::get('/succesFactor-AppID', [SuccessFactor::class, 'AppID']);
-    Route::get('/succesFactor-HomePage', [SuccessFactor::class, 'HomePage']);
-    Route::get('/succesFactor-LogOut ', [SuccessFactor::class, 'LogOut ']);
-    Route::get('/succesFactor-Termsofservice ', [SuccessFactor::class, 'Termsofservice']);
-    Route::get('/succesFactor-Privacystatement  ', [SuccessFactor::class, 'Privacystatement']);
+    // Sign on 
+        Route::get('/auth/azure', [SuccessFactor::class, 'signin']);
+    // Reply  urls
+        Route::get('/auth/azure/callback', [SuccessFactor::class, 'AppID']);
+     //App ID URI   
+        Route::get('/azure_app_id', [SuccessFactor::class, 'HomePage']);
+     // Homepage  
+        Route::get('/ ', [SuccessFactor::class, 'LogOut ']);
+    //Logout
+        Route::get('/logout', [SuccessFactor::class, 'Termsofservice']);
+     // Terms of service url   
+        Route::get('/terms_of_service', [SuccessFactor::class, 'Privacystatement']);
+     // Privacy statement   
+        Route::get('/privacy_statement', [SuccessFactor::class, 'Privacystatement']);
 
     //End Success factor API
 

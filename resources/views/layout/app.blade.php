@@ -15,6 +15,7 @@
                         <h1>@yield('sub-title')</h1>
                     </div><!-- End Page Title -->  
                 <div id="app">
+                    <div class="container">
                         <div class="row">                             
                             <main class="col">
                                 <!--begin::Main-->
@@ -22,6 +23,7 @@
                                 <!--end::Main-->
                             </main>
                         </div>
+                     </div>
                 </div>
     </main>
 

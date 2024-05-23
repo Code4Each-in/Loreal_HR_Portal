@@ -17,7 +17,7 @@
   </thead>
   <tbody>
   @if(session()->has('message'))
-                        <div class="alert alert-success fade show" role="alert">
+                        <div id="successMessage" class="alert alert-success fade show" role="alert">
                                     <i class="bi bi-check-circle me-1"></i>
                                     {{ session()->get('message') }}
                         </div>
@@ -65,4 +65,12 @@
   
   </tbody>
 </table>
+@endsection
+
+@section('js_scripts')
+<script>
+setTimeout(function() {
+    $('#successMessage').fadeOut('fast');
+}, 5000);
+</script>
 @endsection

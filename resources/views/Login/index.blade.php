@@ -29,7 +29,7 @@
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                     @if(session()->has('message'))
-                        <div class="alert alert-success fade show" role="alert">
+                        <div id="successMessage" class="alert alert-success fade show" role="alert">
                                     <i class="bi bi-check-circle me-1"></i>
                                     {{ session()->get('message') }}
                         </div>
@@ -92,7 +92,8 @@
   </main><!-- End #main -->
   @include('layout.sections.footer')
 
+  @include('layout.includes.js')
+  
+   
 
-</body>
 
-</html>
