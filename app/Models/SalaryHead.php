@@ -14,7 +14,8 @@ class SalaryHead extends Model
         'symbol',
         'amount',
         'formula',
-        'percentage'
+        'percentage',
+        'method'
 
     ];
     protected $table = 'salary_heads';

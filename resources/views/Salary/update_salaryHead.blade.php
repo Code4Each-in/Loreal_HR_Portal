@@ -1,9 +1,112 @@
-@section('title', 'Salary Head')
-@section('sub-title', 'Salary Head')
+@section('title', 'Update  Salary Head')
+@section('sub-title', 'Update  Salary Head')
 @extends('layout.app')
 
 @section('content')
+<style>
+    .calculator {
+        border: 1px solid #717377;
+        padding: 10px;
+        border-radius: 16px;
+        background: transparent;
+        box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
+    }
 
+    .calculator input {
+        width: 285px;
+        border: none;
+        padding: 7px;
+        margin: 5px;
+        background: #000;
+        box-shadow: 0px 3px 15px rgba(84, 84, 84, 0.1);
+        font-size: 30px;
+        text-align: right;
+        cursor: pointer;
+    }
+
+    .calculator input::placeholder {
+        color: #ffffff;
+    }
+
+    .calculator a {
+        border: none;
+        width: 50px;
+        height: 50px;
+        margin: 12px 12px 0px;
+        border-radius: 50%;
+        background: #898989;
+        color: #ffffff;
+        font-size: 16px;
+        box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calculator .equalBtn {
+        background-color: #fb7c14;
+    }
+
+    .calculator .operator {
+        color: #6dee0a;
+    }
+
+    .cal-section {
+        /* width: 100%; */
+        display: flex;
+        align-items: center;
+        margin: 0px auto;
+        justify-content: center;
+        /* gap: 5px; */
+    }
+
+    section.main-section {
+        display: flex;
+        justify-content: center;
+        margin: 0px auto;
+        column-gap: 30px;
+    }
+
+    section.cal2 {
+        border: 1px solid #717377;
+        padding: 10px;
+        border-radius: 16px;
+        background: transparent;
+        box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
+    }
+
+    a.button-deisgn {
+        padding: 15px 30px;
+        border: 1px solid #898989;
+        background: #898989;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 500;
+        font-family: ui-monospace;
+    }
+
+    .design-button {
+        overflow-y: scroll;
+        padding: 14px 15px 0px;
+        margin: 10px 0px 0px;
+        height: 41vh;
+    }
+
+    a.button-deisgn:hover {
+        border: 1px solid #71ee0a;
+        background: #76dd4f;
+        color: #fff;
+    }
+
+    .cal-button {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+</style>
 
 @if(session()->has('message'))
 <div class="alert alert-success fade show" role="alert">
@@ -11,14 +114,14 @@
     {{ session()->get('message') }}
 </div>
 @endif
-<form action="{{ url('salaryHead') }}" method="POST">
+<form action="{{ url('update_salary_head/'.$SalaryHead->id) }}" method="POST">
     @csrf
     <div class="modal-body">
 
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Head Title</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="head_title" id="title">
+                <input type="text" class="form-control" name="head_title" id="title" value ="{{ $SalaryHead->head_title}}">
                 @if ($errors->has('head_title'))
                 <span class="text-danger">{{ $errors->first('head_title') }}</span>
                 @endif
@@ -27,11 +130,11 @@
         <div class="row mb-3">
             <label for="content" class="col-sm-3 col-form-label required">Select the option</label>
             <div class="col-sm-3">
-                <input type="radio" id="wid_formula" name="method" value="wid_formula" checked>
+                <input type="radio" id="wid_formula" name="method" value="wid_formula" {{ ($SalaryHead->method=="wid_formula")? "checked" : "" }}>
                   <label for="wid_formula">Make Formula </label>
             </div>
             <div class="col-sm-3">
-                <input type="radio" id="fixed" name="method" value="fixed">
+                <input type="radio" id="fixed" name="method" value="fixed"  {{ ($SalaryHead->method=="fixed")? "checked" : "" }}>
                   <label for="fixed">Fixed</label>
             </div>
         </div>
@@ -109,7 +212,8 @@
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula</label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50" >
+                    {{ $SalaryHead->formula}}
             </textarea>
                     <a id="clearFormula" onclick="clearFormulaOutput()">Clear</a>
                 </div>
@@ -121,7 +225,7 @@
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Amount</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="amount" id="title">
+                <input type="text" class="form-control" name="amount" id="title" value="{{ $SalaryHead->amount}}">
             </div>
         </div>
     </div>
@@ -138,9 +242,16 @@
 <script>
     $(document).ready(function() {
         // By default, hide the amount div and show the formula div
+        @if($SalaryHead->method=="fixed")
+        $('#only_amt').show();
+        $('#formula_div').hide();
+        @endif  
+        
+        @if($SalaryHead->method=="wid_formula")
         $('#only_amt').hide();
         $('#formula_div').show();
-
+        @endif  
+      
         $("input[name='method']").click(function() {
             var selectedValue = $(this).val();
             if (selectedValue == "wid_formula") {

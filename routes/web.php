@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\SuccessFactor;
+use App\Http\Controllers\BasicGradeController;
 
 
 /*
@@ -24,19 +26,50 @@ use App\Http\Controllers\SalaryController;
 
  Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Salary  head
     Route::get('/salart-head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
-    Route::get('/allsalaryHead', [SalaryController::class, 'allsalaryHead']);
+    Route::get('/allsalaryHead', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
+    Route::get('/edit_salary_head/{id}', [SalaryController::class, 'edit_salary_head']);
+    Route::post('/update_salary_head/{id}', [SalaryController::class, 'update_salary_head']);
+    Route::post('/delete_sal_head', [SalaryController::class, 'delete_sal_head']);
+    // End salary Head
+
+    // Basic with grade pay
+    
+    Route::get('/basicGrade', [BasicGradeController::class, 'index']);
+    Route::get('/redirectURL', [BasicGradeController::class, 'redirectURL']);
+    Route::post('/storegrade', [BasicGradeController::class, 'store']);
+    Route::get('/allBasicGrade', [BasicGradeController::class, 'show'])->name('allBasicGrade');
+    Route::post('/editBasicGrade', [BasicGradeController::class, 'editBasicGrade']);
+    Route::post('/updateBasicGrade', [BasicGradeController::class, 'update']);
+    Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
+    
+     // End Basic with grade pay
+
+
  });
 
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
+// Route::group(['middleware' => ['auth']], function () {
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// });
     //Route for register
     Route::get('/registration', [UsersController::class, 'registration'])->name('register-user');
     Route::post('/register', [UsersController::class, 'register'])->name('user.create');
 
+    // Success factor API
+    Route::get('/succesFactor-signin', [SuccessFactor::class, 'signin']);
+    Route::get('/succesFactor-AppID', [SuccessFactor::class, 'AppID']);
+    Route::get('/succesFactor-HomePage', [SuccessFactor::class, 'HomePage']);
+    Route::get('/succesFactor-LogOut ', [SuccessFactor::class, 'LogOut ']);
+    Route::get('/succesFactor-Termsofservice ', [SuccessFactor::class, 'Termsofservice']);
+    Route::get('/succesFactor-Privacystatement  ', [SuccessFactor::class, 'Privacystatement']);
+
+    //End Success factor API
+
+    
     Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
 
     // Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
