@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Notifications\RegistrationSuccessful;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -55,8 +57,9 @@ class UsersController extends Controller
 
         // Send registration successful notification
         $user->notify(new RegistrationSuccessful($messages));
+        Session::flash('message', 'Registration successful! You can now log in.');
 
-        return redirect()->route('login')->with('success', 'Registration successful!');
+        return redirect()->route('login');
     }
 
 
@@ -73,52 +76,60 @@ class UsersController extends Controller
         $user = User::find($request->id);
 
         if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json(['error' => 'User not found']);
         }
 
         return response()->json(['user' => $user]);
     }
 
-    // public function update(Request $request)
-    // {
-    //     // $firstname = $request->input('formData');
-    //     $formData = [];
-    //     parse_str($request->input('formData'), $formData);
+    public function toggleStatus(Request $request)
+    {
+        $user = User::find($request->userId);
+        $new_status = 0;
+        if($request->status == 0){
+            $new_status = 1;
+        }
+            $user->status = $new_status;
+            $user->save();
+            Session::flash('message', 'User status updated successfully');
+            return response()->json(['success' => 'Status updates successfully']);
+    }
+    /**
+     * UPDATE USER DATA
+     * @param request
+     * @return response
+     */
+    public function update(Request $request)
+    {
+        $user = User::find($request->id);
 
-    //     // Access individual form fields
-    //     $firstName = $formData['firstname'];
-    //     // $lastName = $formData['lastname'];
-    //     // dd($firstName, "djfghdj");
+        if ($user) {
+            $validatedData = $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'phone' => 'required',
+                'city' => 'required',
+                'state' => 'required',
+                'zip' => 'required',
+                'address' => 'required',
+                'email' => 'required|email|max:255',
+            ]);
+            //dd($validatedData);
 
-    //     $user = User::find($request->id);
-    //     if (!$user) {
-    //         return response()->json(['error' => 'User not found'], 404);
-    //     }
-
-    //     $validatedData = $request->validate([
-    //         'firstname' => 'required',
-    //         'lastname' => 'required',
-    //         'phone' => 'required',
-    //         'city' => 'required',
-    //         'state' => 'required',
-    //         'zip' => 'required',
-    //         'address' => 'required',
-    //         'email' => 'required|email',
-    //     ]);
-    //     // Update the user data
-    //     $user->update([
-    //         'Fname' => $validatedData['firstname'],
-    //         'Lname' => $validatedData['lastname'],
-    //         'phone' => $validatedData['phone'],
-    //         'city' => $validatedData['city'],
-    //         'state' => $validatedData['state'],
-    //         'zipcode' => $validatedData['zip'],
-    //         'address' => $validatedData['address'],
-    //         'email' => $validatedData['email'],
-    //     ]);
-
-    //     return response()->json(["status" => 1 ,'success' => 'User data updated successfully']);
-    // }
+            // Update the user data
+            $user->update([
+                'Fname' => $validatedData['firstname'],
+                'Lname' => $validatedData['lastname'],
+                'phone' => $validatedData['phone'],
+                'city' => $validatedData['city'],
+                'state' => $validatedData['state'],
+                'zipcode' => $validatedData['zip'],
+                'address' => $validatedData['address'],
+                'email' => $validatedData['email'],
+            ]);
+            Session::flash('message', 'User data updated successfully');
+        }
+    }
 
     public function destroy(Request $request)
     {
@@ -127,9 +138,7 @@ class UsersController extends Controller
 
         if ($user) {
             $user->delete();
-            return response()->json(['success' => 'User deleted successfully']);
-        } else {
-            return response()->json(['error' => 'User not found'], 404);
+            Session::flash('message', 'User deleted successfully');
         }
     }
 
@@ -137,14 +146,19 @@ class UsersController extends Controller
     public function changePassword(Request $request)
     {
         $id = ($request->user_id);
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'password' => 'required|min:6|confirmed',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
         $data = array(
             "password" => Hash::make($request->password)
         );
         // Update the user's password
         User::where('id', $id)->update($data);
-        return redirect()->back()->with('success', 'Password changed successfully');
+        Session::flash('message', 'Password changed successfully');
     }
 }
