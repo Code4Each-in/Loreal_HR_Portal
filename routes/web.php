@@ -75,4 +75,7 @@ use App\Http\Controllers\BasicGradeController;
     // Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
 
     // Route::post('/users/{id}/deactivate', [UsersController::class, 'deactivateUser'])->name('user.deactivate');
+    Route::post('/users/edit', [UsersController::class, 'getUserById'])->name('user.get');
+    // Route::post('/users/update', [UsersController::class, 'update'])->name('user.update');
+    Route::delete('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
