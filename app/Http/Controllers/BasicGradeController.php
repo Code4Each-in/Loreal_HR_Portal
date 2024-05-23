@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BasicGrade;
+use Session;
+
 class BasicGradeController extends Controller
 {
     /**
@@ -70,18 +72,25 @@ class BasicGradeController extends Controller
     {
        
         $validated = $request->validate([
-            'grade' => 'required|unique:basic_grades',
+            'grade' => 'required',
             'basic_salary' => 'required'
         ]);
    
-   
-
       $edit_form_data = array(
          "grade"        => $request->grade,
          "basic_salary" =>$request->basic_salary
       );
 
       $update_basic_grades = BasicGrade::where("id", $request->sal_head_id)->update($edit_form_data); 
+      if($update_basic_grades) {
+        $request->session()->flash('message', 'Updated successfully.');
+        return Response()->json(['status' => 200 , "message" => "Updated successfully"]);
+
+      }
+      else {
+        return response()->json(['status' => 400, 'error' => 'Failed to update.']);
+    }
+  
 
     }
 

@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         @if(session()->has('message'))
-        <div class="alert alert-success fade show" role="alert">
+        <div id="successMessage" class="alert alert-success fade show" role="alert">
             <i class="bi bi-check-circle me-1"></i>
             {{ session()->get('message') }}
         </div>
@@ -154,12 +154,12 @@
                     $('.alert-danger').html('');
                    $("#updatemodel").modal('hide');
                   location.reload();
+               
+                
                 },
                 error: function(xhr, status, error){
                     // Handle error
                     var errorMessage = JSON.parse(xhr.responseText);
-                   // console.error(errorMessage.message);
-                   // console.error(errorMessage.errors);
                     displayErrors(errorMessage.errors);
                 }
             });
@@ -176,6 +176,14 @@
         $('.alert-danger').show();
     }
 </script>
+
+<script>
+    setTimeout(function() {
+        $('#successMessage').fadeOut('fast');
+    }, 2000);
+</script>
+
+
 
 
 

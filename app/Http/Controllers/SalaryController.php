@@ -13,13 +13,17 @@ class SalaryController extends Controller
      
     public function store(Request $req)
     {
-         
-        $validated = $req->validate([
-            'head_title' => 'required|unique:salary_heads'
-        ]);
+       
+       
+       
         $method = $req->method;
         if($method ==  "wid_formula")
         {
+            $validated = $req->validate([
+            'head_title' => 'required|unique:salary_heads',
+            'formulaOutput' => 'required',
+
+            ]);
            $salary_head = SalaryHead::create([
                'head_title'        => $req->head_title,
                'formula'           => $req->formulaOutput,
@@ -28,14 +32,24 @@ class SalaryController extends Controller
       
           }
         else{
+            
+            $validated = $req->validate([
+                'head_title' => 'required|unique:salary_heads',
+                'amount' => 'required',
+    
+                ]);
+                    $salary_head = SalaryHead::create([
+                        'head_title'        => $req->head_title,
+                        'formula'           => '',
+                        'amount'            =>$req->amount,
+                        'method'            => $req->method
+                  
+                    ]);
+               
 
-           $salary_head = SalaryHead::create([
-               'head_title'        => $req->head_title,
-               'formula'           => '',
-               'amount'            =>$req->amount,
-               'method'            => $req->method
+
+        
          
-           ]);
         }
 
         return redirect()->route('allsalaryHead')
@@ -60,7 +74,7 @@ class SalaryController extends Controller
     { 
      
         $validated = $req->validate([
-            'head_title' => 'required|unique:salary_heads'
+            'head_title' => 'required'
         ]);
    
           $method = $req->method;

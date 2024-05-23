@@ -3,113 +3,9 @@
 @extends('layout.app')
 
 @section('content')
-<style>
-    .calculator {
-        border: 1px solid #717377;
-        padding: 10px;
-        border-radius: 16px;
-        background: transparent;
-        box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
-    }
-
-    .calculator input {
-        width: 285px;
-        border: none;
-        padding: 7px;
-        margin: 5px;
-        background: #000;
-        box-shadow: 0px 3px 15px rgba(84, 84, 84, 0.1);
-        font-size: 30px;
-        text-align: right;
-        cursor: pointer;
-    }
-
-    .calculator input::placeholder {
-        color: #ffffff;
-    }
-
-    .calculator a {
-        border: none;
-        width: 50px;
-        height: 50px;
-        margin: 12px 12px 0px;
-        border-radius: 50%;
-        background: #898989;
-        color: #ffffff;
-        font-size: 16px;
-        box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1);
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .calculator .equalBtn {
-        background-color: #fb7c14;
-    }
-
-    .calculator .operator {
-        color: #6dee0a;
-    }
-
-    .cal-section {
-        /* width: 100%; */
-        display: flex;
-        align-items: center;
-        margin: 0px auto;
-        justify-content: center;
-        /* gap: 5px; */
-    }
-
-    section.main-section {
-        display: flex;
-        justify-content: center;
-        margin: 0px auto;
-        column-gap: 30px;
-    }
-
-    section.cal2 {
-        border: 1px solid #717377;
-        padding: 10px;
-        border-radius: 16px;
-        background: transparent;
-        box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
-    }
-
-    a.button-deisgn {
-        padding: 15px 30px;
-        border: 1px solid #898989;
-        background: #898989;
-        color: #fff;
-        border-radius: 5px;
-        font-size: 20px;
-        font-weight: 500;
-        font-family: ui-monospace;
-    }
-
-    .design-button {
-        overflow-y: scroll;
-        padding: 14px 15px 0px;
-        margin: 10px 0px 0px;
-        height: 41vh;
-    }
-
-    a.button-deisgn:hover {
-        border: 1px solid #71ee0a;
-        background: #76dd4f;
-        color: #fff;
-    }
-
-    .cal-button {
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-    }
-</style>
 
 @if(session()->has('message'))
-<div class="alert alert-success fade show" role="alert">
+<div id="successMessage" class="alert alert-success fade show" role="alert">
     <i class="bi bi-check-circle me-1"></i>
     {{ session()->get('message') }}
 </div>
@@ -121,7 +17,7 @@
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Head Title</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="head_title" id="title" value ="{{ $SalaryHead->head_title}}">
+                <input type="text" class="form-control" name="head_title" id="head_title" value ="{{ $SalaryHead->head_title}}">
                 @if ($errors->has('head_title'))
                 <span class="text-danger">{{ $errors->first('head_title') }}</span>
                 @endif
@@ -139,7 +35,7 @@
             </div>
         </div>
 
-        <div id="formula_div">
+        <div id="formula_div" <?php if($SalaryHead->method=="fixed") { ?> style="display: none;" <?php } ?>>
             <section class="main-section">
             <section class="cal2">
                     <div class="design-button">
@@ -300,5 +196,14 @@
         })
     })
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("#head_title").focus(function(){
+           alert("lkmlk");
+        });
+    });
+</script>
+
 
 @endsection
