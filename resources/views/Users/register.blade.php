@@ -24,7 +24,7 @@
                                     @csrf
                                     <div class="col-6">
                                         <label for="fname" class="form-label">First Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="firstname" class="form-control" id="fname" value="{{ old('fname') }}">
+                                        <input type="text" name="firstname" class="form-control" id="fname" value="{{ old('firstname') }}">
                                         @if ($errors->has('firstname'))
                                         <span style="font-size: 12px;" class="text-danger">{{ $errors->first('firstname') }}</span>
                                         @endif
@@ -32,7 +32,7 @@
 
                                     <div class="col-6">
                                         <label for="lname" class="form-label">Last Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="lastname" class="form-control" id="lname" value="{{ old('lname') }}">
+                                        <input type="text" name="lastname" class="form-control" id="lname" value="{{ old('lastname') }}">
                                         @if ($errors->has('lastname'))
                                         <span style="font-size: 12px;" class="text-danger">{{ $errors->first('lastname') }}</span>
                                         @endif
@@ -127,3 +127,5 @@
     </div>
 </main><!-- End #main -->
 @include('layout.sections.footer')
+
+

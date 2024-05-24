@@ -36,7 +36,7 @@ use App\Http\Controllers\BasicGradeController;
     // End salary Head
 
     // Basic with grade pay
-    
+
     Route::get('/basicGrade', [BasicGradeController::class, 'index']);
     Route::get('/redirectURL', [BasicGradeController::class, 'redirectURL']);
     Route::post('/storegrade', [BasicGradeController::class, 'store']);
@@ -44,10 +44,14 @@ use App\Http\Controllers\BasicGradeController;
     Route::post('/editBasicGrade', [BasicGradeController::class, 'editBasicGrade']);
     Route::post('/updateBasicGrade', [BasicGradeController::class, 'update']);
     Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
-    
-     // End Basic with grade pay
 
-
+    // End Basic with grade pay
+    Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
+    Route::post('/users/edit', [UsersController::class, 'getUserById'])->name('user.get');
+    Route::post('/users/update', [UsersController::class, 'update'])->name('user.update');
+    Route::delete('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
+    Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
+    Route::get('/toggle-user-status', [UsersController::class, 'toggleStatus'])->name('toggle-user-status');
  });
 
 
@@ -77,13 +81,9 @@ use App\Http\Controllers\BasicGradeController;
 
     //End Success factor API
 
-    
-    Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
+
+
 
     // Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
 
     // Route::post('/users/{id}/deactivate', [UsersController::class, 'deactivateUser'])->name('user.deactivate');
-    Route::post('/users/edit', [UsersController::class, 'getUserById'])->name('user.get');
-    // Route::post('/users/update', [UsersController::class, 'update'])->name('user.update');
-    Route::delete('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
-    Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
