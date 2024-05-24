@@ -41,16 +41,10 @@
                     <div class="design-button">
                         <h4>Salary Head</h4>
                         <div class="cal-button ">
-                            <a onclick="showFormula('{BASIC}')" class="button-deisgn">Basic</a>
-                            <a onclick="showFormula('{HRA}')" class="button-deisgn">HRA</a>
-                            <a onclick="showFormula('{Edu}')" class="button-deisgn">Edu</a>
-                            <a onclick="showFormula('{SP_ALW}')"  class="button-deisgn">Sp Alw</a>
-                            <a onclick="showFormula('{WPS}')"  class="button-deisgn">WPS</a>
-                            <a onclick="showFormula('{CAR}')"  class="button-deisgn">CAR</a>
-                            <a onclick="showFormula('{MEAL}')"  class="button-deisgn">MEAL</a>
-                            <a onclick="showFormula('{PF}')"  class="button-deisgn">PF</a>
-                            <a onclick="showFormula('{TOTAL_BASE}')"  class="button-deisgn">TOTAL BASE</a>
-                            <a onclick="showFormula('{VPP}')"  class="button-deisgn">VPP</a>
+                        @foreach($all_master_head as $val)
+                        <a onclick="showFormula('{{$val->formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                        @endforeach
+                  
                           
                         </div>
                     </div>
@@ -71,7 +65,7 @@
                 <section class="calculator">
                     <!-- <input type="text" placeholder="0" id="inputBox"> -->
                     <div class="cal-section">
-                        <a onclick="clearFormulaOutput()" class="operator">AC</a>
+                        <a onclick="clearFormulaOutput()" class="operator">AC</a> 
                         <a onclick="showFormula('/')" class="operator">/</a>
                         <a onclick="showFormula('%')" class="operator">%</a>
                         <a onclick="showFormula('÷')" class="operator">÷</a>
