@@ -37,12 +37,14 @@ class LoginController extends Controller
             ]);
             if (Auth::attempt($credentials)) {
                 $user = User::where('email', $credentials['email'])->first();
-                    if ($user) {
+                    if ($user&& $user->status == 1 && Auth::attempt($credentials)) {
                         $request->session()->regenerate();
                         return redirect()->intended('dashboard');
-                    }else{
+                    }else {
                         Auth::logout();
-
+                        return back()->withErrors([
+                            'credentials_error' => 'Your status has been inactive recently. Please contact your administrator.',
+                        ])->onlyInput('email');
                     }
                 }
 

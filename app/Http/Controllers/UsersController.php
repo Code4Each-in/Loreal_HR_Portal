@@ -82,6 +82,9 @@ class UsersController extends Controller
         return response()->json(['user' => $user]);
     }
 
+    /**
+     *
+     */
     public function toggleStatus(Request $request)
     {
         $user = User::find($request->userId);
@@ -101,9 +104,9 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find($request->id);
+        $userToUpdate = User::find($request->edit_form_id);
 
-        if ($user) {
+        if ($userToUpdate) {
             $validatedData = $request->validate([
                 'firstname' => 'required',
                 'lastname' => 'required',
@@ -117,16 +120,17 @@ class UsersController extends Controller
             //dd($validatedData);
 
             // Update the user data
-            $user->update([
-                'Fname' => $validatedData['firstname'],
-                'Lname' => $validatedData['lastname'],
-                'phone' => $validatedData['phone'],
-                'city' => $validatedData['city'],
-                'state' => $validatedData['state'],
-                'zipcode' => $validatedData['zip'],
-                'address' => $validatedData['address'],
-                'email' => $validatedData['email'],
-            ]);
+            $userToUpdate->where('id',$request->edit_form_id)
+                        ->update([
+                            'Fname' => $validatedData['firstname'],
+                            'Lname' => $validatedData['lastname'],
+                            'phone' => $validatedData['phone'],
+                            'city' => $validatedData['city'],
+                            'state' => $validatedData['state'],
+                            'zipcode' => $validatedData['zip'],
+                            'address' => $validatedData['address'],
+                            'email' => $validatedData['email'],
+                        ]);
             Session::flash('message', 'User data updated successfully');
         }
     }
