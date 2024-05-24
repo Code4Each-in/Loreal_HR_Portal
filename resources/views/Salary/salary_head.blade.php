@@ -218,13 +218,19 @@ $form_type = (old('formType') );
         formAction += "?formType=fixed";
         document.getElementById('salaryForm').setAttribute('action', formAction);
     });
+    
+    document.getElementById('wid_formula').addEventListener('click', function() {
+        let formAction = "{{ url('salaryHead') }}";
+        formAction += "?formType=wid_formula";
+        document.getElementById('salaryForm').setAttribute('action', formAction);
+
+    });
+
 </script>
 
 <script>
     var formType = '{{ old('formType') }}';
-  
     if (formType === 'fixed') {
-      
         document.getElementById('formula_div').style.display = 'none';
         document.getElementById('fixed').checked = true;
         document.getElementById('fixed').click();
