@@ -7,7 +7,7 @@
         {{ session()->get('message') }}
     </div>
     @endif
-    <table class="table">
+    <table class="table" id="pagination" style="width:100%">
         <thead>
             <tr>
                 <th>#</th>
@@ -47,6 +47,7 @@
         </tbody>
     </table>
 </div>
+
 <!-- Edit UserData Modal -->
 <div class="modal fade" id="editUserDataModal" tabindex="-1" role="dialog" aria-labelledby="editUserDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -59,10 +60,10 @@
                 <form action="" method="POST" id="update_form">
                     @csrf
                     <div class="alert alert-danger" style="display:none"></div>
-                    <input type="hidden" name="id" class="form-control">
                     <div class="form-group">
+                        <input type="hidden" name="edit_form_id" id="edit_form_id" class="form-control">
                         <label for="firstname">First Name<span class="text-danger">*</span></label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" required>
+                        <input type="text" name="firstname" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="lastname">Last Name<span class="text-danger">*</span></label>
@@ -94,13 +95,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="updateForm" class="btn btn-primary" data-user-id="{{ $user->id }}">Update</button>
+                        <button type="button" id="updateForm" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</div><!--##user update modal-->
+
 <!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -142,13 +144,16 @@
             }
         }, 3000);
     });
+
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
+        $('#pagination').DataTable({
+            searching: true
+        });
         //for active and inactive user->status(0,1)
         $('.status-toggle').click(function() {
             var userId = $(this).data('user-id');
@@ -162,8 +167,8 @@
                     status: status
                 },
                 success: function(response) {
-                   // console.log(response);
-                    if(response){
+                    // console.log(response);userdata
+                    if (response) {
 
                         location.reload();
                     }
@@ -179,6 +184,7 @@
         $('.edit-userdata-btn').click(function(e) {
             e.preventDefault();
             var userId = $(this).data('user-id');
+            // $('#user_id').val(userId);
             vdata = {
                 id: userId
             };
@@ -186,8 +192,9 @@
                 type: 'post',
                 url: "{{ url('users/edit') }}",
                 data: vdata,
-                success: function(response) {
-                    console.log(response);
+                success: function(response)
+                {
+
                     $('input[name="firstname"]').val(response.user.Fname);
                     $('input[name="lastname"]').val(response.user.Lname);
                     $('input[name="phone"]').val(response.user.phone);
@@ -196,9 +203,10 @@
                     $('input[name="zip"]').val(response.user.zipcode);
                     $('input[name="address"]').val(response.user.address);
                     $('input[name="email"]').val(response.user.email);
-                    $('input[name="id"]').val(response.user.id);
+                    $('input[name="edit_form_id"]').val(response.user.id);
 
                     $('#editUserDataModal').modal('show');
+
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -210,13 +218,11 @@
         $('#updateForm').click(function(e) {
 
             e.preventDefault();
-            var form = $('#update_form')[0];
-            var userId = $(this).data('user-id');
-
             $.ajax({
                 type: 'post',
                 url: "/users/update",
-                data: {
+                data:
+                {
                     'firstname': $("input[name=firstname]").val(),
                     'lastname': $("input[name=lastname]").val(),
                     'phone': $("input[name=phone]").val(),
@@ -225,16 +231,14 @@
                     'zip': $("input[name=zip]").val(),
                     'address': $("input[name=address]").val(),
                     'email': $("input[name=email]").val(),
-                    'id': userId
+                    'edit_form_id': $("input[name=edit_form_id]").val(),
                 },
                 success: function(response) {
-                    // console.log(response);
                     $('#editUserDataModal').modal('hide');
                     location.reload();
                 },
                 error: function(xhr, status, error) {
                     var errorMessage = JSON.parse(xhr.responseText);
-                    //  console.log(errorMessage.errors);
                     var validationErrors = errorMessage.errors;
                     var html = "<ul>";
                     $.each(validationErrors, function(key, value) {
@@ -245,7 +249,6 @@
                     html += "</ul>";
                     $('.alert-danger').html(html);
                     $('.alert-danger').show();
-                    //displayErrors(errorMessage.errors);
                 }
             });
         });
