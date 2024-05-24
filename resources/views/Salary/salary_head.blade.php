@@ -11,12 +11,21 @@
     {{ session()->get('message') }}
 </div>
 @endif
-<form action="{{ url('salaryHead') }}" method="POST">
+
+
+ {{ old('formType')  }}
+  <?php 
+$form_type = (old('formType') ); 
+echo $form_type;
+?>
+
+
+<form id="salaryForm" class="form-design" action="{{ url('salaryHead') }}" method="POST">
     @csrf
     <div class="modal-body">
 
         <div class="row mb-3 mt-4">
-            <label for="title" class="col-sm-3 col-form-label required">Head Title</label>
+            <label for="title" class="col-sm-3 col-form-label required">Head Title  <span class='asterisk'>*</span></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="head_title" id="title">
                 @if ($errors->has('head_title'))
@@ -36,35 +45,35 @@
             </div>
         </div>
 
-        <div id="formula_div">
+        <div id="formula_div" <?php if($form_type=="fixed") { ?> style="display: none;" <?php } ?>>
             <section class="main-section">
-            <section class="cal2">
+                <section class="cal2">
                     <div class="design-button">
                         <h4>Salary Head</h4>
                         <div class="cal-button ">
                             <a onclick="showFormula('{BASIC}')" class="button-deisgn">Basic</a>
                             <a onclick="showFormula('{HRA}')" class="button-deisgn">HRA</a>
                             <a onclick="showFormula('{Edu}')" class="button-deisgn">Edu</a>
-                            <a onclick="showFormula('{SP_ALW}')"  class="button-deisgn">Sp Alw</a>
-                            <a onclick="showFormula('{WPS}')"  class="button-deisgn">WPS</a>
-                            <a onclick="showFormula('{CAR}')"  class="button-deisgn">CAR</a>
-                            <a onclick="showFormula('{MEAL}')"  class="button-deisgn">MEAL</a>
-                            <a onclick="showFormula('{PF}')"  class="button-deisgn">PF</a>
-                            <a onclick="showFormula('{TOTAL_BASE}')"  class="button-deisgn">TOTAL BASE</a>
-                            <a onclick="showFormula('{VPP}')"  class="button-deisgn">VPP</a>
-                          
+                            <a onclick="showFormula('{SP_ALW}')" class="button-deisgn">Sp Alw</a>
+                            <a onclick="showFormula('{WPS}')" class="button-deisgn">WPS</a>
+                            <a onclick="showFormula('{CAR}')" class="button-deisgn">CAR</a>
+                            <a onclick="showFormula('{MEAL}')" class="button-deisgn">MEAL</a>
+                            <a onclick="showFormula('{PF}')" class="button-deisgn">PF</a>
+                            <a onclick="showFormula('{TOTAL_BASE}')" class="button-deisgn">TOTAL BASE</a>
+                            <a onclick="showFormula('{VPP}')" class="button-deisgn">VPP</a>
+
                         </div>
                     </div>
 
                 </section>
                 <section class="cal2">
                     <div class="design-button">
-                    <h4>Source Factor</h4>
+                        <h4>Source Factor</h4>
                         <div class="cal-button ">
                             <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
                             <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
                             <a onclick="showFormula('{INCENTIVE}')" class="button-deisgn">Incentive</a>
-                            <a onclick="showFormula('{VPP_PR}')"  class="button-deisgn">VPP %</a>
+                            <a onclick="showFormula('{VPP_PR}')" class="button-deisgn">VPP %</a>
                         </div>
                     </div>
 
@@ -72,7 +81,7 @@
                 <section class="calculator">
                     <!-- <input type="text" placeholder="0" id="inputBox"> -->
                     <div class="cal-section">
-                        <a onclick="showFormula('AC')" class="operator">AC</a>
+                        <a onclick="clearFormulaOutput()" class="operator">AC</a>
                         <a onclick="showFormula('/')" class="operator">/</a>
                         <a onclick="showFormula('%')" class="operator">%</a>
                         <a onclick="showFormula('÷')" class="operator">÷</a>
@@ -107,11 +116,15 @@
 
             </section>
             <div class="row mb-3 mt-4">
-                <label for="title" class="col-sm-3 col-form-label required">Formula</label>
+                <label for="title" class="col-sm-3 col-form-label required">Formula<span class='asterisk'>*</span></label>
                 <div class="col-sm-9">
                     <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
+              
             </textarea>
-                    <a id="clearFormula" onclick="clearFormulaOutput()">Clear</a>
+            @if ($errors->has('formulaOutput'))
+                <span class="text-danger">{{ $errors->first('formulaOutput') }}</span>
+                @endif
+                  
                 </div>
             </div>
         </div>
@@ -119,27 +132,40 @@
     </div>
     <div id="only_amt">
         <div class="row mb-3 mt-4">
-            <label for="title" class="col-sm-3 col-form-label required">Amount</label>
+            <label for="title" class="col-sm-3 col-form-label required">Amount<span class='asterisk'>*</span></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="amount" id="title">
+                @if ($errors->has('amount'))
+                <span class="text-danger">{{ $errors->first('amount') }}</span>
+                @endif
             </div>
+       
         </div>
     </div>
 
     <div class="modal-footer">
-
         <button type="submit" class="btn btn-default">Save</button>
     </div>
 
 </form>
+
 @endsection
 
 @section('js_scripts')
 <script>
     $(document).ready(function() {
-        // By default, hide the amount div and show the formula div
+        var formType = '{{ old('formType') }}';
+    
+    if (formType === 'fixed') {
+        $('#only_amt').show();
+        $('#formula_div').hide();
+
+    }
+    else{
         $('#only_amt').hide();
-        $('#formula_div').show();
+        $('#formula_div').show(); 
+    }
+      
 
         $("input[name='method']").click(function() {
             var selectedValue = $(this).val();
@@ -188,6 +214,26 @@
             }
         })
     })
+</script>
+<script>
+    document.getElementById('fixed').addEventListener('click', function() {
+     
+        let formAction = "{{ url('salaryHead') }}";
+        // Append the query string for fixed option
+        formAction += "?formType=fixed";
+        document.getElementById('salaryForm').setAttribute('action', formAction);
+    });
+</script>
+
+<script>
+    var formType = '{{ old('formType') }}';
+    console.log("formType:", formType);
+    if (formType === 'fixed') {
+      
+        document.getElementById('formula_div').style.display = 'none';
+        document.getElementById('fixed').checked = true;
+        document.getElementById('fixed').click();
+    }
 </script>
 
 @endsection
