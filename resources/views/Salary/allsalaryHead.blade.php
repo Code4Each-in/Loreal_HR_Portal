@@ -3,8 +3,11 @@
 @extends('layout.app')
 
 @section('content')
+<div class="create_btn">
+<a href="{{ url('master_salary_head') }}" class="btn btn-primary">Create Salary Head</a>
+</div>
 
-<table class="table  table-striped">
+<table class="table  table-striped" id="salary_head">
   <thead>
     <tr>
       <th scope="col">Sr no</th>
@@ -25,7 +28,7 @@
     @foreach($allsalHead as $val)
     
     <tr> 
-      <th scope="row">{{ $val->id }}</th>
+      <th scope="row">{{ $loop->iteration }}</th>
       <td>{{ $val->head_title }}</td>
       <td>{{ $val->formula }}</td>
       <td>{{ $val->amount }}</td>
@@ -65,6 +68,7 @@
   
   </tbody>
 </table>
+
 @endsection
 
 @section('js_scripts')
@@ -73,4 +77,20 @@ setTimeout(function() {
     $('#successMessage').fadeOut('fast');
 }, 5000);
 </script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.8/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" "></script>
+ 
+
+ <script type="text/javascript">
+    //  $(document).ready(function () {
+        
+    //     $('#salary_head').DataTable();
+ 
+    // });
+ </script>
+
+
+
 @endsection

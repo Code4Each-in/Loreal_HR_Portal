@@ -13,10 +13,10 @@
 @endif
 
 
- {{ old('formType')  }}
+ 
   <?php 
 $form_type = (old('formType') ); 
-echo $form_type;
+
 ?>
 
 
@@ -51,17 +51,10 @@ echo $form_type;
                     <div class="design-button">
                         <h4>Salary Head</h4>
                         <div class="cal-button ">
-                            <a onclick="showFormula('{BASIC}')" class="button-deisgn">Basic</a>
-                            <a onclick="showFormula('{HRA}')" class="button-deisgn">HRA</a>
-                            <a onclick="showFormula('{Edu}')" class="button-deisgn">Edu</a>
-                            <a onclick="showFormula('{SP_ALW}')" class="button-deisgn">Sp Alw</a>
-                            <a onclick="showFormula('{WPS}')" class="button-deisgn">WPS</a>
-                            <a onclick="showFormula('{CAR}')" class="button-deisgn">CAR</a>
-                            <a onclick="showFormula('{MEAL}')" class="button-deisgn">MEAL</a>
-                            <a onclick="showFormula('{PF}')" class="button-deisgn">PF</a>
-                            <a onclick="showFormula('{TOTAL_BASE}')" class="button-deisgn">TOTAL BASE</a>
-                            <a onclick="showFormula('{VPP}')" class="button-deisgn">VPP</a>
-
+                            @foreach($all_master_head as $val)
+                            <a onclick="showFormula('{{$val->formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                         
+                           @endforeach
                         </div>
                     </div>
 
@@ -143,11 +136,13 @@ echo $form_type;
         </div>
     </div>
 
-    <div class="modal-footer">
+    <div class="modal-footer back-btn">
         <button type="submit" class="btn btn-default">Save</button>
-    </div>
+        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary">Back</a>
 
+    </div>
 </form>
+
 
 @endsection
 
@@ -227,7 +222,7 @@ echo $form_type;
 
 <script>
     var formType = '{{ old('formType') }}';
-    console.log("formType:", formType);
+  
     if (formType === 'fixed') {
       
         document.getElementById('formula_div').style.display = 'none';

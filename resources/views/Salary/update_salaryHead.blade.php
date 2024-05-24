@@ -71,7 +71,7 @@
                 <section class="calculator">
                     <!-- <input type="text" placeholder="0" id="inputBox"> -->
                     <div class="cal-section">
-                        <a onclick="showFormula('AC')" class="operator">AC</a>
+                        <a onclick="clearFormulaOutput()" class="operator">AC</a>
                         <a onclick="showFormula('/')" class="operator">/</a>
                         <a onclick="showFormula('%')" class="operator">%</a>
                         <a onclick="showFormula('÷')" class="operator">÷</a>
@@ -111,7 +111,7 @@
                     <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50" >
                     {{ $SalaryHead->formula}}
             </textarea>
-                    <a id="clearFormula" onclick="clearFormulaOutput()">Clear</a>
+                   
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@
 <script>
     $(document).ready(function() {
         $("#head_title").focus(function(){
-           alert("lkmlk");
+         
         });
     });
 </script>

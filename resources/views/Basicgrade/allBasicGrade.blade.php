@@ -3,6 +3,10 @@
 @extends('layout.app')
 
 @section('content')
+<div  class="create_btn">
+<a href="{{ url('basicGrade') }}" class="btn btn-primary">Basic Salary Grade</a>
+</div>
+
 
 <table class="table  table-striped">
     <thead>
@@ -28,35 +32,13 @@
 
             <td>
                <a href="#" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
-                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodel-{{$val-> id}}"><i class="bi bi-trash"></i></a>
+                <a href="" class="btn btn-danger delete" data-id ="{{$val->id}}"><i class="bi bi-trash"></i></a>
 
             </td>
         </tr>
 
 
-                <!--Delete  Modal -->
-                <form action="{{ url('deleteBasicGrade') }}" method="POST">
-            @csrf
-            <div class="modal fade" id="deletemodel-{{$val-> id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                            <input type="hidden" name="sal_head_id" value="{{$val-> id}}">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are You want to delete
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">DELETE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- End Delete Model -->
+     
 
         
         @endforeach
@@ -80,7 +62,9 @@
                         <div class="form-group">
                         <div class="alert alert-danger" style="display:none"></div>
                             <label for="recipient-name" class="col-form-label">Grade:</label>
-                            <input type="hidden" name="sal_head_id" value="{{$val-> id}}">
+                            <input type="hidden" name="sal_head_id" id="sal_head_id" value="">
+
+                           
                             <input type="text" class="form-control" id="edit_grade" name="grade">
                             @if ($errors->has('grade'))
                             <span class="text-danger">{{ $errors->first('grade') }}</span>
@@ -104,10 +88,31 @@
                     </div>
                 </div>
             </div>
-       
-
-
 <!-- End update model -->
+
+           <!--Delete  Modal -->
+           <form action="{{ url('deleteBasicGrade') }}" method="POST">
+            @csrf
+            <div class="modal fade" id="deletemodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <input type="hidden" name="sal_head_id" id="head_id" value="">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are You want to delete
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">DELETE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- End Delete Model -->
 @endsection
 @section('js_scripts')
 <script>
@@ -125,14 +130,13 @@
                 data: vdata,
                 success:function(data){
                     var data = JSON.parse(data);
+                    $('#sal_head_id').val(data.id);
                     $('#edit_grade').val(data.grade);
                     $('#edit_basic_salary').val(data.basic_salary);
                     $('#updatemodel').modal('show'); 
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    // You can handle the error here, e.g., displaying a message to the user
-                    alert("An error occurred while processing your request. Please try again later.");
                 }
             });
            
@@ -181,6 +185,22 @@
     setTimeout(function() {
         $('#successMessage').fadeOut('fast');
     }, 2000);
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.delete').click(function(e){
+            e.preventDefault(); 
+            var id = $(this).data('id');
+          $('#head_id').val(id);
+          $('#deletemodel').modal('show'); 
+          
+          
+           
+       
+           
+        });
+    });
 </script>
 
 
