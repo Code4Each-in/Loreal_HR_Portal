@@ -46,11 +46,11 @@ use App\Http\Controllers\Employee;
     Route::post('/updateBasicGrade', [BasicGradeController::class, 'update']);
     Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
 
-    
+
      // End Basic with grade pay
 
      // Employee Route
-     Route::get('/employee', [Employee::class, 'index']);
+     //Route::get('/employee', [Employee::class, 'index']);
      // End employee route
 
     // End Basic with grade pay
@@ -72,19 +72,19 @@ use App\Http\Controllers\Employee;
     Route::post('/register', [UsersController::class, 'register'])->name('user.create');
 
     // Success factor API
-    // Sign on 
+    // Sign on
         Route::get('/auth/azure', [SuccessFactor::class, 'signin']);
     // Reply  urls
         Route::get('/auth/azure/callback', [SuccessFactor::class, 'AppID']);
-     //App ID URI   
+     //App ID URI
         Route::get('/azure_app_id', [SuccessFactor::class, 'HomePage']);
-     // Homepage  
+     // Homepage
         Route::get('/ ', [SuccessFactor::class, 'LogOut ']);
     //Logout
-        Route::get('/logout', [SuccessFactor::class, 'Termsofservice']);
-     // Terms of service url   
+        Route::get('/successlogout', [SuccessFactor::class, 'Termsofservice']);
+     // Terms of service url
         Route::get('/terms_of_service', [SuccessFactor::class, 'Privacystatement']);
-     // Privacy statement   
+     // Privacy statement
         Route::get('/privacy_statement', [SuccessFactor::class, 'Privacystatement']);
 
     //End Success factor API
