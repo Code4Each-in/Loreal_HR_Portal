@@ -34,8 +34,8 @@
               <i class="bi bi-circle"></i><span>Salary Head Listing</span>
             </a>
           </li>
-     
-       
+
+
 
         </ul>
       </li>
@@ -46,7 +46,7 @@
         <ul id="salary_head" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
             <a href="{{  url('basicGrade')}}">
-              <i class="bi bi-circle"></i><span>Basic Salary Grade</span>
+              <i class="bi bi-circle"></i><span>Create Grade</span>
             </a>
           </li>
           <li>
@@ -54,11 +54,16 @@
               <i class="bi bi-circle"></i><span>Grade Listing</span>
             </a>
           </li>
-     
+          <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Basic Grade</span>
+            </a>
+          </li>
+
 
         </ul>
-      </li> 
-      
+      </li>
+
     </ul>
 
   </aside>

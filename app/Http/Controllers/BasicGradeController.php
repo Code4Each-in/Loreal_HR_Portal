@@ -20,7 +20,7 @@ class BasicGradeController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -30,15 +30,15 @@ class BasicGradeController extends Controller
     {
         $validated = $request->validate([
             'grade' => 'required|unique:basic_grades',
-            'basic_salary' => 'required'
+            // 'basic_salary' => 'required'
         ]);
 
         $salary_head = BasicGrade::create([
             'grade'        => $request->grade,
-            'basic_salary'        => $request->basic_salary
+            // 'basic_salary'        => $request->basic_salary
         ]);
 
-        return redirect()->route('allBasicGrade')->with('message', 'New Grade with Basic Salary Added   successfully!'); 
+        return redirect()->route('allBasicGrade')->with('message', 'New Grade Added successfully!');
     }
 
     /**
@@ -70,18 +70,18 @@ class BasicGradeController extends Controller
 
     public function update(Request $request)
     {
-       
+
         $validated = $request->validate([
             'grade' => 'required',
-            'basic_salary' => 'required'
+            // 'basic_salary' => 'required'
         ]);
-   
+
       $edit_form_data = array(
          "grade"        => $request->grade,
-         "basic_salary" =>$request->basic_salary
+        //  "basic_salary" =>$request->basic_salary
       );
 
-      $update_basic_grades = BasicGrade::where("id", $request->sal_head_id)->update($edit_form_data); 
+      $update_basic_grades = BasicGrade::where("id", $request->sal_head_id)->update($edit_form_data);
       if($update_basic_grades) {
         $request->session()->flash('message', 'Updated successfully.');
         return Response()->json(['status' => 200 , "message" => "Updated successfully"]);
@@ -90,7 +90,7 @@ class BasicGradeController extends Controller
       else {
         return response()->json(['status' => 400, 'error' => 'Failed to update.']);
     }
-  
+
 
     }
 
@@ -102,6 +102,6 @@ class BasicGradeController extends Controller
         $id = $req->sal_head_id;
         $delete = BasicGrade::find($id)->delete();
 
-        return redirect()->route('allBasicGrade')->with('message', 'Deleted  successfully!'); 
+        return redirect()->route('allBasicGrade')->with('message', 'Deleted  successfully!');
     }
 }
