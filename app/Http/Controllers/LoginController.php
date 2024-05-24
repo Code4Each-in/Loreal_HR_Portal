@@ -139,5 +139,6 @@ class LoginController extends Controller
         DB::table('password_reset_tokens')->where(['email'=> $request->email])->delete();
 
         return redirect('/')->with('message', 'Your password has been changed!');
+
     }
 }
