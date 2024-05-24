@@ -131,7 +131,7 @@ class UsersController extends Controller
                             'address' => $validatedData['address'],
                             'email' => $validatedData['email'],
                         ]);
-            Session::flash('message', 'User data updated successfully');
+            Session::flash('message', 'User data updated successfully.');
         }
     }
 
