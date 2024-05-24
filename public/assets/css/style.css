@@ -1368,7 +1368,7 @@ form.form-design {
 .pagetitle {
   display: flex;
   justify-content: flex-start;
-  padding: 20px 20px 20px;
+  padding: 20px 20px 0px;
 }
 .design-button h4 {
   text-align: center;
@@ -1389,4 +1389,17 @@ textarea#formulaOutput {
 }
 .col-form-label.required span.asterisk {
   color: red;
+}
+
+.create_btn {
+  display: flex;
+  justify-content: end;
+  margin: 0px auto;
+  padding: 0px 0px 30px;
+  align-items: center;
+}
+.modal-footer.back-btn{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }

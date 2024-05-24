@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SuccessFactor;
 use App\Http\Controllers\BasicGradeController;
+use App\Http\Controllers\Employee;
 
 
 /*
@@ -27,9 +28,9 @@ use App\Http\Controllers\BasicGradeController;
  Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // Salary  head
-    Route::get('/salart-head', [SalaryController::class, 'index'])->name('salaryHead');
+    Route::get('/master_salary_head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
-    Route::get('/allsalaryHead', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
+    Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
     Route::get('/edit_salary_head/{id}', [SalaryController::class, 'edit_salary_head']);
     Route::post('/update_salary_head/{id}', [SalaryController::class, 'update_salary_head']);
     Route::post('/delete_sal_head', [SalaryController::class, 'delete_sal_head']);
@@ -46,6 +47,10 @@ use App\Http\Controllers\BasicGradeController;
     Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
     
      // End Basic with grade pay
+
+     // Employee Route
+     Route::get('/employee', [Employee::class, 'index']);
+     // End employee route
 
 
  });

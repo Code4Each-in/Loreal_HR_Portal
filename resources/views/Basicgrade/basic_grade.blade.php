@@ -29,9 +29,11 @@
         </div>
     </div>
 
-    <div class="modal-footer">
+    <div class="modal-footer back-btn">
 
         <button type="submit" class="btn btn-default">Save</button>
+        <a href="{{ url('allBasicGrade') }}" class="btn btn-primary">Back</a>
+        
     </div>
 
 </form>

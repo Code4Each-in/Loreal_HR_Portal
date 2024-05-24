@@ -8,7 +8,8 @@ class SalaryController extends Controller
 {
     public function index()
     {
-        return view('Salary.salary_head');
+       $all_master_head  = SalaryHead::all();
+        return view('Salary.salary_head', compact("all_master_head"));
     }
      
     public function store(Request $req)
