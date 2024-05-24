@@ -20,7 +20,7 @@ body {
 
 a {
   color: #4154f1;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -1330,7 +1330,7 @@ a.button-deisgn {
   /* font-family: ui-monospace; */
   text-align: center;
   cursor: pointer;
-}  
+}
 .cal-button {
   padding: 5px;
   display: flex;
@@ -1403,3 +1403,16 @@ textarea#formulaOutput {
   flex-direction: row-reverse;
   justify-content: space-between;
 }
+
+footer#footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    padding: 0px 0;
+    font-size: 14px;
+    transition: all 0.3s;
+    border-top: 1px solid #cddfff;
+    background-color: #cddfff;
+    z-index: 1000;
+    }

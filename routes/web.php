@@ -7,7 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SuccessFactor;
 use App\Http\Controllers\BasicGradeController;
-use App\Http\Controllers\Employee;
+use App\Http\Controllers\EmployeeController;
 
 
 /*
@@ -50,7 +50,7 @@ use App\Http\Controllers\Employee;
      // End Basic with grade pay
 
      // Employee Route
-     //Route::get('/employee', [Employee::class, 'index']);
+     //Route::get('/employee', [EmployeeController::class, 'index']);
      // End employee route
 
     // End Basic with grade pay
@@ -79,9 +79,9 @@ use App\Http\Controllers\Employee;
      //App ID URI
         Route::get('/azure_app_id', [SuccessFactor::class, 'HomePage']);
      // Homepage
-        Route::get('/ ', [SuccessFactor::class, 'LogOut ']);
+       // Route::get('/ ', [SuccessFactor::class, 'LogOut ']);
     //Logout
-        Route::get('/successlogout', [SuccessFactor::class, 'Termsofservice']);
+       // Route::get('/successlogout', [SuccessFactor::class, 'Termsofservice']);
      // Terms of service url
         Route::get('/terms_of_service', [SuccessFactor::class, 'Privacystatement']);
      // Privacy statement

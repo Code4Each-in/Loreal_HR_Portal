@@ -7,7 +7,7 @@
 <a href="{{ url('master_salary_head') }}" class="btn btn-primary">Create Salary Head</a>
 </div>
 
-<table class="table  table-striped" id="salary_head">
+<table class="table" id="pagination" >
   <thead>
     <tr>
       <th scope="col">Sr no</th>
@@ -15,7 +15,6 @@
       <th scope="col">Formula</th>
       <th scope="col">Amount</th>
       <th scope="col">Action</th>
-     
     </tr>
   </thead>
   <tbody>
@@ -26,16 +25,15 @@
                         </div>
   @endif
     @foreach($allsalHead as $val)
-    
-    <tr> 
+    <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>{{ $val->head_title }}</td>
       <td>{{ $val->formula }}</td>
       <td>{{ $val->amount }}</td>
-      <td> 
+      <td>
         <a href="{{ url('edit_salary_head/' . $val->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
         <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodel-{{ $val->id  }}"><i class="bi bi-trash"></i></a>
-    
+
       </td>
     </tr>
         <!--Delete  Modal -->
@@ -50,7 +48,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            Are You want to delete 
+            Are You want to delete
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -62,10 +60,6 @@
 </form>
     <!-- End Delete Model -->
     @endforeach
-
-
- 
-  
   </tbody>
 </table>
 
@@ -73,24 +67,20 @@
 
 @section('js_scripts')
 <script>
+ $(document).ready(function() {
+        $('#pagination').DataTable({
+            searching: true,
+            language: {
+                emptyTable: "No records found"
+            },
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [ 4] },
+            ],
+        });
+    });
 setTimeout(function() {
     $('#successMessage').fadeOut('fast');
 }, 5000);
 </script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.8/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" "></script>
- 
-
- <script type="text/javascript">
-    //  $(document).ready(function () {
-        
-    //     $('#salary_head').DataTable();
- 
-    // });
- </script>
-
-
 
 @endsection

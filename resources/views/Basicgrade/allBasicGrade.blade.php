@@ -8,7 +8,7 @@
 </div>
 
 
-<table class="table  table-striped">
+<table class="table" id="pagination" style="width:100%">
     <thead>
         <tr>
             <th scope="col">Grade</th>
@@ -36,11 +36,6 @@
 
             </td>
         </tr>
-
-
-
-
-
         @endforeach
     </tbody>
 </table>
@@ -117,6 +112,12 @@
 @section('js_scripts')
 <script>
     $(document).ready(function(){
+         $('#pagination').DataTable({
+            searching: true,
+            language: {
+                emptyTable: "No records found"
+            }
+        });
         $('.update').click(function(e){
             e.preventDefault();
             var id = $(this).data('id');

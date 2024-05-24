@@ -7,7 +7,7 @@
         {{ session()->get('message') }}
     </div>
     @endif
-    <table class="table" id="pagination" style="width:100%">
+    <table class="table dataTable" id="pagination" style="width:100%">
         <thead>
             <tr>
                 <th>#</th>
@@ -15,7 +15,7 @@
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th width="150px">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -57,40 +57,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" id="update_form">
+                <form action="" method="POST" id="update_form" class="row g-3 needs-validation">
                     @csrf
                     <div class="alert alert-danger" style="display:none"></div>
                     <div class="form-group">
                         <input type="hidden" name="edit_form_id" id="edit_form_id" class="form-control">
-                        <label for="firstname">First Name<span class="text-danger">*</span></label>
+                        <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="firstname" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Last Name<span class="text-danger">*</span></label>
+                        <label for="lastname" class="form-label">Last Name<span class="text-danger">*</span></label>
                         <input type="text" name="lastname" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone<span class="text-danger">*</span></label>
+                        <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
                         <input type="number" name="phone" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="city">City<span class="text-danger">*</span></label>
+                        <label for="city" class="form-label">City<span class="text-danger">*</span></label>
                         <input type="text" name="city" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="state">State<span class="text-danger">*</span></label>
+                        <label for="state" class="form-label">State<span class="text-danger">*</span></label>
                         <input type="text" name="state" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="zip">Zip<span class="text-danger">*</span></label>
+                        <label for="zip" class="form-label">Zip<span class="text-danger">*</span></label>
                         <input type="number" name="zip" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="address">Address<span class="text-danger">*</span></label>
+                        <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="modal-footer">
@@ -152,7 +152,13 @@
             }
         });
         $('#pagination').DataTable({
-            searching: true
+            searching: true,
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [ 5] },
+            ],
+            language: {
+                emptyTable: "No records found"
+            }
         });
         //for active and inactive user->status(0,1)
         $('.status-toggle').click(function() {

@@ -66,8 +66,9 @@ class SalaryController extends Controller
 
     public function edit_salary_head($id)
     {
+        $all_master_head  = SalaryHead::all();
         $SalaryHead = SalaryHead::find($id);
-        return view('Salary.update_salaryHead', compact("SalaryHead"));
+        return view('Salary.update_salaryHead', compact("SalaryHead"), compact("all_master_head"));
 
     }
 
