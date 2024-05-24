@@ -1,7 +1,13 @@
 @extends('layout.app')
 @section('content')
 <div class="container">
-    <table class="table">
+    @if(session()->has('message'))
+    <div id="successMessage" class="alert alert-success fade show" role="alert">
+        <i class="bi bi-check-circle me-1"></i>
+        {{ session()->get('message') }}
+    </div>
+    @endif
+    <table class="table" id="pagination" style="width:100%">
         <thead>
             <tr>
                 <th>#</th>
@@ -20,11 +26,9 @@
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    @if ($user->status == 1)
-                    <button class="btn btn-danger">Inactive</button>
-                    @else
-                    <button class="btn btn-success">Active</button>
-                    @endif
+                    <button class="status-toggle btn {{ $user->status == 1 ? 'btn-danger' : 'btn-success' }}" data-user-id="{{ $user->id }}" data-status="{{ $user->status }}">
+                        {{ $user->status == 1 ? 'Inactive' : 'Active' }}
+                    </button>
                 </td>
                 <td>
                     <a href="" class="btn btn-primary edit-userdata-btn" data-toggle="modal" data-target="#editUserDataModal" data-user-id="{{ $user->id }}">
@@ -43,6 +47,7 @@
         </tbody>
     </table>
 </div>
+
 <!-- Edit UserData Modal -->
 <div class="modal fade" id="editUserDataModal" tabindex="-1" role="dialog" aria-labelledby="editUserDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -54,48 +59,50 @@
             <div class="modal-body">
                 <form action="" method="POST" id="update_form">
                     @csrf
-                    <input type="hidden" name="id" class="form-control">
+                    <div class="alert alert-danger" style="display:none"></div>
                     <div class="form-group">
-                        <label for="firstname">First Name</label>
+                        <input type="hidden" name="edit_form_id" id="edit_form_id" class="form-control">
+                        <label for="firstname">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="firstname" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Last Name</label>
+                        <label for="lastname">Last Name<span class="text-danger">*</span></label>
                         <input type="text" name="lastname" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone<span class="text-danger">*</span></label>
                         <input type="number" name="phone" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="city">City</label>
+                        <label for="city">City<span class="text-danger">*</span></label>
                         <input type="text" name="city" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="state">State</label>
+                        <label for="state">State<span class="text-danger">*</span></label>
                         <input type="text" name="state" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="zip">Zip</label>
+                        <label for="zip">Zip<span class="text-danger">*</span></label>
                         <input type="number" name="zip" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="address">Address<span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="updateForm" class="btn btn-primary" data-user-id="{{ $user->id }}">Update</button>
+                        <button type="button" id="updateForm" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</div><!--##user update modal-->
+
 <!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -105,16 +112,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('user.change-password') }}" method="POST">
+                <form id="changePasswordForm" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="password">New Password</label>
+                        <div class="alert alert-danger" style="display:none"></div>
+                        <label for="password">New Password<span class="text-danger">*</span></label>
                         <input type="hidden" name="user_id" id="user_id" class="form-control">
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" required>
+                        <label for="password_confirmation">Confirm Password<span class="text-danger">*</span></label>
+                        <input type="password" name="password_confirmation" class="form-control">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -128,17 +136,55 @@
 @endsection
 @section('js_scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+    });
+
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $('#pagination').DataTable({
+            searching: true
+        });
+        //for active and inactive user->status(0,1)
+        $('.status-toggle').click(function() {
+            var userId = $(this).data('user-id');
+            var status = $(this).data('status');
+
+            $.ajax({
+                url: "{{ url('/toggle-user-status') }}",
+                method: 'GET',
+                data: {
+                    userId: userId,
+                    status: status
+                },
+                success: function(response) {
+                    // console.log(response);userdata
+                    if (response) {
+
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = JSON.parse(xhr.responseText);
+                    displayErrors(errorMessage.error);
+                }
+            });
+        });
 
         //for edit to show the data of user
         $('.edit-userdata-btn').click(function(e) {
             e.preventDefault();
             var userId = $(this).data('user-id');
+            // $('#user_id').val(userId);
             vdata = {
                 id: userId
             };
@@ -146,9 +192,9 @@
                 type: 'post',
                 url: "{{ url('users/edit') }}",
                 data: vdata,
-                success: function(response) {
-                    console.log(response);
-                    // Populate form fields with the received data
+                success: function(response)
+                {
+
                     $('input[name="firstname"]').val(response.user.Fname);
                     $('input[name="lastname"]').val(response.user.Lname);
                     $('input[name="phone"]').val(response.user.phone);
@@ -157,9 +203,10 @@
                     $('input[name="zip"]').val(response.user.zipcode);
                     $('input[name="address"]').val(response.user.address);
                     $('input[name="email"]').val(response.user.email);
-                    $('input[name="id"]').val(response.user.id);
+                    $('input[name="edit_form_id"]').val(response.user.id);
 
                     $('#editUserDataModal').modal('show');
+
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -167,39 +214,44 @@
             });
         });
 
-        // //to update the data of user
-        // $('#updateForm').click(function(e) {
+        //to update the data of user
+        $('#updateForm').click(function(e) {
 
-        //     e.preventDefault();
-        //      var form = $('#update_form')[0];
-        //     var formData = $("#update_form").serialize();
-        //     // var url = $(this).attr('action');
-        //     console.log(formData, 'pppppp');
-        //     var userId = $(this).data('user-id');
-        //     // var data = formData.user + '&id=' + userId;
-        //     // console.log(data);
-        //     $.ajax({
-        //         type: 'post', // Change the request type to PUT
-        //         url: "{{ url('users/update') }}",
-        //         data: {
-        //             formData:formData,
-        //             id:userId
-        //         },
-        //         success: function(response) {
-        //             // Update the table fields with new data
-        //             // var userId = response.user.id;
-        //             userRow.find('.user-firstname').text(response.user.Fname);
-        //             userRow.find('.user-lastname').text(response.user.Lname);
-        //             userRow.find('.user-phone').text(response.user.phone);
-        //             userRow.find('.user-email').text(response.user.email);
-        //             $('#editUserDataModal').modal('hide');
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: "/users/update",
+                data:
+                {
+                    'firstname': $("input[name=firstname]").val(),
+                    'lastname': $("input[name=lastname]").val(),
+                    'phone': $("input[name=phone]").val(),
+                    'city': $("input[name=city]").val(),
+                    'state': $("input[name=state]").val(),
+                    'zip': $("input[name=zip]").val(),
+                    'address': $("input[name=address]").val(),
+                    'email': $("input[name=email]").val(),
+                    'edit_form_id': $("input[name=edit_form_id]").val(),
+                },
+                success: function(response) {
+                    $('#editUserDataModal').modal('hide');
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = JSON.parse(xhr.responseText);
+                    var validationErrors = errorMessage.errors;
+                    var html = "<ul>";
+                    $.each(validationErrors, function(key, value) {
+                        console.log(value);
 
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error(xhr.responseText);
-        //         }
-        //     });
-        // });
+                        html += "<li>" + value + "</li>";
+                    });
+                    html += "</ul>";
+                    $('.alert-danger').html(html);
+                    $('.alert-danger').show();
+                }
+            });
+        });
 
         //for deleting user detail
         $('.delete-user-btn').click(function(e) {
@@ -241,17 +293,34 @@
             var formData = $(this).serialize();
             $.ajax({
                 type: 'POST',
-                url: '{{ route("user.change-password") }}',
+                url: '{{ url("/users/change-password") }}',
                 data: formData,
                 success: function(response) {
+                    $('.alert-danger').html('');
                     $('#changePasswordModal').modal('hide');
-                    alert(response.success);
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
+                    var errorMessage = JSON.parse(xhr.responseText);
+                    displayErrors(errorMessage.error);
                 }
             });
         });
+        $('#changePasswordModal').on('hidden.bs.modal', function() {
+            // Reset the form fields
+            $('#changePasswordForm')[0].reset();
+        });
     });
+
+    function displayErrors(errors) {
+        // Clear previous errors
+        $('.alert-danger').html('');
+        // Display each error
+        $.each(errors, function(key, value) {
+            $('.alert-danger').append(value);
+        });
+        // Show the error container
+        $('.alert-danger').show();
+    }
 </script>
 @endsection
