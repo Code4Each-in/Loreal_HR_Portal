@@ -20,6 +20,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         if($request->isMethod('get')) {
             $userId = request()->user()->id ?? null;
             if ($userId) {
@@ -47,7 +48,15 @@ class LoginController extends Controller
                         ])->onlyInput('email');
                     }
                 }
+                else{
+
+                    return back()->withErrors([
+                        'credentials_error' => 'The provided credentials do not match our records.',
+                    ])->onlyInput('email');
+                }
         }
+        return redirect('/dashboard');
+
 
 
     }
