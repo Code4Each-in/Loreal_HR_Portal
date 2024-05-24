@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div id="only_amt">
+    <!-- <div id="only_amt">
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Basic</label>
             <div class="col-sm-9">
@@ -27,13 +27,13 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="modal-footer back-btn">
 
         <button type="submit" class="btn btn-default">Save</button>
         <a href="{{ url('allBasicGrade') }}" class="btn btn-primary">Back</a>
-        
+
     </div>
 
 </form>

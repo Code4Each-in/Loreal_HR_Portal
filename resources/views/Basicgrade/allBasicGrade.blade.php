@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th scope="col">Grade</th>
-            <th scope="col">Basic Salary</th>
+            <!-- <th scope="col">Basic Salary</th> -->
             <th scope="col">Action</th>
 
         </tr>
@@ -28,7 +28,7 @@
         @foreach($basic_grades as $val)
         <tr>
             <th scope="row">{{ $val-> grade}} </th>
-            <td>{{ $val-> basic_salary}}</td>
+            <!-- <td>{{ $val-> basic_salary}}</td> -->
 
             <td>
                <a href="#" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
@@ -38,22 +38,22 @@
         </tr>
 
 
-     
 
-        
+
+
         @endforeach
     </tbody>
 </table>
 
 <!-- Update model -->
 
-         
+
             <div class="modal fade" id="updatemodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">UPDATE</h5>
-                           
+
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -64,27 +64,27 @@
                             <label for="recipient-name" class="col-form-label">Grade:</label>
                             <input type="hidden" name="sal_head_id" id="sal_head_id" value="">
 
-                           
+
                             <input type="text" class="form-control" id="edit_grade" name="grade">
                             @if ($errors->has('grade'))
                             <span class="text-danger">{{ $errors->first('grade') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="message-text" class="col-form-label">Basic Salary:</label>
                             <input type="text" class="form-control" id="edit_basic_salary" name="basic_salary">
                             @if ($errors->has('basic_salary'))
                             <span class="text-danger">{{ $errors->first('basic_salary') }}</span>
                             @endif
-                        </div>
+                        </div> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">UPDATE</button>
                         </div>
                         </form>
-                     
-                      
+
+
                     </div>
                 </div>
             </div>
@@ -118,12 +118,12 @@
 <script>
     $(document).ready(function(){
         $('.update').click(function(e){
-            e.preventDefault(); 
-            var id = $(this).data('id'); 
-          
-            var token = "{{ csrf_token() }}"; 
-            var vdata = {id:id, _token: token}; 
-           
+            e.preventDefault();
+            var id = $(this).data('id');
+
+            var token = "{{ csrf_token() }}";
+            var vdata = {id:id, _token: token};
+
             $.ajax({
                 url : "{{ url('editBasicGrade')}}",
                 type : "post",
@@ -132,14 +132,14 @@
                     var data = JSON.parse(data);
                     $('#sal_head_id').val(data.id);
                     $('#edit_grade').val(data.grade);
-                    $('#edit_basic_salary').val(data.basic_salary);
-                    $('#updatemodel').modal('show'); 
+                    // $('#edit_basic_salary').val(data.basic_salary);
+                    $('#updatemodel').modal('show');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                 }
             });
-           
+
         });
     });
 </script>
@@ -158,8 +158,8 @@
                     $('.alert-danger').html('');
                    $("#updatemodel").modal('hide');
                   location.reload();
-               
-                
+
+
                 },
                 error: function(xhr, status, error){
                     // Handle error
@@ -190,15 +190,15 @@
 <script>
     $(document).ready(function(){
         $('.delete').click(function(e){
-            e.preventDefault(); 
+            e.preventDefault();
             var id = $(this).data('id');
           $('#head_id').val(id);
-          $('#deletemodel').modal('show'); 
-          
-          
-           
-       
-           
+          $('#deletemodel').modal('show');
+
+
+
+
+
         });
     });
 </script>
