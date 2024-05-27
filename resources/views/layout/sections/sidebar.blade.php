@@ -54,16 +54,21 @@
               <i class="bi bi-circle"></i><span>Grade Listing</span>
             </a>
           </li>
-          <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>Basic Grade</span>
-            </a>
-          </li>
-
 
         </ul>
       </li>
-
+      <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#basic_grade_salary_master" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Basic Grade Salary Master</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="basic_grade_salary_master" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ url('basic_grade') }}">
+                        <i class="bi bi-circle"></i><span>Create BasicSalary</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 
   </aside>
