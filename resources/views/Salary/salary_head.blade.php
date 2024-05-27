@@ -52,8 +52,10 @@ $form_type = (old('formType') );
                         <h4>Salary Head</h4>
                         <div class="cal-button ">
                             @foreach($all_master_head as $val)
-                            <a onclick="showFormula('{{$val->formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
-                         
+
+                           <?php   $head_title = '{'. $val->head_title.'}' ?>
+                            <a onclick="showFormula('{{$head_title}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                          
                            @endforeach
                         </div>
                     </div>
@@ -225,7 +227,7 @@ $form_type = (old('formType') );
         document.getElementById('salaryForm').setAttribute('action', formAction);
 
     });
-
+ 
 </script>
 
 <script>

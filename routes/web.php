@@ -38,10 +38,10 @@ use App\Http\Controllers\EmployeeController;
 
     // Basic with grade pay
 
-    Route::get('/basicGrade', [BasicGradeController::class, 'index']);
+    Route::get('/create_grade', [BasicGradeController::class, 'index']);
     Route::get('/redirectURL', [BasicGradeController::class, 'redirectURL']);
     Route::post('/storegrade', [BasicGradeController::class, 'store']);
-    Route::get('/allBasicGrade', [BasicGradeController::class, 'show'])->name('allBasicGrade');
+    Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
     Route::post('/editBasicGrade', [BasicGradeController::class, 'editBasicGrade']);
     Route::post('/updateBasicGrade', [BasicGradeController::class, 'update']);
     Route::post('/deleteBasicGrade', [BasicGradeController::class, 'destroy']);
@@ -50,7 +50,8 @@ use App\Http\Controllers\EmployeeController;
      // End Basic with grade pay
 
      // Employee Route
-     //Route::get('/employee', [EmployeeController::class, 'index']);
+     Route::get('/employee', [EmployeeController::class, 'index']);
+     Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
      // End employee route
 
     // End Basic with grade pay
