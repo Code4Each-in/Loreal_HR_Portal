@@ -42,8 +42,14 @@
                         <h4>Salary Head</h4>
                         <div class="cal-button ">
                         @foreach($all_master_head as $val)
-                        <a onclick="showFormula('{{$val->formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
-                        @endforeach
+                             @if(!empty($val->formula))
+                            <?php  $formula = $val->formula; ?>
+                            <a onclick="showFormula('{{$formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                             @else 
+                           <?php   $amount = '{'.$val->head_title.'}'; ?>
+                            <a onclick="showFormula('{{$amount}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                            @endif
+                           @endforeach
                   
                           
                         </div>
