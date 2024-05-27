@@ -45,12 +45,12 @@
         </a>
         <ul id="salary_head" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-            <a href="{{  url('basicGrade')}}">
+            <a href="{{  url('create_grade')}}">
               <i class="bi bi-circle"></i><span>Create Grade</span>
             </a>
           </li>
           <li>
-            <a href="{{  url('allBasicGrade')}}">
+            <a href="{{  url('grade_listing')}}">
               <i class="bi bi-circle"></i><span>Grade Listing</span>
             </a>
           </li>
