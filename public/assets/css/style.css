@@ -1404,7 +1404,7 @@ textarea#formulaOutput {
   justify-content: space-between;
 }
 
-footer#footer {
+footer.footer{
     position: fixed;
     bottom: 0px;
     left: 0;
