@@ -40,16 +40,13 @@
             <section class="cal2">
                     <div class="design-button">
                         <h4>Salary Head</h4>
-                        <div class="cal-button ">
+                        <div class="cal-button "> 
                         @foreach($all_master_head as $val)
-                             @if(!empty($val->formula))
-                            <?php  $formula = $val->formula; ?>
-                            <a onclick="showFormula('{{$formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
-                             @else 
-                           <?php   $amount = '{'.$val->head_title.'}'; ?>
-                            <a onclick="showFormula('{{$amount}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
-                            @endif
-                           @endforeach
+
+<?php   $head_title = '{'. $val->head_title.'}' ?>
+ <a onclick="showFormula('{{$head_title}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+
+@endforeach
                   
                           
                         </div>
@@ -80,7 +77,7 @@
                         <a onclick="showFormula('7')">7</a>
                         <a onclick="showFormula('8')">8</a>
                         <a onclick="showFormula('9')">9</a>
-                        <a onclick="showFormula('x')" class="operator">x</a>
+                        <a onclick="showFormula('*')" class="operator">x</a>
                     </div>
                     <div class="cal-section">
                         <a onclick="showFormula('4')">4</a>
@@ -164,7 +161,7 @@
     // Append the clicked button's value to the textarea content
     function showFormula(value) {
         var textarea = document.getElementById("formulaOutput");
-        textarea.value += value + " ";
+        textarea.value += value;
     }
 
     // To clear the formulaOutput textarea

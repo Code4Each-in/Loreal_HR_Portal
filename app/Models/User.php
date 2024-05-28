@@ -16,7 +16,7 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-     */
+     */ 
     protected $fillable = [
         'Fname',
         'Lname',
@@ -30,6 +30,10 @@ class User extends Authenticatable
         'password',
         'status',
     ];
+    public function post()
+    {
+        return $this->hasMany(UserDetail::class, 'emp_id' , 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

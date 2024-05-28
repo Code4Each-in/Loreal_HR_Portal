@@ -25,26 +25,31 @@
                         </div>
   @endif
     @foreach($allsalHead as $val)
+   <?php $head_title = str_replace("_", " ", $val->head_title ); ?>
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
-      <td>{{ $val->head_title }}</td>
+      <td>{{ $head_title }}</td>
       <td>{{ $val->formula }}</td>
       <td>{{ $val->amount }}</td>
       <td>
         <a href="{{ url('edit_salary_head/' . $val->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-        <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodel-{{ $val->id  }}"><i class="bi bi-trash"></i></a>
+        <a href="" class="btn btn-danger delete" data-bs-toggle="modal" data-id ="{{ $val->id }}" data-bs-target="#deletemodel"><i class="bi bi-trash"></i></a>
 
       </td>
     </tr>
-        <!--Delete  Modal -->
-        <form action="{{ url('delete_sal_head') }}"  method="POST">
+   
+    @endforeach
+  </tbody>
+</table>
+     <!--Delete  Modal -->
+     <form action="{{ url('delete_sal_head') }}"  method="POST"> 
           @csrf
-      <div class="modal fade" id="deletemodel-{{ $val->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deletemodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-              <input type ="hidden" name="sal_head_id" value="{{ $val->id }}">
+              <input type ="hidden" name="sal_head_id" id="sal_head_id" value="">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -59,9 +64,6 @@
       </div>
 </form>
     <!-- End Delete Model -->
-    @endforeach
-  </tbody>
-</table>
 
 @endsection
 
@@ -81,6 +83,20 @@
 setTimeout(function() {
     $('#successMessage').fadeOut('fast');
 }, 5000);
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.delete').click(function(e){
+        
+            e.preventDefault();
+            var id = $(this).data('id');
+           $('#sal_head_id').val(id);
+          $('#deletemodel').modal('show');
+
+
+        });
+    });
 </script>
 
 @endsection
