@@ -67,6 +67,11 @@
                         <i class="bi bi-circle"></i><span>Create BasicSalary</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('basic_grade_salary_master_listing') }}">
+                        <i class="bi bi-circle"></i><span>Basic Grade Salary Listing</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
