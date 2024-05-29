@@ -3,47 +3,48 @@
 @extends('layout.app')
 
 @section('content')
-<div class="create_btn">
-<a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a>
-</div>
+    <div class="create_btn">
+        <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a>
+    </div>
 
-<table class="table" id="pagination" >
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Head Title</th>
-      <th scope="col">Formula</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Grade</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  @if(session()->has('message'))
-                        <div id="successMessage" class="alert alert-success fade show" role="alert">
-                                    <i class="bi bi-check-circle me-1"></i>
-                                    {{ session()->get('message') }}
-                        </div>
-  @endif
+    <table class="table" id="pagination" >
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Head Title</th>
+            <th scope="col">Formula</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if(session()->has('message'))
+        <div id="successMessage" class="alert alert-success fade show" role="alert">
+            <i class="bi bi-check-circle me-1"></i>
+                {{ session()->get('message') }}
+        </div>
+    @endif
     @foreach($allbasicgradesal as $val)
-    <tr>
-      <th scope="row">{{ $loop->iteration }}</th>
-      <td>{{ $val['head_title'] }}</td>
-      <td>{{ $val['formula'] }}</td>
-      <td>{{ $val['amount'] }}</td>
-      <td>{{ $val['grade']['grade'] }}</td>
-      <td>
-        <a href="{{ url('edit_basic_salary/' . $val['id']) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-        <a href="#" class="btn btn-danger delete-btn" data-id="{{ $val['id'] }}"><i class="bi bi-trash"></i></a>
+        <tr>
+            <th scope="row">{{ $loop->iteration }}</th>
+            <td>{{ $val['head_title'] }}</td>
+            <td>{{ $val['formula'] }}</td>
+            <td>{{ $val['amount'] }}</td>
+            <td>{{ $val['grade']['grade'] }}</td>
+            <td>
+                <a href="{{ url('edit_basic_salary/' . $val['id']) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                <a href="#" class="btn btn-danger delete-btn" data-id="{{ $val['id'] }}"><i class="bi bi-trash"></i></a>
 
-      </td>
-    </tr>
+            </td>
+        </tr>
     @endforeach
-</tbody>
-</table>
+    </tbody>
+    </table>
+
 <!--Delete  Modal -->
 <form action="{{ url('delete_basic_sal') }}"  method="POST">
-         @csrf
+    @csrf
      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div class="modal-dialog">
          <div class="modal-content">
@@ -63,36 +64,34 @@
        </div>
      </div>
 </form>
-
+<!-- End of Delete Model -->
 @endsection
+
 @section('js_scripts')
 <script>
- $(document).ready(function() {
-     setTimeout(function() {
-         $('#successMessage').fadeOut('fast');
-     }, 5000);
-        $('#pagination').DataTable({
-            searching: true,
-            language: {
-                emptyTable: "No records found"
-            },
-            "aoColumnDefs": [
-                { "bSortable": false, "aTargets": [ 5] },
-            ],
+$(document).ready(function() {
+    setTimeout(function() {
+        $('#successMessage').fadeOut('fast');
+    }, 5000);
+
+    $('#pagination').DataTable({
+        searching: true,
+        language: {
+        emptyTable: "No records found"
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 5] },
+        ],
         });
 
-        $('.delete-btn').click(function(e){
-  e.preventDefault();
-  var id = $(this).data('id');
-
-  // Assuming you have an input field with id "sal_head_id"
-  $('#sal_head_id').val(id);
-  $('#deleteModal').modal('show');
-});
+    $('.delete-btn').click(function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        $('#sal_head_id').val(id);
+        $('#deleteModal').modal('show');
+    });
 
     });
 </script>
-
-
 @endsection
-hidden
+

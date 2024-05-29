@@ -28,7 +28,7 @@ class GradeSalaryMasterController extends Controller
                 'formulaOutput' => 'required',
                 'grade' => 'required'
             ]);
-
+            // Create a new salary head with formula
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' => $req->head_title,
                 'formula' => $req->formulaOutput,
@@ -41,7 +41,7 @@ class GradeSalaryMasterController extends Controller
                 'amount' => 'required',
                 'grade' => 'required'
             ]);
-
+            // Create a new salary head with fixed amount
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' => $req->head_title,
                 'formula' => '',
@@ -52,7 +52,7 @@ class GradeSalaryMasterController extends Controller
         }
         return redirect()->route('allBasicGradeSalary')->with('message', 'Basic Grade Salary Master Added Successfully!');
     }
-
+    // Display all basic grade salary masters
     public  function allBasicGradeSalary()
     {
         $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->get()->toArray();
@@ -60,6 +60,7 @@ class GradeSalaryMasterController extends Controller
         return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"));
     }
 
+    // Display the form to edit basic grade salary master
     public function edit_basic_salary($id)
     {
         $all_grades  = BasicGrade::all();
@@ -68,6 +69,7 @@ class GradeSalaryMasterController extends Controller
         return view('GradeSalaryMaster.update_basicGradeSalary', compact('basic_salary', 'all_basic_salary', 'all_grades'));
     }
 
+    // Update basic grade salary master
     public function update_basic_salary(Request $req, $id)
     {
 
@@ -75,7 +77,7 @@ class GradeSalaryMasterController extends Controller
             'head_title' => 'required',
             'grade' => 'required'
         ]);
-
+        // Determine the method for calculating the salary
           $method = $req->method;
           if($method ==  "wid_formula")
           {
@@ -99,12 +101,14 @@ class GradeSalaryMasterController extends Controller
               );
             $affectedRows = GradeWiseSalaryMaster::where("id", $id)->update($sal_head_data);
           }
+          // Update the salary head details
           return redirect()->route('allBasicGradeSalary')
           ->with('message', 'Basic Grade Salary Master Update successfully!');
 
 
     }
 
+    // Delete basic grade salary master
     public function delete_basic_sal(Request $req)
     {
         $id = $req->sal_head_id;
