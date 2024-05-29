@@ -1,5 +1,5 @@
-@section('title', 'Update  Salary Head')
-@section('sub-title', 'Update  Salary Head')
+@section('title', 'Update Salary Head')
+@section('sub-title', 'Update Salary Head')
 @extends('layout.app')
 
 @section('content')
@@ -17,7 +17,7 @@
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Head Title</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="head_title" id="head_title" value ="{{ $SalaryHead->head_title}}">
+                <input type="text" class="form-control" name="head_title" id="head_title" value="{{ $SalaryHead->head_title}}">
                 @if ($errors->has('head_title'))
                 <span class="text-danger">{{ $errors->first('head_title') }}</span>
                 @endif
@@ -30,37 +30,37 @@
                   <label for="wid_formula">Make Formula </label>
             </div>
             <div class="col-sm-3">
-                <input type="radio" id="fixed" name="method" value="fixed"  {{ ($SalaryHead->method=="fixed")? "checked" : "" }}>
+                <input type="radio" id="fixed" name="method" value="fixed" {{ ($SalaryHead->method=="fixed")? "checked" : "" }}>
                   <label for="fixed">Fixed</label>
             </div>
         </div>
 
-        <div id="formula_div" <?php if($SalaryHead->method=="fixed") { ?> style="display: none;" <?php } ?>>
+        <div id="formula_div" <?php if ($SalaryHead->method == "fixed") { ?> style="display: none;" <?php } ?>>
             <section class="main-section">
-            <section class="cal2">
+                <section class="cal2">
                     <div class="design-button">
                         <h4>Salary Head</h4>
-                        <div class="cal-button "> 
-                        @foreach($all_master_head as $val)
+                        <div class="cal-button ">
+                            @foreach($all_master_head as $val)
 
-<?php   $head_title = '{'. $val->head_title.'}' ?>
- <a onclick="showFormula('{{$head_title}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+                            <?php $head_title = '{' . $val->head_title . '}' ?>
+                            <a onclick="showFormula('{{$head_title}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
 
-@endforeach
-                  
-                          
+                            @endforeach
+
+
                         </div>
                     </div>
 
                 </section>
                 <section class="cal2">
                     <div class="design-button">
-                    <h4>Source Factor</h4>
+                        <h4>Source Factor</h4>
                         <div class="cal-button ">
                             <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
                             <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
                             <a onclick="showFormula('{INCENTIVE}')" class="button-deisgn">Incentive</a>
-                            <a onclick="showFormula('{VPP_PR}')"  class="button-deisgn">VPP %</a>
+                            <a onclick="showFormula('{VPP_PR}')" class="button-deisgn">VPP %</a>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                 <section class="calculator">
                     <!-- <input type="text" placeholder="0" id="inputBox"> -->
                     <div class="cal-section">
-                        <a onclick="clearFormulaOutput()" class="operator">AC</a> 
+                        <a onclick="clearFormulaOutput()" class="operator">AC</a>
                         <a onclick="showFormula('/')" class="operator">/</a>
                         <a onclick="showFormula('%')" class="operator">%</a>
                         <a onclick="showFormula('÷')" class="operator">÷</a>
@@ -105,10 +105,10 @@
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula</label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50" >
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
                     {{ $SalaryHead->formula}}
-            </textarea>
-                   
+                    </textarea>
+
                 </div>
             </div>
         </div>
@@ -135,16 +135,16 @@
 <script>
     $(document).ready(function() {
         // By default, hide the amount div and show the formula div
-        @if($SalaryHead->method=="fixed")
+        @if($SalaryHead - > method == "fixed")
         $('#only_amt').show();
         $('#formula_div').hide();
-        @endif  
-        
-        @if($SalaryHead->method=="wid_formula")
+        @endif
+
+        @if($SalaryHead - > method == "wid_formula")
         $('#only_amt').hide();
         $('#formula_div').show();
-        @endif  
-      
+        @endif
+
         $("input[name='method']").click(function() {
             var selectedValue = $(this).val();
             if (selectedValue == "wid_formula") {
@@ -196,8 +196,8 @@
 
 <script>
     $(document).ready(function() {
-        $("#head_title").focus(function(){
-         
+        $("#head_title").focus(function() {
+
         });
     });
 </script>

@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-       // $all_emp = User::with('post')->get();
+       // Get all  employees  came  from success factor  
         $all_emp = User::with('post')->where('type_id', '2')->get();
         $all_salary_head = SalaryHead::all();
         return view('Employee.all_employee',  compact("all_emp"), compact("all_salary_head"));
