@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GradeWiseSalaryMaster extends Model
 {
-    protected $table = 'grade_wise_salary_masters';
+   
     use HasFactory;
     protected $fillable = [
         'head_title',
@@ -19,10 +19,17 @@ class GradeWiseSalaryMaster extends Model
         'grade',
     ];
 
+    protected $table = 'grade_wise_salary_masters';
 
     public function grade(): BelongsTo
     {
         return $this->belongsTo(BasicGrade::class, 'grade');
     }
+
+    public function head()
+    {
+        return $this->belongsTo(SalaryHead::class, 'head_title', 'head_title');
+    } 
+
 
 }

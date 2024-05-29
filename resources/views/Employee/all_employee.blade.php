@@ -24,7 +24,7 @@
   <td>{{ $val->post[0]->grade }}</td>
   <td>{{ $val->post[0]->base_pay }}</td>
   <td>
-  <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-bs-toggle="modal" data-bs-target="#basicModal">Salary</button>
+  <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-grade="{{ $val->post[0]->grade }}" data-bs-toggle="modal" data-bs-target="#basicModal">Salary</button>
   </td>
 </tr>
 @endforeach
@@ -37,9 +37,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Basic Modal</h5>
+            <button id="show_btn">Show</button>
+            <button id="hide_btn">Hide</button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            
           </div>
           <div class="modal-body" id="append_emp_detail">
+        
           
           </div>
         </div>
@@ -51,10 +55,10 @@
 $(document).ready(function(){
   $('.salary-btn').on('click', function () {
     var id = $(this).attr("data-id");
-    var name = $(this).closest('tr').find('.emp-name').text();
-    
+    var grade = $(this).data("grade");
+   
     // Now you have the employee ID and name, you can use them as needed
-    vdata = {id:id, "_token": "{{ csrf_token() }}"};
+    vdata = {id:id, grade:grade, "_token": "{{ csrf_token() }}"};
     $.ajax({
       url: "{{ url('get_emp_data')}}",
       type: "post",
@@ -67,6 +71,22 @@ $(document).ready(function(){
   });
 });
 </script>
+
+<script>
+$(document).on('click', '#show_btn', function() {
+  $('#show_formula').show();
+    $('.show_formula').show();
+    $('#show_cal').show();
+    $('.show_cal').show();
+});
+
+$(document).on('click', '#hide_btn', function() {
+  $('#show_formula').hide();
+    $('.show_formula').hide();
+    $('#show_cal').hide();
+    $('.show_cal').hide();
+});
+  </script>
 
     @endsection
 

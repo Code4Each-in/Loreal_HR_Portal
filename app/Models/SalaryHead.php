@@ -19,4 +19,11 @@ class SalaryHead extends Model
 
     ];
     protected $table = 'salary_heads';
+
+    public function head()
+    {
+        return $this->belongsTo(GradeWiseSalaryMaster::class, 'head_title', 'head_title');
+    } 
+
+   
 }
