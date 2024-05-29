@@ -64,8 +64,11 @@ use App\Http\Controllers\GradeSalaryMasterController;
     Route::get('/toggle-user-status', [UsersController::class, 'toggleStatus'])->name('toggle-user-status');
 
     Route::get('/basic_grade', [GradeSalaryMasterController::class, 'index'])->name('basic.grade');
-    Route::post('/grade_salary_master', [GradeSalaryMasterController::class, 'store']);
-
+    Route::post('/grade_salary_master', [GradeSalaryMasterController::class, 'store_grade']);
+    Route::get('/basic_grade_salary_master_listing', [GradeSalaryMasterController::class, 'allBasicGradeSalary'])->name('allBasicGradeSalary');
+    Route::get('/edit_basic_salary/{id}', [GradeSalaryMasterController::class, 'edit_basic_salary']);
+    Route::post('/update_basic_salary/{id}', [GradeSalaryMasterController::class, 'update_basic_salary']);
+    Route::post('/delete_basic_sal', [GradeSalaryMasterController::class, 'delete_basic_sal']);
  });
 
 
