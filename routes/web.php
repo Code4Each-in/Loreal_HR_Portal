@@ -51,7 +51,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
      // End Basic with grade pay
 
      // Employee Route
-     Route::get('/employee', [EmployeeController::class, 'index']);
+     Route::get('/emp_listing', [EmployeeController::class, 'index']);
      Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
      // End employee route
 

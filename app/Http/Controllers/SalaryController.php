@@ -25,8 +25,9 @@ class SalaryController extends Controller
             'formulaOutput' => 'required',
 
             ]);
+            $head_title = str_replace(' ', '_', $req->head_title);
            $salary_head = SalaryHead::create([
-               'head_title'        => $req->head_title,
+               'head_title'        => $head_title,
                'formula'           => $req->formulaOutput,
                'method'            => $req->method
            ]);
@@ -110,7 +111,6 @@ class SalaryController extends Controller
     {
         $id = $req->sal_head_id;
         $delete = SalaryHead::find($id)->delete();
-
-        return redirect()->back()->with('message', 'Head Title Deleted Successfully');
+         return redirect()->back()->with('message', 'Head Title Deleted Successfully');
     }
 }

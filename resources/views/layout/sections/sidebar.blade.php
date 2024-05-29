@@ -41,7 +41,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#salary_head" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Salary Grade</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Salary Grade</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="salary_head" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
@@ -58,6 +58,26 @@
         </ul>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#employee" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="employee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <!-- <li>
+            <a href="{{  url('master_salary_head')}}">
+              <i class="bi bi-circle"></i><span>Create Salary Head</span>
+            </a>
+          </li> -->
+          <li>
+            <a href="{{  url('emp_listing')}}">
+              <i class="bi bi-circle"></i><span>Employee Listing</span>
+            </a>
+          </li>
+
+
+
+        </ul>
+      </li>
+
             <a class="nav-link collapsed" data-bs-target="#basic_grade_salary_master" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Basic Grade Salary Master</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
