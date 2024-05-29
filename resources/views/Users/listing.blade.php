@@ -1,5 +1,9 @@
 @extends('layout.app')
 @section('content')
+<div class="create_btn">
+<a class="btn btn-primary" id="createUser" data-toggle="modal" data-target="#userModal">Create User</a>
+</div>
+
 <div class="container">
     @if(session()->has('message'))
     <div id="successMessage" class="alert alert-success fade show" role="alert">
@@ -114,6 +118,7 @@
             <div class="modal-body">
                 <form id="changePasswordForm" method="POST">
                     @csrf
+                    <div class="alert alert-danger" style="display:none"></div>
                     <div class="form-group">
                         <div class="alert alert-danger" style="display:none"></div>
                         <label for="password">New Password<span class="text-danger">*</span></label>
@@ -133,7 +138,81 @@
         </div>
     </div>
 </div>
+<!-- End of change password -->
+
+<!-- Create User -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" id="Create_user" class="row g-3 needs-validation">
+                    @csrf
+                    <div class="alert alert-danger" style="display:none"></div>
+                    <div class="form-group">
+                        <label for="role" class="form-label">Role<span class="text-danger">*</span></label>
+                        <select name="role_id" class="form-select" id="role">
+                        <option value="" selected>Select Role</option>
+                        @foreach($all_roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
+                        <input type="text" name="firstname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="form-label">Last Name<span class="text-danger">*</span></label>
+                        <input type="text" name="lastname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
+                        <input type="number" name="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="form-label">City<span class="text-danger">*</span></label>
+                        <input type="text" name="city" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="form-label">State<span class="text-danger">*</span></label>
+                        <input type="text" name="state" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="zip" class="form-label">Zip<span class="text-danger">*</span></label>
+                        <input type="number" name="zip" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
+                        <input type="text" name="address" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmpassword" class="form-label">Confirm Password<span class="text-danger">*</span></label>
+                        <input type="password" name="password_confirmation" class="form-control" id="confirmpassword">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="saveuser" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of create user-->
 @endsection
+
 @section('js_scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -188,6 +267,7 @@
 
         //for edit to show the data of user
         $('.edit-userdata-btn').click(function(e) {
+            $('.alert-danger').css('display','none');
             e.preventDefault();
             var userId = $(this).data('user-id');
             // $('#user_id').val(userId);
@@ -200,7 +280,6 @@
                 data: vdata,
                 success: function(response)
                 {
-
                     $('input[name="firstname"]').val(response.user.Fname);
                     $('input[name="lastname"]').val(response.user.Lname);
                     $('input[name="phone"]').val(response.user.phone);
@@ -316,6 +395,38 @@
             // Reset the form fields
             $('#changePasswordForm')[0].reset();
         });
+    });
+
+    //for creating user
+    $('#createUser').click(function() {
+        $('.alert-danger').css('display','none');
+        $('#Create_user')[0].reset();
+        $('#userModal').modal('show');
+    });
+    $('#saveuser').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url:'{{ url("/save_user") }}',
+            type: 'POST',
+            data: $('#Create_user').serialize(),
+            success: function(response) {
+                $('#userModal').modal('hide');
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = JSON.parse(xhr.responseText);
+                    var validationErrors = errorMessage.errors;
+                    var html = "<ul>";
+                    $.each(validationErrors, function(key, value) {
+                        console.log(value);
+
+                        html += "<li>" + value + "</li>";
+                    });
+                    html += "</ul>";
+                    $('.alert-danger').html(html);
+                    $('.alert-danger').show();
+                }
+            });
     });
 
     function displayErrors(errors) {

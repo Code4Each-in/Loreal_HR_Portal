@@ -9,6 +9,7 @@ use App\Notifications\RegistrationSuccessful;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Role;
 
 class UsersController extends Controller
 {
@@ -67,7 +68,45 @@ class UsersController extends Controller
     {
         // Retrieve all users
         $users = User::all();
-        return view('Users.listing', compact('users'));
+        $all_roles = Role::all();
+        return view('Users.listing', compact('users', 'all_roles'));
+    }
+
+    //to save new user
+    public function saveUser(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'role_id' => 'required|exists:roles,id',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'address' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        // Create a new User and with validated data
+        $user = new User();
+        $user->role_id = $validatedData['role_id'];
+        $user->Fname = $validatedData['firstname'];
+        $user->Lname = $validatedData['lastname'];
+        $user->phone = $validatedData['phone'];
+        $user->city = $validatedData['city'];
+        $user->state = $validatedData['state'];
+        $user->zipcode = $validatedData['zip'];
+        $user->address = $validatedData['address'];
+        $user->email = $validatedData['email'];
+        $user->password = $validatedData['password'];
+
+        // Save the user to the database
+        $user->save();
+
+        Session::flash('message', 'User saved successfully');
+        return response()->json(['success' => 'User saved successfully']);
     }
 
     public function getUserById(Request $request)

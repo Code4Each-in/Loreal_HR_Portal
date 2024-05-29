@@ -62,6 +62,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
     Route::delete('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
     Route::get('/toggle-user-status', [UsersController::class, 'toggleStatus'])->name('toggle-user-status');
+    Route::post('/save_user', [UsersController::class, 'saveUser'])->name('user.save');
 
     Route::get('/basic_grade', [GradeSalaryMasterController::class, 'index'])->name('basic.grade');
     Route::post('/grade_salary_master', [GradeSalaryMasterController::class, 'store_grade']);
