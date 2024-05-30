@@ -36,7 +36,7 @@ class RegistrationSuccessful extends Notification
     {
         $mailMessage = new MailMessage;
         $mailMessage->greeting($this->messages['greeting-text'] ?? '');
-        $mailMessage->subject($this->messages['subject'] ?? 'Welcome to ' . config('app.name'));
+        $mailMessage->subject($this->messages['subject'] ?? 'Welcome to Welcome to Local Integration Portal');
 
         foreach ($this->messages['lines_array'] as $key => $value) {
             if (strpos($key, 'special_') === 0) {

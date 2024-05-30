@@ -46,7 +46,7 @@ class UsersController extends Controller
 
         // Prepare notification messages
         $messages = [
-            'subject' => 'Welcome to ' . config('app.name'),
+            'subject' => 'Welcome to Local Integration Portal',
             'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',',
             'lines_array' => [
                 'body-text' => 'Thank you for registering with us. Your account has been successfully created.',
