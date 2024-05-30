@@ -38,6 +38,7 @@ class UsersController extends Controller
             'address' => $validatedData['address'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
+            'role_id' => 2,
 
         ]);
 
@@ -67,8 +68,9 @@ class UsersController extends Controller
     public function showListing()
     {
         // Retrieve all users
-        $users = User::all();
+        $users = User::with('role')->get();
         $all_roles = Role::all();
+        //dump($users); dd();
         return view('Users.listing', compact('users', 'all_roles'));
     }
 
@@ -155,6 +157,7 @@ class UsersController extends Controller
                 'zip' => 'required',
                 'address' => 'required',
                 'email' => 'required|email|max:255',
+                'role_id' => 'required',
             ]);
             //dd($validatedData);
 
@@ -169,6 +172,7 @@ class UsersController extends Controller
                             'zipcode' => $validatedData['zip'],
                             'address' => $validatedData['address'],
                             'email' => $validatedData['email'],
+                            'role_id' => $validatedData['role_id'],
                         ]);
             Session::flash('message', 'User data updated successfully.');
         }

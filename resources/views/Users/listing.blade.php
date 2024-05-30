@@ -18,6 +18,7 @@
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Status</th>
                 <th width="150px">Action</th>
             </tr>
@@ -29,6 +30,7 @@
                 <td>{{ $user->Fname }} {{ $user->Lname }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->role->name }}</td>
                 <td>
                     <button class="status-toggle btn {{ $user->status == 1 ? 'btn-danger' : 'btn-success' }}" data-user-id="{{ $user->id }}" data-status="{{ $user->status }}">
                         {{ $user->status == 1 ? 'Inactive' : 'Active' }}
@@ -64,6 +66,15 @@
                 <form action="" method="POST" id="update_form" class="row g-3 needs-validation">
                     @csrf
                     <div class="alert alert-danger" style="display:none"></div>
+                    <div class="form-group">
+                    <label for="role" class="form-label">Role<span class="text-danger">*</span></label>
+                        <select name="role_id" class="form-select" id="role_id">
+                            <option value="" selected>Select Role</option>
+                            @foreach($all_roles as $role)
+                            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <input type="hidden" name="edit_form_id" id="edit_form_id" class="form-control">
                         <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
@@ -105,7 +116,8 @@
             </div>
         </div>
     </div>
-</div><!--##user update modal-->
+</div>
+<!--##user update modal-->
 
 <!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
@@ -233,7 +245,7 @@
         $('#pagination').DataTable({
             searching: true,
             "aoColumnDefs": [
-                { "bSortable": false, "aTargets": [ 5] },
+                { "bSortable": false, "aTargets": [ 6] },
             ],
             language: {
                 emptyTable: "No records found"
@@ -289,6 +301,10 @@
                     $('input[name="address"]').val(response.user.address);
                     $('input[name="email"]').val(response.user.email);
                     $('input[name="edit_form_id"]').val(response.user.id);
+                    
+                    var userRoleId = response.user.role_id;
+                    $('#role_id option').removeAttr('selected');
+                    $('#role_id option[value="' + userRoleId + '"]').attr('selected', 'selected'); 
 
                     $('#editUserDataModal').modal('show');
 
@@ -317,6 +333,7 @@
                     'address': $("input[name=address]").val(),
                     'email': $("input[name=email]").val(),
                     'edit_form_id': $("input[name=edit_form_id]").val(),
+                    'role_id': $("select[name=role_id]").val()
                 },
                 success: function(response) {
                     $('#editUserDataModal').modal('hide');
