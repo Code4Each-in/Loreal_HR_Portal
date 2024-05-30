@@ -45,82 +45,82 @@
             </div>
         </div>
 
-        <div id="formula_div" <?php if($basic_salary->method=="fixed") { ?> style="display: none;"
-            <?php } ?>>
-                <section class="main-section">
-                    <section class="cal2">
-                        <div class="design-button">
-                            <h4>Salary Head</h4>
-                            <div class="cal-button ">
-                                @foreach($all_basic_salary as $val) @if(!empty($val->formula))
-                                <?php  $formula = $val->formula; ?>
-                                    <a onclick="showFormula('{{$formula}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a> @else
-                                    <?php   $amount = '{'.$val->head_title.'}'; ?>
-                                        <a onclick="showFormula('{{$amount}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a> @endif @endforeach
+        <div id="formula_div" <?php if ($basic_salary->method == "fixed") { ?> style="display: none;" <?php } ?>>
+            <section class="main-section">
+                <section class="cal2">
+                    <div class="design-button">
+                        <h4>Salary Head</h4>
+                        <div class="cal-button ">
+                        @foreach($all_basic_salary as $val)
+
+                        <?php $head_title = '{' . $val->head_title . '}' ?>
+                        <a onclick="showFormula('{{$head_title}}')" data-salary-formula="" class="button-deisgn">{{ $val->head_title }}</a>
+
+                        @endforeach
 
 
-                            </div>
                         </div>
-
-                    </section>
-                    <section class="cal2">
-                        <div class="design-button">
-                            <h4>Source Factor</h4>
-                            <div class="cal-button ">
-                                <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
-                                <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
-                                <a onclick="showFormula('{INCENTIVE}')" class="button-deisgn">Incentive</a>
-                                <a onclick="showFormula('{VPP_PR}')" class="button-deisgn">VPP %</a>
-                            </div>
-                        </div>
-
-                    </section>
-
-                    <section class="calculator">
-                        <!-- <input type="text" placeholder="0" id="inputBox"> -->
-                        <div class="cal-section">
-                            <a onclick="clearFormulaOutput()" class="operator">AC</a>
-                            <a onclick="showFormula('/')" class="operator">/</a>
-                            <a onclick="showFormula('%')" class="operator">%</a>
-                            <a onclick="showFormula('÷')" class="operator">÷</a>
-                        </div>
-                        <div class="cal-section">
-                            <a onclick="showFormula('7')">7</a>
-                            <a onclick="showFormula('8')">8</a>
-                            <a onclick="showFormula('9')">9</a>
-                            <a onclick="showFormula('x')" class="operator">x</a>
-                        </div>
-                        <div class="cal-section">
-                            <a onclick="showFormula('4')">4</a>
-                            <a onclick="showFormula('5')">5</a>
-                            <a onclick="showFormula('6')">6</a>
-                            <a onclick="showFormula('-')" class="operator">-</a>
-                        </div>
-                        <div class="cal-section">
-                            <a onclick="showFormula('1')">1</a>
-                            <a onclick="showFormula('2')">2</a>
-                            <a onclick="showFormula('3')">3</a>
-                            <a onclick="showFormula('+')" class="operator">+</a>
-                        </div>
-                        <div class="cal-section">
-
-                            <a onclick="showFormula('0')">0</a>
-                            <a onclick="showFormula('.')">.</a>
-                            <a onclick="showFormula('(')" class="operator">(</a>
-                            <a onclick="showFormula(')')" class="operator">)</a>
-                        </div>
-                    </section>
+                    </div>
 
                 </section>
-                <div class="row mb-3 mt-4">
-                    <label for="title" class="col-sm-3 col-form-label required">Formula<span class='asterisk'>*</span></label>
-                    <div class="col-sm-9">
-                        <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
-                            {{ $basic_salary->formula}}
-                        </textarea>
-
+                <section class="cal2">
+                    <div class="design-button">
+                        <h4>Source Factor</h4>
+                        <div class="cal-button ">
+                            <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
+                            <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
+                            <a onclick="showFormula('{INCENTIVE}')" class="button-deisgn">Incentive</a>
+                            <a onclick="showFormula('{VPP_PR}')" class="button-deisgn">VPP %</a>
+                        </div>
                     </div>
+
+                </section>
+
+                <section class="calculator">
+                    <!-- <input type="text" placeholder="0" id="inputBox"> -->
+                    <div class="cal-section">
+                        <a onclick="clearFormulaOutput()" class="operator">AC</a>
+                        <a onclick="showFormula('/')" class="operator">/</a>
+                        <a onclick="showFormula('%')" class="operator">%</a>
+                        <a onclick="showFormula('÷')" class="operator">÷</a>
+                    </div>
+                    <div class="cal-section">
+                        <a onclick="showFormula('7')">7</a>
+                        <a onclick="showFormula('8')">8</a>
+                        <a onclick="showFormula('9')">9</a>
+                        <a onclick="showFormula('*')" class="operator">x</a>
+                    </div>
+                    <div class="cal-section">
+                        <a onclick="showFormula('4')">4</a>
+                        <a onclick="showFormula('5')">5</a>
+                        <a onclick="showFormula('6')">6</a>
+                        <a onclick="showFormula('-')" class="operator">-</a>
+                    </div>
+                    <div class="cal-section">
+                        <a onclick="showFormula('1')">1</a>
+                        <a onclick="showFormula('2')">2</a>
+                        <a onclick="showFormula('3')">3</a>
+                        <a onclick="showFormula('+')" class="operator">+</a>
+                    </div>
+                    <div class="cal-section">
+
+                        <a onclick="showFormula('0')">0</a>
+                        <a onclick="showFormula('.')">.</a>
+                        <a onclick="showFormula('(')" class="operator">(</a>
+                        <a onclick="showFormula(')')" class="operator">)</a>
+                    </div>
+                </section>
+
+            </section>
+            <div class="row mb-3 mt-4">
+                <label for="title" class="col-sm-3 col-form-label required">Formula<span class='asterisk'>*</span></label>
+                <div class="col-sm-9">
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
+                    {{ $basic_salary->formula}}
+                    </textarea>
+
                 </div>
+            </div>
         </div>
 
     </div>
@@ -142,15 +142,15 @@
 
 @endsection @section('js_scripts')
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
         // By default, hide the amount div and show the formula div
-        @if($basic_salary->method=="fixed")
+        @if($basic_salary-> method == "fixed")
 
         $('#only_amt').show();
         $('#formula_div').hide();
         @endif
 
-        @if($basic_salary->method=="wid_formula")
+        @if($basic_salary -> method == "wid_formula")
         $('#only_amt').hide();
         $('#formula_div').show();
         @endif
@@ -165,41 +165,45 @@
                 $('#formula_div').hide();
             }
         });
-         // Append the clicked button's value to the textarea content
-    function showFormula(value) {
-        var textarea = document.getElementById("formulaOutput");
-        textarea.value += value + " ";
-    }
+        // Append the clicked button's value to the textarea content
+  
+        let input = document.getElementById('inputBox');
+        let buttons = document.querySelectorAll('button');
 
-    // To clear the formulaOutput textarea
-    function clearFormulaOutput() {
-        var textarea = document.getElementById("formulaOutput");
-        textarea.value = '';
-    }
-    let input = document.getElementById('inputBox');
-    let buttons = document.querySelectorAll('button');
+        let string = "";
+        let arr = Array.from(buttons);
+        arr.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (e.target.innerHTML == '=') {
+                    string = eval(string);
+                    input.value = string;
+                } else if (e.target.innerHTML == 'AC') {
+                    string = "";
+                    input.value = string;
+                } else if (e.target.innerHTML == 'DEL') {
+                    string = string.substring(0, string.length - 1);
+                    input.value = string;
+                } else {
+                    string += e.target.innerHTML;
+                    input.value = string;
 
-    let string = "";
-    let arr = Array.from(buttons);
-    arr.forEach(button => {
-        button.addEventListener('click', (e) => {
-            if (e.target.innerHTML == '=') {
-                string = eval(string);
-                input.value = string;
-            } else if (e.target.innerHTML == 'AC') {
-                string = "";
-                input.value = string;
-            } else if (e.target.innerHTML == 'DEL') {
-                string = string.substring(0, string.length - 1);
-                input.value = string;
-            } else {
-                string += e.target.innerHTML;
-                input.value = string;
-
-            }
-        })
-    });
+                }
+            })
+        });
     });
 </script>
+
+<script>
+      function showFormula(value) {
+            var textarea = document.getElementById("formulaOutput");
+            textarea.value += value;
+        }
+
+        // To clear the formulaOutput textarea
+        function clearFormulaOutput() {
+            var textarea = document.getElementById("formulaOutput");
+            textarea.value = '';
+        }
+    </script>
 
 @endsection

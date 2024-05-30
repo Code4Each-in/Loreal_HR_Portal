@@ -87,14 +87,11 @@ setTimeout(function() {
 
 <script>
     $(document).ready(function(){
-        $('.delete').click(function(e){
-        
+        $(document).on('click', '.delete', function(e){
             e.preventDefault();
             var id = $(this).data('id');
-           $('#sal_head_id').val(id);
-          $('#deletemodel').modal('show');
-
-
+            $('#sal_head_id').val(id);
+            $('#deletemodel').modal('show');
         });
     });
 </script>

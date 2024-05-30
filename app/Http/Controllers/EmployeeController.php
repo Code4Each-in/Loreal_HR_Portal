@@ -14,7 +14,8 @@ class EmployeeController extends Controller
     public function index()
     {
         // Get all  employees  came  from success factor  
-        $all_emp = User::with('post')->where('type_id', '2')->get();
+        //  Join with user detail table 
+        $all_emp = User::with(['post', 'post.get_grade_name'])->where('type_id', '2')->get();
         $all_salary_head = SalaryHead::all();
         return view('Employee.all_employee',  compact("all_emp"), compact("all_salary_head"));
     }
@@ -37,15 +38,40 @@ class EmployeeController extends Controller
 
 
         //$emp = Employee::find($id);
+           $all_salary_head = [];
 
-        //  $all_salary_head = SalaryHead::all();
-        // $all_salary_head5 = GradeWiseSalaryMaster::where('grade', $grade)->get();
+           $only_salary_head = SalaryHead::all();
+
+           $salaryhead_with_grades = GradeWiseSalaryMaster::where('grade', $grade)->get();
+           
+          
+           foreach ($salaryhead_with_grades as $head) {
+            //  dump($head->head_title);
+            $all_salary_head[$head->head_title] = $head; 
+        }
+          
+
+        foreach ($only_salary_head as $data) {
+            if (isset($all_salary_head[$data->head_title])) {
+               $all_salary_head[$data->head_title];
+            }else {
+           
+            $all_salary_head[$data->head_title] = $data;
+            }
+        }
+
+    
+        
+      
+
+      
         // $heads = SalaryHead::with('head')->where('grade', $grade)->get();
-        $all_salary_head = SalaryHead::with(['head' => function ($q) use ($grade) {
-            $q->where('grade', $grade);
-        }])->get();
 
-
+        //  Relationship with GradeWiseSalaryMaster 
+        // $all_salary_head = SalaryHead::with(['head' => function ($q) use ($grade) {
+        //     $q->where('grade', $grade);
+        // }])->get();
+        // dump($all_salary_head->toarray());
 
 
         $html = "<table class='table'> 
@@ -68,14 +94,19 @@ class EmployeeController extends Controller
 
         $key = [];
         $replacement_values = [];
+       // dump($all_salary_head);
         foreach ($all_salary_head as $val) {
-            if (!empty($val->head->formula)) {
-                $val->formula = $val->head->formula;
-            }
-            if (!empty($val->head->amount)) {
-                $val->amount = $val->head->amount;
-            }
-            //  $val->formula = ;
+           // echo $val->formula;
+           // echo $val->head_title;
+            //dump($val);
+            // if (!empty($val->head->formula)) {
+            //     $val->formula = $val->head->formula;
+            // }
+          
+            // if (!empty($val->head->amount)) {
+            //     $val->amount = $val->head->amount;
+            // }
+           
 
             $pattern = "/\{([A-Za-z_]+)\}/";
             $formula = str_replace(' ', '_', $val->formula);
