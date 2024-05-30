@@ -21,10 +21,16 @@
     @foreach ($all_emp as $val)
 <tr>
   <td>{{ $val->Fname }} {{ $val->Lname }}</td>
-  <td><?php $data = json_decode($val->post[0]->get_grade_name); if (!empty($data) && isset($data[0])) {
-    $grade = $data[0]->grade;
-    echo $grade; 
-}?></td>
+  <td><?php 
+  if(!empty($val->post[0]->get_grade_name))
+   {  
+    $data =  json_decode($val->post[0]->get_grade_name);
+    if (!empty($data) && isset($data[0])) {
+      $grade = $data[0]->grade;
+      echo $grade; 
+  }
+   } 
+ ?></td>
  
   <td>{{ $val->post[0]->base_pay }}</td>
   <td>
