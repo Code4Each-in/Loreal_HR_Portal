@@ -266,7 +266,7 @@
         });
 
         //for edit to show the data of user
-        $('.edit-userdata-btn').click(function(e) {
+        $('.edit-userdata-btn').click(function(e) { 
             $('.alert-danger').css('display','none');
             e.preventDefault();
             var userId = $(this).data('user-id');
