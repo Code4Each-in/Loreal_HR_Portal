@@ -22,8 +22,9 @@ class UserDetail extends Model
         return $this->hasMany(GradeWiseSalaryMaster::class, 'grade', 'grade');
     }
 
-
-
-
+    public function get_grade_name()
+    {
+        return $this->hasMany(BasicGrade::class, 'id' , 'grade');
+    }
  
 }

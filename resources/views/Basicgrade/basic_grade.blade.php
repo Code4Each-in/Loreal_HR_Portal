@@ -32,7 +32,7 @@
     <div class="modal-footer back-btn">
 
         <button type="submit" class="btn btn-default">Save</button>
-        <a href="{{ url('allBasicGrade') }}" class="btn btn-primary">Back</a>
+        <a href="{{ url('grade_listing') }}" class="btn btn-primary">Back</a>
 
     </div>
 

@@ -25,7 +25,8 @@ class SalaryController extends Controller
             'formulaOutput' => 'required',
 
             ]);
-            $head_title = str_replace(' ', '_', $req->head_title);
+            $head_title = preg_replace('/\s+/', ' ', $req->head_title);
+            $head_title = str_replace(' ', '_', $head_title); 
            $salary_head = SalaryHead::create([
                'head_title'        => $head_title,
                'formula'           => $req->formulaOutput,

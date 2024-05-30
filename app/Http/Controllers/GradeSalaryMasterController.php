@@ -29,21 +29,25 @@ class GradeSalaryMasterController extends Controller
                 'grade' => 'required'
             ]);
             // Create a new salary head with formula
+            $head_title = preg_replace('/\s+/', ' ', $req->head_title);
+            $head_title = str_replace(' ', '_', $head_title); 
+           // $head_title = str_replace(' ', '_', $req->head_title); 
             $salary_head = GradeWiseSalaryMaster::create([
-                'head_title' => $req->head_title,
+                'head_title' =>  $head_title,
                 'formula' => $req->formulaOutput,
                 'method' => $req->method,
                 'grade' => $req->grade
             ]);
         } else {
             $validated = $req->validate([
-                'head_title' => 'required|unique:grade_wise_salary_masters',
+                'head_title' => 'required',
                 'amount' => 'required',
                 'grade' => 'required'
             ]);
             // Create a new salary head with fixed amount
+            $head_title = str_replace(' ', '_', $req->head_title); 
             $salary_head = GradeWiseSalaryMaster::create([
-                'head_title' => $req->head_title,
+                'head_title' => $head_title,
                 'formula' => '',
                 'amount' => $req->amount,
                 'method' => $req->method,

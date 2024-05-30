@@ -17,7 +17,7 @@
 
 <!-- Template Main JS File -->
 
-<script src="assets/js/main.js"></script>
+<script src="{{ url('assets/js/main.js')}}"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <!-- Include Bootstrap 5 CSS -->

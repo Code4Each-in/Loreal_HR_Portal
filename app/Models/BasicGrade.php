@@ -12,4 +12,6 @@ class BasicGrade extends Model
         'grade',
         'basic_salary'
     ];
+
+ 
 }

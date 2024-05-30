@@ -17,11 +17,15 @@
  
   </thead>
   <tbody>
- 
+
     @foreach ($all_emp as $val)
 <tr>
   <td>{{ $val->Fname }} {{ $val->Lname }}</td>
-  <td>{{ $val->post[0]->grade }}</td>
+  <td><?php $data = json_decode($val->post[0]->get_grade_name); if (!empty($data) && isset($data[0])) {
+    $grade = $data[0]->grade;
+    echo $grade; 
+}?></td>
+ 
   <td>{{ $val->post[0]->base_pay }}</td>
   <td>
   <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-grade="{{ $val->post[0]->grade }}" data-bs-toggle="modal" data-bs-target="#basicModal">Salary</button>
