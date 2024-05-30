@@ -135,12 +135,12 @@
 <script>
     $(document).ready(function() {
         // By default, hide the amount div and show the formula div
-        @if($SalaryHead - > method == "fixed")
+        @if($SalaryHead-> method == "fixed")
         $('#only_amt').show();
         $('#formula_div').hide();
         @endif
 
-        @if($SalaryHead - > method == "wid_formula")
+        @if($SalaryHead-> method == "wid_formula")
         $('#only_amt').hide();
         $('#formula_div').show();
         @endif

@@ -24,7 +24,7 @@ class GradeSalaryMasterController extends Controller
 
         if ($method == "wid_formula") {
             $validated = $req->validate([
-                'head_title' => 'required|unique:grade_wise_salary_masters',
+                'head_title' => 'required',
                 'formulaOutput' => 'required',
                 'grade' => 'required'
             ]);

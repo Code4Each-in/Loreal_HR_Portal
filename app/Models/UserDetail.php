@@ -17,5 +17,13 @@ class UserDetail extends Model
         'vpp_percentage'
     ];
 
+    public function grader()
+    {
+        return $this->hasMany(GradeWiseSalaryMaster::class, 'grade', 'grade');
+    }
+
+
+
+
  
 }
