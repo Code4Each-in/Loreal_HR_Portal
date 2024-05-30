@@ -127,8 +127,8 @@ class EmployeeController extends Controller
 
 
                 $basic = str_replace($dynamicKeywords, array_values($formulaMasterVals), $val->formula);
-
-                $result = eval("return $basic;");
+                 echo $basic."--------------";
+                $result = eval("return $basic");
                 $results[$val->head_title] = $result;
             } else {
                 $results[$val->head_title] = is_numeric($val->amount) ? floatval($val->amount) : $val->amount;

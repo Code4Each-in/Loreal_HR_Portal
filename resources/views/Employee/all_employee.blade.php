@@ -32,7 +32,7 @@
    } 
  ?></td>
  
-  <td>{{ $val->post[0]->base_pay }}</td>
+  <td> <?php if(!empty($val->post[0]->base_pay)) { echo $val->post[0]->base_pay; } ?></td>
   <td>
   <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-grade="{{ $val->post[0]->grade }}" data-bs-toggle="modal" data-bs-target="#basicModal">Salary</button>
   </td>
