@@ -45,11 +45,11 @@
 										<div class="col-12">
 											<label for="email" class="form-label">Email</label>
 											
-											 type="text" name="email" class="form-control" id="email" required>
+											<input type="text" name="email" class="form-control" id="email" required>
 											
 												<div class="invalid-feedback">Please enter your Email.</div>
 											
-											</div>
+										
 											@if ($errors->has('email'))
 												<span class="text-danger my-2">{{ $errors->first('email') }}</span>
 												@endif

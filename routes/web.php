@@ -35,6 +35,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
     Route::get('/edit_salary_head/{id}', [SalaryController::class, 'edit_salary_head']);
     Route::post('/update_salary_head/{id}', [SalaryController::class, 'update_salary_head']);
     Route::post('/delete_sal_head', [SalaryController::class, 'delete_sal_head']);
+    Route::get('/get_master_head_title', [SalaryController::class, 'get_master_head_title']);
     // End salary Head
 
     // Basic with grade pay

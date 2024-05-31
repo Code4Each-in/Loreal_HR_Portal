@@ -114,4 +114,18 @@ class SalaryController extends Controller
         $delete = SalaryHead::find($id)->delete();
          return redirect()->back()->with('message', 'Head Title Deleted Successfully');
     }
+
+    public function get_master_head_title(Request $req)
+    {
+          $term = $req->term; 
+          $terms = explode(' ', $term);
+
+          $salaryHeads = SalaryHead::where(function ($query) use ($terms) {
+              foreach ($terms as $term) {
+                  $query->orWhere('head_title', 'like', '%' . $term . '%');
+              }
+          })->get();
+           return  json_encode($salaryHeads);
+        
+    }
 }

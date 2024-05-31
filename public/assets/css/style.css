@@ -1416,3 +1416,26 @@ footer.footer{
     background-color: #cddfff;
     z-index: 1000;
     }
+
+    .ui-autocomplete li {
+      padding: 5px;
+      width: 100%;
+  }
+  
+  .ui-autocomplete li a {
+      width: 100%;
+  }
+  
+  .ui-autocomplete li:hover {
+      background: rgb(92, 92, 184);
+  }
+  
+  .ui-autocomplete li a:hover {
+      background: rgb(67, 67, 187);
+  }
+  
+  .ui-autocomplete li a.ui-state-focus {
+      background: rgb(72, 72, 177) !important;
+  border:none;
+  color: #fff;
+  }
