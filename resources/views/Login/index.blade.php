@@ -1,3 +1,4 @@
+@section('title', 'Login')
 @include('layout.includes.head')
 <main>
     <div class="container">
