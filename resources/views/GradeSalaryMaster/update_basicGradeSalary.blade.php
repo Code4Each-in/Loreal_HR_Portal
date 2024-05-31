@@ -1,5 +1,5 @@
-@section('title', 'Update Basic Grade Salary Master')
-@section('sub-title', 'Update Basic Grade Salary Master')
+@section('title', 'Update Grade Salary Master')
+@section('sub-title', 'Update Grade Salary Master')
 @extends('layout.app')
 @section('content')
 

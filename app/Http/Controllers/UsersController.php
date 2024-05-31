@@ -44,7 +44,7 @@ class UsersController extends Controller
 
         // Retrieve the newly created user
         $user = User::where('email', $validatedData['email'])->first();
-
+ 
         // Prepare notification messages
         $messages = [
             'subject' => 'Welcome to Local Integration Portal',

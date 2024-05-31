@@ -24,7 +24,7 @@ class RegistrationSuccessful extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via(object $notifiable): array 
     {
         return ['mail'];
     }

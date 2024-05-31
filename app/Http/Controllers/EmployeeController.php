@@ -96,6 +96,8 @@ class EmployeeController extends Controller
         $replacement_values = [];
        // dump($all_salary_head);
         foreach ($all_salary_head as $val) {
+            $result = 0;
+           // $basic = 0;
            // echo $val->formula;
            // echo $val->head_title;
             //dump($val);
@@ -127,8 +129,8 @@ class EmployeeController extends Controller
 
 
                 $basic = str_replace($dynamicKeywords, array_values($formulaMasterVals), $val->formula);
-                 echo $basic."--------------";
-                $result = eval("return $basic");
+
+                $result = eval("return $basic;");
                 $results[$val->head_title] = $result;
             } else {
                 $results[$val->head_title] = is_numeric($val->amount) ? floatval($val->amount) : $val->amount;
