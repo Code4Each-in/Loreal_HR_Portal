@@ -65,7 +65,7 @@
             <div class="modal-body">
                 <form action="" method="POST" id="update_form" class="row g-3 needs-validation">
                     @csrf
-                    <div class="alert alert-danger" style="display:none"></div>
+                    <!-- <div class="alert alert-danger" style="display:none"></div> -->
                     <div class="form-group">
                     <label for="role" class="form-label">Role<span class="text-danger">*</span></label>
                         <select name="role_id" class="form-select" id="role_id">
@@ -74,39 +74,48 @@
                             <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
+                        <div id="role_id_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="edit_form_id" id="edit_form_id" class="form-control">
                         <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="firstname" class="form-control" required>
+                        <div id="firstname_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="form-label">Last Name<span class="text-danger">*</span></label>
                         <input type="text" name="lastname" class="form-control" required>
+                        <div id="lastname_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
                         <input type="number" name="phone" class="form-control" required>
+                        <div id="phone_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="city" class="form-label">City<span class="text-danger">*</span></label>
                         <input type="text" name="city" class="form-control" required>
+                        <div id="city_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="state" class="form-label">State<span class="text-danger">*</span></label>
                         <input type="text" name="state" class="form-control" required>
+                        <div id="state_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="zip" class="form-label">Zip<span class="text-danger">*</span></label>
                         <input type="number" name="zip" class="form-control" required>
+                        <div id="zip_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control" required>
+                        <div id="address_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control" required>
+                        <div id="email_error_up" class="text-danger error_ee"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -128,11 +137,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="changePasswordForm" method="POST">
+                <form id="changePasswordForm" method="POST" class="row g-3">
                     @csrf
                     <div class="alert alert-danger" style="display:none"></div>
                     <div class="form-group">
-                        <div class="alert alert-danger" style="display:none"></div>
                         <label for="password">New Password<span class="text-danger">*</span></label>
                         <input type="hidden" name="user_id" id="user_id" class="form-control">
                         <input type="password" name="password" class="form-control">
@@ -163,7 +171,7 @@
             <div class="modal-body">
                 <form action="" method="POST" id="Create_user" class="row g-3 needs-validation">
                     @csrf
-                    <div class="alert alert-danger" style="display:none"></div>
+
                     <div class="form-group">
                         <label for="role" class="form-label">Role<span class="text-danger">*</span></label>
                         <select name="role_id" class="form-select" id="role">
@@ -172,42 +180,52 @@
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
                         </select>
+                        <div id="role_id_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="firstname" class="form-control">
+                        <div id="firstname_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="form-label">Last Name<span class="text-danger">*</span></label>
                         <input type="text" name="lastname" class="form-control">
+                        <div id="lastname_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
                         <input type="number" name="phone" class="form-control">
+                        <div id="phone_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="city" class="form-label">City<span class="text-danger">*</span></label>
                         <input type="text" name="city" class="form-control">
+                        <div id="city_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="state" class="form-label">State<span class="text-danger">*</span></label>
                         <input type="text" name="state" class="form-control">
+                        <div id="state_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="zip" class="form-label">Zip<span class="text-danger">*</span></label>
                         <input type="number" name="zip" class="form-control">
+                        <div id="zip_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control">
+                        <div id="address_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control">
+                        <div id="email_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
                         <input type="password" name="password" class="form-control">
+                        <div id="password_error" class="text-danger error_e"></div>
                     </div>
                     <div class="form-group">
                         <label for="confirmpassword" class="form-label">Confirm Password<span class="text-danger">*</span></label>
@@ -264,7 +282,6 @@
                     status: status
                 },
                 success: function(response) {
-                    // console.log(response);userdata
                     if (response) {
 
                         location.reload();
@@ -278,11 +295,10 @@
         });
 
         //for edit to show the data of user
-        $('.edit-userdata-btn').click(function(e) { 
-            $('.alert-danger').css('display','none');
+        $('.edit-userdata-btn').click(function(e) {
             e.preventDefault();
+            $('.error_ee').html('');
             var userId = $(this).data('user-id');
-            // $('#user_id').val(userId);
             vdata = {
                 id: userId
             };
@@ -319,6 +335,8 @@
         $('#updateForm').click(function(e) {
 
             e.preventDefault();
+            $('.error_ee').html('');
+           
             $.ajax({
                 type: 'post',
                 url: "/users/update",
@@ -342,15 +360,11 @@
                 error: function(xhr, status, error) {
                     var errorMessage = JSON.parse(xhr.responseText);
                     var validationErrors = errorMessage.errors;
-                    var html = "<ul>";
                     $.each(validationErrors, function(key, value) {
-                        console.log(value);
-
-                        html += "<li>" + value + "</li>";
+                        // console.log(value);
+                        html= '<p>'+ value +'</p>';
+                        $('#' + key + '_error_up').html(html);
                     });
-                    html += "</ul>";
-                    $('.alert-danger').html(html);
-                    $('.alert-danger').show();
                 }
             });
         });
@@ -362,7 +376,6 @@
             data = {
                 id: userId
             };
-            console.log(data);
             // Display a confirmation dialog
             var confirmDelete = confirm("Are you sure you want to delete this user?");
             if (confirmDelete) {
@@ -385,6 +398,7 @@
         //for changing the password
         $('.change-password-btn').click(function(e) {
             e.preventDefault();
+            $('.alert-danger').css('display','none');
             var postid = $(this).data("id");
             //alert(postid);
             $('#user_id').val(postid);
@@ -411,17 +425,20 @@
         $('#changePasswordModal').on('hidden.bs.modal', function() {
             // Reset the form fields
             $('#changePasswordForm')[0].reset();
+            $('.alert-danger').html('');
         });
     });
 
     //for creating user
     $('#createUser').click(function() {
+        $('.error_e').html('');
         $('.alert-danger').css('display','none');
         $('#Create_user')[0].reset();
         $('#userModal').modal('show');
     });
     $('#saveuser').click(function(e) {
         e.preventDefault();
+        $('.error_e').html('');
         $.ajax({
             url:'{{ url("/save_user") }}',
             type: 'POST',
@@ -433,15 +450,10 @@
             error: function(xhr, status, error) {
                 var errorMessage = JSON.parse(xhr.responseText);
                     var validationErrors = errorMessage.errors;
-                    var html = "<ul>";
                     $.each(validationErrors, function(key, value) {
-                        console.log(value);
-
-                        html += "<li>" + value + "</li>";
+                        html1= '<p>'+ value +'</p>';
+                        $('#' + key + '_error').html(html1);
                     });
-                    html += "</ul>";
-                    $('.alert-danger').html(html);
-                    $('.alert-danger').show();
                 }
             });
     });
