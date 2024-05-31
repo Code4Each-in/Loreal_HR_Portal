@@ -1,3 +1,4 @@
+@section('title', 'Users')
 @extends('layout.app')
 @section('content')
 <div class="create_btn">
@@ -260,6 +261,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+    // Function to initialize DataTable
+    function initializeDataTable() {
         $('#pagination').DataTable({
             searching: true,
             "aoColumnDefs": [
@@ -269,178 +272,117 @@
                 emptyTable: "No records found"
             }
         });
-        //for active and inactive user->status(0,1)
-        $('.status-toggle').click(function() {
-            var userId = $(this).data('user-id');
-            var status = $(this).data('status');
+    }
 
-            $.ajax({
-                url: "{{ url('/toggle-user-status') }}",
-                method: 'GET',
-                data: {
-                    userId: userId,
-                    status: status
-                },
-                success: function(response) {
-                    if (response) {
+    // Call the function to initialize DataTable initially
+    initializeDataTable();
 
-                        location.reload();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = JSON.parse(xhr.responseText);
-                    displayErrors(errorMessage.error);
+    // Use event delegation for status toggle
+    $(document).on('click', '.status-toggle', function() {
+        var userId = $(this).data('user-id');
+        var status = $(this).data('status');
+
+        $.ajax({
+            url: "{{ url('/toggle-user-status') }}",
+            method: 'GET',
+            data: {
+                userId: userId,
+                status: status
+            },
+            success: function(response) {
+                if (response) {
+                    location.reload();
                 }
-            });
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = JSON.parse(xhr.responseText);
+                displayErrors(errorMessage.error);
+            }
         });
+    });
 
-        //for edit to show the data of user
-        $('.edit-userdata-btn').click(function(e) {
-            e.preventDefault();
-            $('.error_ee').html('');
-            var userId = $(this).data('user-id');
-            vdata = {
-                id: userId
-            };
+    // Use event delegation for edit user data button
+    $(document).on('click', '.edit-userdata-btn', function(e) {
+        e.preventDefault();
+        $('.error_ee').html('');
+        var userId = $(this).data('user-id');
+        vdata = {
+            id: userId
+        };
+        $.ajax({
+            type: 'post',
+            url: "{{ url('users/edit') }}",
+            data: vdata,
+            success: function(response) {
+                $('input[name="firstname"]').val(response.user.Fname);
+                $('input[name="lastname"]').val(response.user.Lname);
+                $('input[name="phone"]').val(response.user.phone);
+                $('input[name="city"]').val(response.user.city);
+                $('input[name="state"]').val(response.user.state);
+                $('input[name="zip"]').val(response.user.zipcode);
+                $('input[name="address"]').val(response.user.address);
+                $('input[name="email"]').val(response.user.email);
+                $('input[name="edit_form_id"]').val(response.user.id);
+                
+                var userRoleId = response.user.role_id;
+                $('#role_id option').removeAttr('selected');
+                $('#role_id option[value="' + userRoleId + '"]').attr('selected', 'selected'); 
+
+                $('#editUserDataModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Use event delegation for delete user button
+    $(document).on('click', '.delete-user-btn', function(e) {
+        e.preventDefault();
+        var userId = $(this).data('user-id');
+        var data = {
+            id: userId
+        };
+        var confirmDelete = confirm("Are you sure you want to delete this user?");
+        if (confirmDelete) {
             $.ajax({
-                type: 'post',
-                url: "{{ url('users/edit') }}",
-                data: vdata,
-                success: function(response)
-                {
-                    $('input[name="firstname"]').val(response.user.Fname);
-                    $('input[name="lastname"]').val(response.user.Lname);
-                    $('input[name="phone"]').val(response.user.phone);
-                    $('input[name="city"]').val(response.user.city);
-                    $('input[name="state"]').val(response.user.state);
-                    $('input[name="zip"]').val(response.user.zipcode);
-                    $('input[name="address"]').val(response.user.address);
-                    $('input[name="email"]').val(response.user.email);
-                    $('input[name="edit_form_id"]').val(response.user.id);
-                    
-                    var userRoleId = response.user.role_id;
-                    $('#role_id option').removeAttr('selected');
-                    $('#role_id option[value="' + userRoleId + '"]').attr('selected', 'selected'); 
-
-                    $('#editUserDataModal').modal('show');
-
+                type: 'DELETE',
+                url: "{{ url('/users/delete') }}",
+                data: data,
+                success: function(response) {
+                    console.log(response.success);
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                 }
             });
-        });
-
-        //to update the data of user
-        $('#updateForm').click(function(e) {
-
-            e.preventDefault();
-            $('.error_ee').html('');
-           
-            $.ajax({
-                type: 'post',
-                url: "/users/update",
-                data:
-                {
-                    'firstname': $("input[name=firstname]").val(),
-                    'lastname': $("input[name=lastname]").val(),
-                    'phone': $("input[name=phone]").val(),
-                    'city': $("input[name=city]").val(),
-                    'state': $("input[name=state]").val(),
-                    'zip': $("input[name=zip]").val(),
-                    'address': $("input[name=address]").val(),
-                    'email': $("input[name=email]").val(),
-                    'edit_form_id': $("input[name=edit_form_id]").val(),
-                    'role_id': $("select[name=role_id]").val()
-                },
-                success: function(response) {
-                    $('#editUserDataModal').modal('hide');
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = JSON.parse(xhr.responseText);
-                    var validationErrors = errorMessage.errors;
-                    $.each(validationErrors, function(key, value) {
-                        // console.log(value);
-                        html= '<p>'+ value +'</p>';
-                        $('#' + key + '_error_up').html(html);
-                    });
-                }
-            });
-        });
-
-        //for deleting user detail
-        $('.delete-user-btn').click(function(e) {
-            e.preventDefault();
-            var userId = $(this).data('user-id');
-            data = {
-                id: userId
-            };
-            // Display a confirmation dialog
-            var confirmDelete = confirm("Are you sure you want to delete this user?");
-            if (confirmDelete) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: "{{ url('/users/delete') }}",
-                    data: data,
-                    success: function(response) {
-                        console.log(response.success);
-                        location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        });
-
-
-        //for changing the password
-        $('.change-password-btn').click(function(e) {
-            e.preventDefault();
-            $('.alert-danger').css('display','none');
-            var postid = $(this).data("id");
-            //alert(postid);
-            $('#user_id').val(postid);
-            $('#changePasswordModal').modal('show');
-        });
-        $('#changePasswordForm').submit(function(e) {
-            e.preventDefault();
-            var formData = $(this).serialize();
-            $.ajax({
-                type: 'POST',
-                url: '{{ url("/users/change-password") }}',
-                data: formData,
-                success: function(response) {
-                    $('.alert-danger').html('');
-                    $('#changePasswordModal').modal('hide');
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = JSON.parse(xhr.responseText);
-                    displayErrors(errorMessage.error);
-                }
-            });
-        });
-        $('#changePasswordModal').on('hidden.bs.modal', function() {
-            // Reset the form fields
-            $('#changePasswordForm')[0].reset();
-            $('.alert-danger').html('');
-        });
+        }
     });
 
-    //for creating user
-    $('#createUser').click(function() {
+    // Use event delegation for change password button
+    $(document).on('click', '.change-password-btn', function(e) {
+        e.preventDefault();
+        $('.alert-danger').css('display', 'none');
+        var postid = $(this).data("id");
+        $('#user_id').val(postid);
+        $('#changePasswordModal').modal('show');
+    });
+
+    // Use event delegation for create user button
+    $('#createUser').on('click', function() {
         $('.error_e').html('');
-        $('.alert-danger').css('display','none');
+        $('.alert-danger').css('display', 'none');
         $('#Create_user')[0].reset();
         $('#userModal').modal('show');
     });
-    $('#saveuser').click(function(e) {
+
+    // Use event delegation for save user button
+    $(document).on('click', '#saveuser', function(e) {
         e.preventDefault();
         $('.error_e').html('');
         $.ajax({
-            url:'{{ url("/save_user") }}',
+            url: '{{ url("/save_user") }}',
             type: 'POST',
             data: $('#Create_user').serialize(),
             success: function(response) {
@@ -449,13 +391,74 @@
             },
             error: function(xhr, status, error) {
                 var errorMessage = JSON.parse(xhr.responseText);
-                    var validationErrors = errorMessage.errors;
-                    $.each(validationErrors, function(key, value) {
-                        html1= '<p>'+ value +'</p>';
-                        $('#' + key + '_error').html(html1);
-                    });
-                }
-            });
+                var validationErrors = errorMessage.errors;
+                $.each(validationErrors, function(key, value) {
+                    var html1 = '<p>' + value + '</p>';
+                    $('#' + key + '_error').html(html1);
+                });
+            }
+        });
+    });
+
+    // Use event delegation for update form button
+    $(document).on('click', '#updateForm', function(e) {
+        e.preventDefault();
+        $('.error_ee').html('');
+        $.ajax({
+            type: 'post',
+            url: "/users/update",
+            data:
+            {
+                'firstname': $("input[name=firstname]").val(),
+                'lastname': $("input[name=lastname]").val(),
+                'phone': $("input[name=phone]").val(),
+                'city': $("input[name=city]").val(),
+                'state': $("input[name=state]").val(),
+                'zip': $("input[name=zip]").val(),
+                'address': $("input[name=address]").val(),
+                'email': $("input[name=email]").val(),
+                'edit_form_id': $("input[name=edit_form_id]").val(),
+                'role_id': $("select[name=role_id]").val()
+            },
+            success: function(response) {
+                $('#editUserDataModal').modal('hide');
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = JSON.parse(xhr.responseText);
+                var validationErrors = errorMessage.errors;
+                $.each(validationErrors, function(key, value) {
+                    var html= '<p>'+ value +'</p>';
+                    $('#' + key + '_error_up').html(html);
+                });
+            }
+        });
+    });
+
+    // Use event delegation for change password form submit
+    $('#changePasswordForm').submit(function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("/users/change-password") }}',
+            data: formData,
+            success: function(response) {
+                $('.alert-danger').html('');
+                $('#changePasswordModal').modal('hide');
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = JSON.parse(xhr.responseText);
+                displayErrors(errorMessage.error);
+            }
+        });
+    });
+
+    // Reset the change password modal when it's closed
+    $('#changePasswordModal').on('hidden.bs.modal', function() {
+        $('#changePasswordForm')[0].reset();
+        $('.alert-danger').html('');
     });
 
     function displayErrors(errors) {
@@ -468,5 +471,7 @@
         // Show the error container
         $('.alert-danger').show();
     }
+});
+
 </script>
 @endsection

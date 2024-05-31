@@ -1,3 +1,4 @@
+@section('title', 'Registration')
 @include('layout.includes.head')
 
 <main>
