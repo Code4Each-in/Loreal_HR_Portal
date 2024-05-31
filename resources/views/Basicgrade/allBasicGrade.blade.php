@@ -1,5 +1,5 @@
-@section('title', 'All Salary Head')
-@section('sub-title', 'All Salary Head')
+@section('title', 'Grade Listing')
+@section('sub-title', 'Grade Listing')
 @extends('layout.app')
 
 @section('content')

@@ -5,7 +5,7 @@
 
 @section('content')
 
-<table class="table">
+<table class="table" id="emp_table">
   <thead>
     
     <tr>
@@ -34,7 +34,7 @@
  
   <td> <?php if(!empty($val->post[0]->base_pay)) { echo $val->post[0]->base_pay; } ?></td>
   <td>
-  <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-grade="{{ $val->post[0]->grade }}" data-bs-toggle="modal" data-bs-target="#basicModal">Salary</button>
+  <button type="button" class="btn btn-primary salary-btn" data-id="{{ $val->id }}" data-grade="{{ $val->post[0]->grade }}" data-bs-toggle="modal" data-bs-target="#basicModal5">Salary</button>
   </td>
 </tr>
 @endforeach
@@ -42,15 +42,14 @@
 </table>
      <!-- Basic Modal -->
  
-    <div class="modal fade" id="basicModal" tabindex="-1">
-      <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" id="basicModal" tabindex="-1">
+      <div class="modal-dialog modal-lg"> 
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Basic Modal</h5>
-            <button id="show_btn">Show</button>
-            <button id="hide_btn">Hide</button>
+            <button class="btn btn-primary" id="show_btn">Show</button>
+            <button class="btn btn-primary"  id="hide_btn">Hide</button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            
           </div>
           <div class="modal-body" id="append_emp_detail">
         
@@ -63,6 +62,15 @@
     @section('js_scripts')
     <script>
 $(document).ready(function(){
+  $('#emp_table').DataTable({
+        searching: true,
+        language: {
+        emptyTable: "No records found"
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 3] },
+        ],
+        });
   $('.salary-btn').on('click', function () {
     var id = $(this).attr("data-id");
     var grade = $(this).data("grade");
@@ -76,6 +84,8 @@ $(document).ready(function(){
       data: vdata,
       success:function(data){
         $('#append_emp_detail').html(data);
+        $("#basicModal").modal('show');
+
       }
     });
   });
@@ -97,6 +107,7 @@ $(document).on('click', '#hide_btn', function() {
     $('.show_cal').hide();
 });
   </script>
+  
 
     @endsection
 

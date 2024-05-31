@@ -41,7 +41,7 @@ class CommonEmailNotification extends Notification
             // ->line(isset($this->messages['body-text']) ? $this->messages['body-text'] : 'Body Text')
             $lineItems = $this->messages['lines_array'];
 
-            foreach ($lineItems as $key => $value) {
+            foreach ($lineItems as $key => $value) { 
                 if (strpos($key, 'special_') === 0) {
                     $specialLabel = ucwords(str_replace('_', ' ', str_replace('special_', '', $key)));
                     $mailMessage->line( $specialLabel . ': ' . $value);
