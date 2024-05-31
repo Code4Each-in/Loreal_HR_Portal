@@ -1,5 +1,5 @@
-@section('title', ' Grade Salary Master')
-@section('sub-title', ' Grade Salary Master')
+@section('title', 'Basic Grade Salary Master')
+@section('sub-title', 'Basic Grade Salary Master')
 @extends('layout.app')
 
 @section('content')
@@ -35,7 +35,7 @@ $form_type = (old('formType') );
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Head Title <span class='asterisk'>*</span></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="head_title" id="head_title">
+                    <input type="text" class="form-control" name="head_title" id="title">
                     @if ($errors->has('head_title'))
                     <span class="text-danger">{{ $errors->first('head_title') }}</span>
                     @endif
@@ -127,7 +127,6 @@ $form_type = (old('formType') );
             </div>
         </div>
 
-        </div>
         <div id="only_amt">
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Amount<span class='asterisk'>*</span></label>
@@ -236,47 +235,5 @@ $form_type = (old('formType') );
             document.getElementById('fixed').click();
         }
     </script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script>
-$(function() { 
-    $("#head_title").autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                url: "{{ url('get_master_head_title') }}",
-                type: "GET",
-                dataType: "json", 
-                data: { term: request.term },
-                success: function(data) {
-                    var formattedTitles = data.map(function(item) {
-                        return item.head_title.replace(/_/g, ' ');
-                    });
-                    response(formattedTitles); 
-                }
-            });
-        },
-        messages: {
-            noResults: '',
-            results: function() {}
-        },
-        _renderMenu: function(ul, items) {
-            var that = this;
-            $.each(items, function(index, item) {
-                that._renderItemData(ul, item);
-            });
-        },
-        _renderItem: function(ul, item) {
-            return $("<li>")
-                .append("<div>" + item.label + "</div>")
-                .appendTo(ul);
-        }
-    });
-});
-
-</script>
-
-
-
-
 
     @endsection
