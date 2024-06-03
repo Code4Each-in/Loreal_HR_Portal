@@ -41,7 +41,7 @@
 
                                     <div class="col-12">
                                         <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" id="phone" value="{{ old('phone') }}">
+                                        <input type="text" name="phone" class="form-control" id="phone" value="{{ old('phone') }}" maxlength="10">
                                         @if ($errors->has('phone'))
                                         <span style="font-size: 12px;" class="text-danger">{{ $errors->first('phone') }}</span>
                                         @endif

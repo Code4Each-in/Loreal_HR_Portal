@@ -123,9 +123,13 @@
         </div>
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
 
         <button type="submit" class="btn btn-default">Save</button>
+    </div> -->
+    <div class="modal-footer back-btn">
+        <button type="submit" class="btn btn-default">Save</button>
+        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary">Back</a>
     </div>
 
 </form>

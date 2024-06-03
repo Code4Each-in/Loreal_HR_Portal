@@ -48,7 +48,7 @@ class UsersController extends Controller
         // Prepare notification messages
         $messages = [
             'subject' => 'Welcome to Local Integration Portal',
-            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',',
+            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',', 
             'lines_array' => [
                 'body-text' => 'Thank you for registering with us. Your account has been successfully created.',
                 'info' => "You can now log in to your account using the credentials you provided during registration.",
@@ -94,6 +94,7 @@ class UsersController extends Controller
         // Create a new User and with validated data
         $user = new User();
         $user->role_id = $validatedData['role_id'];
+        $user->type_id = "2";
         $user->Fname = $validatedData['firstname'];
         $user->Lname = $validatedData['lastname'];
         $user->phone = $validatedData['phone'];

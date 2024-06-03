@@ -38,7 +38,8 @@
                                         <label for="yourUsername" class="form-label">Username</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="text" class="form-control" id="yourUsername" name="email">
+                                            <input type="text" class="form-control" id="yourUsername" name="email" @if(isset($_COOKIE["email"])) value="{{ $_COOKIE["email"] }}" @endif>
+
                                             <div class="invalid-feedback">Please enter your username.</div>
                                         </div>
                                         @if ($errors->has('email'))
@@ -48,7 +49,8 @@
 
                                     <div class="col-12">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="yourPassword" name="password">
+                                        <input type="password" class="form-control" id="yourPassword" name="password"   @if(isset($_COOKIE["password"])) value="{{ $_COOKIE["password"] }}" @endif  >
+                                    
                                         <div class="invalid-feedback">Please enter your password!</div>
                                         @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>

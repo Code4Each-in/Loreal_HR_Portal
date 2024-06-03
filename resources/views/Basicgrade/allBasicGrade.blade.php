@@ -4,7 +4,7 @@
 
 @section('content')
 <div  class="create_btn">
-<a href="{{ url('create_grade') }}" class="btn btn-primary">Basic Salary Grade</a>
+<a href="{{ url('create_grade') }}" class="btn btn-primary">Create Grade</a>
 </div>
 
 
