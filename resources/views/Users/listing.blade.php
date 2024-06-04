@@ -31,7 +31,8 @@
                 <td>{{ $user->Fname }} {{ $user->Lname }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->role->name }}</td>
+                <td>{{ optional($user->role)->name }}</td>
+
                 <td>
                     <button class="status-toggle btn {{ $user->status == 1 ? 'btn-danger' : 'btn-success' }}" data-user-id="{{ $user->id }}" data-status="{{ $user->status }}">
                         {{ $user->status == 1 ? 'Inactive' : 'Active' }}

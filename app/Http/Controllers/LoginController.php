@@ -36,9 +36,17 @@ class LoginController extends Controller
                 'email' => ['required', 'email'],
                 'password' => ['required'],
             ]);
+          
             if (Auth::attempt($credentials)) {
                 $user = User::where('email', $credentials['email'])->first();
                     if ($user&& $user->status == 1 && Auth::attempt($credentials)) {
+                        if($request->remember=="true"){
+                           setcookie("email", $user->email, time()+ 3600);
+                           setcookie("password", $request->password, time()+ 3600);
+                        }else{
+                            setcookie("email", "");
+                            setcookie("password", "");
+                        }
                         $request->session()->regenerate();
                         return redirect()->intended('dashboard');
                     }else {

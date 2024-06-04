@@ -17,17 +17,30 @@ class RolesSeeder extends Seeder
         Role::truncate();
         $roles = [
             [
-                'name'     => "Super Admin",
+                'name'     => "Admin Access",
                 'role_id' => 1
             ],
             [
-                'name'     => "Admin",
+                'name'     => "HR Controller Access",
                 'role_id' => 2
             ],
             [
-                'name'     => "Manager",
+                'name'     => "HRBP Access",
                 'role_id' => 3
+            ],
+            [
+                'name'     => "Sales Planning Access",
+                'role_id' => 4
+            ],
+            [
+                'name'     => "IT Access",
+                'role_id' => 5
+            ],
+            [
+                'name'     => "Employee Access",
+                'role_id' => 6
             ]
+
         ];
     
         DB::table('roles')->insert($roles);

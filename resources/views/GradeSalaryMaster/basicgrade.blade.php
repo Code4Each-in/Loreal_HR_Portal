@@ -144,7 +144,8 @@ $form_type = (old('formType') );
         <div class="modal-footer back-btn">
             <button type="submit" class="btn btn-default">Save</button>
             <a href="{{ url('basic_grade_salary_master_listing') }}" class="btn btn-primary">Back</a>
-
+           
+           
         </div>
     </form>
 

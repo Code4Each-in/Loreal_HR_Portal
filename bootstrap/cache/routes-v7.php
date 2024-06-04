@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Nys9czDXutQDwXmX',
+            '_route' => 'generated::cxkFL7q88Tzu64Gz',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3l6o4gbDPPL6icR7',
+            '_route' => 'generated::TqnWrDjplYA1ws6p',
           ),
           1 => NULL,
           2 => 
@@ -164,7 +164,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::B9m2l463YD9cRo9Q',
+            '_route' => 'generated::xVmXVpz6RsYxVsIY',
           ),
           1 => NULL,
           2 => 
@@ -239,7 +239,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::jS586qs4Ux3zALis',
+            '_route' => 'dashboard',
           ),
           1 => NULL,
           2 => 
@@ -253,7 +253,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/salart-head' => 
+      '/master_salary_head' => 
       array (
         0 => 
         array (
@@ -279,7 +279,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wKguyLwZmcKOlNfX',
+            '_route' => 'generated::rsTHq3ObWOcNXz7i',
           ),
           1 => NULL,
           2 => 
@@ -292,7 +292,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/allsalaryHead' => 
+      '/salary_head_listing' => 
       array (
         0 => 
         array (
@@ -318,7 +318,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::IL8N4vomWmJjxSNF',
+            '_route' => 'generated::gS6P7J8WBXZpEBOH',
           ),
           1 => NULL,
           2 => 
@@ -331,13 +331,53 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/basicGrade' => 
+      '/get_master_head_title' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::ukhaz577huhkHRX9',
+            '_route' => 'generated::BDB9IuPqdbwMgBVT',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/create_grade' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::wuj5vjoLwojCesBA',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/redirectURL' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::PkmkTaUbr3LiwfQk',
           ),
           1 => NULL,
           2 => 
@@ -357,7 +397,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::yaEP35hcyjFH6bQM',
+            '_route' => 'generated::WLq4fM5iCf9Exqkk',
           ),
           1 => NULL,
           2 => 
@@ -370,7 +410,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/allBasicGrade' => 
+      '/grade_listing' => 
       array (
         0 => 
         array (
@@ -396,7 +436,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::m4LwtEMwCPe47Qn5',
+            '_route' => 'generated::u95WsGk15qX8kWAD',
           ),
           1 => NULL,
           2 => 
@@ -415,7 +455,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::SjIHSQgSBkssz59p',
+            '_route' => 'generated::F7NtjtZRLFBGHGpC',
           ),
           1 => NULL,
           2 => 
@@ -434,7 +474,259 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RQrc21u4VcLGMDzI',
+            '_route' => 'generated::tfCzgrPCeak5bDX4',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/emp_listing' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::mG2fwp9RBuJAUYA5',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/get_emp_data' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::njZQFtlLanVibyX9',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/users' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.listing',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/users/edit' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.get',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/users/update' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.update',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/users/delete' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.destroy',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/users/change-password' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.change-password',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/toggle-user-status' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'toggle-user-status',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/save_user' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.save',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/basic_grade' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'basic.grade',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/grade_salary_master' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::oOrY1Lj7EhOdpgCi',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/basic_grade_salary_master_listing' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'allBasicGradeSalary',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/delete_basic_sal' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::jYa6QDQmWAHQekpM',
           ),
           1 => NULL,
           2 => 
@@ -486,13 +778,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/succesFactor-signin' => 
+      '/auth/azure' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::jD7tNfwEAVPiEfp9',
+            '_route' => 'generated::zQ5yw6Rd0s7lb5cv',
           ),
           1 => NULL,
           2 => 
@@ -506,13 +798,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/succesFactor-AppID' => 
+      '/auth/azure/callback' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::kqp4uAW4yQgSJMC0',
+            '_route' => 'generated::DreZnag1UNeplCUw',
           ),
           1 => NULL,
           2 => 
@@ -526,13 +818,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/succesFactor-HomePage' => 
+      '/azure_app_id' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::BsQm95MYNjUIzfWG',
+            '_route' => 'generated::5K6NOoUN7GMe51Mb',
           ),
           1 => NULL,
           2 => 
@@ -546,13 +838,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/succesFactor-LogOut' => 
+      '/terms_of_service' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::UG6NtkSELjYb8nEi',
+            '_route' => 'generated::4xSC80ghKS419Sw8',
           ),
           1 => NULL,
           2 => 
@@ -566,78 +858,19 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/succesFactor-Termsofservice' => 
+      '/privacy_statement' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::6gZoKQOrNB0kZ4VA',
+            '_route' => 'generated::02cf3j54ybzUbwy3',
           ),
           1 => NULL,
           2 => 
           array (
             'GET' => 0,
             'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/succesFactor-Privacystatement' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'generated::M4JfvvFNMyylFLaZ',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/users' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'user.listing',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/users/change-password' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'user.change-password',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -648,7 +881,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/reset/password/([^/]++)(*:31)|/edit_salary_head/([^/]++)(*:64)|/update_salary_head/([^/]++)(*:99))/?$}sDu',
+      0 => '{^(?|/reset/password/([^/]++)(*:31)|/edit_(?|salary_head/([^/]++)(*:67)|basic_salary/([^/]++)(*:95))|/update_(?|salary_head/([^/]++)(*:134)|basic_salary/([^/]++)(*:163)))/?$}sDu',
     ),
     3 => 
     array (
@@ -658,7 +891,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::YvfCqdmQAf662S9P',
+            '_route' => 'generated::DRXjm167AHqK5FkR',
           ),
           1 => 
           array (
@@ -675,13 +908,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      64 => 
+      67 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::bFABPF8KADugi5yz',
+            '_route' => 'generated::VjFpzeljQ1cU5BIo',
           ),
           1 => 
           array (
@@ -698,13 +931,58 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      99 => 
+      95 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::kW0jPpusJFyGlIBf',
+            '_route' => 'generated::idciXQPn7s0Qp1DV',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      134 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::Hi9cv55PVHZlhTFp',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      163 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::VTiF93nexVbZ4Vwu',
           ),
           1 => 
           array (
@@ -881,7 +1159,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Nys9czDXutQDwXmX' => 
+    'generated::cxkFL7q88Tzu64Gz' => 
     array (
       'methods' => 
       array (
@@ -898,13 +1176,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005540000000000000000";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000050c0000000000000000";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::Nys9czDXutQDwXmX',
+        'as' => 'generated::cxkFL7q88Tzu64Gz',
       ),
       'fallback' => false,
       'defaults' => 
@@ -920,7 +1198,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3l6o4gbDPPL6icR7' => 
+    'generated::TqnWrDjplYA1ws6p' => 
     array (
       'methods' => 
       array (
@@ -942,7 +1220,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3l6o4gbDPPL6icR7',
+        'as' => 'generated::TqnWrDjplYA1ws6p',
       ),
       'fallback' => false,
       'defaults' => 
@@ -996,7 +1274,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::B9m2l463YD9cRo9Q' => 
+    'generated::xVmXVpz6RsYxVsIY' => 
     array (
       'methods' => 
       array (
@@ -1017,7 +1295,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::B9m2l463YD9cRo9Q',
+        'as' => 'generated::xVmXVpz6RsYxVsIY',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1106,7 +1384,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::YvfCqdmQAf662S9P' => 
+    'generated::DRXjm167AHqK5FkR' => 
     array (
       'methods' => 
       array (
@@ -1127,7 +1405,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::YvfCqdmQAf662S9P',
+        'as' => 'generated::DRXjm167AHqK5FkR',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1179,7 +1457,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::jS586qs4Ux3zALis' => 
+    'dashboard' => 
     array (
       'methods' => 
       array (
@@ -1201,7 +1479,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::jS586qs4Ux3zALis',
+        'as' => 'dashboard',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1224,7 +1502,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'salart-head',
+      'uri' => 'master_salary_head',
       'action' => 
       array (
         'middleware' => 
@@ -1255,7 +1533,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::wKguyLwZmcKOlNfX' => 
+    'generated::rsTHq3ObWOcNXz7i' => 
     array (
       'methods' => 
       array (
@@ -1276,7 +1554,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::wKguyLwZmcKOlNfX',
+        'as' => 'generated::rsTHq3ObWOcNXz7i',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1299,7 +1577,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'allsalaryHead',
+      'uri' => 'salary_head_listing',
       'action' => 
       array (
         'middleware' => 
@@ -1330,7 +1608,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bFABPF8KADugi5yz' => 
+    'generated::VjFpzeljQ1cU5BIo' => 
     array (
       'methods' => 
       array (
@@ -1352,7 +1630,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bFABPF8KADugi5yz',
+        'as' => 'generated::VjFpzeljQ1cU5BIo',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1368,7 +1646,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::kW0jPpusJFyGlIBf' => 
+    'generated::Hi9cv55PVHZlhTFp' => 
     array (
       'methods' => 
       array (
@@ -1389,7 +1667,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::kW0jPpusJFyGlIBf',
+        'as' => 'generated::Hi9cv55PVHZlhTFp',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1405,7 +1683,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::IL8N4vomWmJjxSNF' => 
+    'generated::gS6P7J8WBXZpEBOH' => 
     array (
       'methods' => 
       array (
@@ -1426,7 +1704,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::IL8N4vomWmJjxSNF',
+        'as' => 'generated::gS6P7J8WBXZpEBOH',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1442,14 +1720,52 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ukhaz577huhkHRX9' => 
+    'generated::BDB9IuPqdbwMgBVT' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'basicGrade',
+      'uri' => 'get_master_head_title',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SalaryController@get_master_head_title',
+        'controller' => 'App\\Http\\Controllers\\SalaryController@get_master_head_title',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::BDB9IuPqdbwMgBVT',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::wuj5vjoLwojCesBA' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'create_grade',
       'action' => 
       array (
         'middleware' => 
@@ -1464,7 +1780,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ukhaz577huhkHRX9',
+        'as' => 'generated::wuj5vjoLwojCesBA',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1480,7 +1796,45 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::yaEP35hcyjFH6bQM' => 
+    'generated::PkmkTaUbr3LiwfQk' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'redirectURL',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BasicGradeController@redirectURL',
+        'controller' => 'App\\Http\\Controllers\\BasicGradeController@redirectURL',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::PkmkTaUbr3LiwfQk',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::WLq4fM5iCf9Exqkk' => 
     array (
       'methods' => 
       array (
@@ -1501,7 +1855,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::yaEP35hcyjFH6bQM',
+        'as' => 'generated::WLq4fM5iCf9Exqkk',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1524,7 +1878,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'allBasicGrade',
+      'uri' => 'grade_listing',
       'action' => 
       array (
         'middleware' => 
@@ -1555,7 +1909,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::m4LwtEMwCPe47Qn5' => 
+    'generated::u95WsGk15qX8kWAD' => 
     array (
       'methods' => 
       array (
@@ -1576,7 +1930,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::m4LwtEMwCPe47Qn5',
+        'as' => 'generated::u95WsGk15qX8kWAD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1592,7 +1946,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::SjIHSQgSBkssz59p' => 
+    'generated::F7NtjtZRLFBGHGpC' => 
     array (
       'methods' => 
       array (
@@ -1613,7 +1967,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::SjIHSQgSBkssz59p',
+        'as' => 'generated::F7NtjtZRLFBGHGpC',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1629,7 +1983,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RQrc21u4VcLGMDzI' => 
+    'generated::tfCzgrPCeak5bDX4' => 
     array (
       'methods' => 
       array (
@@ -1650,7 +2004,568 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::RQrc21u4VcLGMDzI',
+        'as' => 'generated::tfCzgrPCeak5bDX4',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::mG2fwp9RBuJAUYA5' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'emp_listing',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@index',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::mG2fwp9RBuJAUYA5',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::njZQFtlLanVibyX9' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'get_emp_data',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@emp_data',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@emp_data',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::njZQFtlLanVibyX9',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.listing' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'users',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@showListing',
+        'controller' => 'App\\Http\\Controllers\\UsersController@showListing',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.listing',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.get' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'users/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@getUserById',
+        'controller' => 'App\\Http\\Controllers\\UsersController@getUserById',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.get',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'users/update',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@update',
+        'controller' => 'App\\Http\\Controllers\\UsersController@update',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'users/delete',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@destroy',
+        'controller' => 'App\\Http\\Controllers\\UsersController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.destroy',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.change-password' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'users/change-password',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@changePassword',
+        'controller' => 'App\\Http\\Controllers\\UsersController@changePassword',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.change-password',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'toggle-user-status' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'toggle-user-status',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@toggleStatus',
+        'controller' => 'App\\Http\\Controllers\\UsersController@toggleStatus',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'toggle-user-status',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.save' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'save_user',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UsersController@saveUser',
+        'controller' => 'App\\Http\\Controllers\\UsersController@saveUser',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.save',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'basic.grade' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'basic_grade',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@index',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'basic.grade',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::oOrY1Lj7EhOdpgCi' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'grade_salary_master',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@store_grade',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@store_grade',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::oOrY1Lj7EhOdpgCi',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'allBasicGradeSalary' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'basic_grade_salary_master_listing',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@allBasicGradeSalary',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@allBasicGradeSalary',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'allBasicGradeSalary',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::idciXQPn7s0Qp1DV' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'edit_basic_salary/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@edit_basic_salary',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@edit_basic_salary',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::idciXQPn7s0Qp1DV',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::VTiF93nexVbZ4Vwu' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'update_basic_salary/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@update_basic_salary',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@update_basic_salary',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::VTiF93nexVbZ4Vwu',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::jYa6QDQmWAHQekpM' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'delete_basic_sal',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\GradeSalaryMasterController@delete_basic_sal',
+        'controller' => 'App\\Http\\Controllers\\GradeSalaryMasterController@delete_basic_sal',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::jYa6QDQmWAHQekpM',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1739,14 +2654,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::jD7tNfwEAVPiEfp9' => 
+    'generated::zQ5yw6Rd0s7lb5cv' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'succesFactor-signin',
+      'uri' => 'auth/azure',
       'action' => 
       array (
         'middleware' => 
@@ -1760,7 +2675,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::jD7tNfwEAVPiEfp9',
+        'as' => 'generated::zQ5yw6Rd0s7lb5cv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1776,14 +2691,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::kqp4uAW4yQgSJMC0' => 
+    'generated::DreZnag1UNeplCUw' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'succesFactor-AppID',
+      'uri' => 'auth/azure/callback',
       'action' => 
       array (
         'middleware' => 
@@ -1797,7 +2712,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::kqp4uAW4yQgSJMC0',
+        'as' => 'generated::DreZnag1UNeplCUw',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1813,14 +2728,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::BsQm95MYNjUIzfWG' => 
+    'generated::5K6NOoUN7GMe51Mb' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'succesFactor-HomePage',
+      'uri' => 'azure_app_id',
       'action' => 
       array (
         'middleware' => 
@@ -1834,7 +2749,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::BsQm95MYNjUIzfWG',
+        'as' => 'generated::5K6NOoUN7GMe51Mb',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1850,88 +2765,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UG6NtkSELjYb8nEi' => 
+    'generated::4xSC80ghKS419Sw8' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'succesFactor-LogOut ',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\SuccessFactor@LogOut ',
-        'controller' => 'App\\Http\\Controllers\\SuccessFactor@LogOut ',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'generated::UG6NtkSELjYb8nEi',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::6gZoKQOrNB0kZ4VA' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'succesFactor-Termsofservice ',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\SuccessFactor@Termsofservice',
-        'controller' => 'App\\Http\\Controllers\\SuccessFactor@Termsofservice',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'generated::6gZoKQOrNB0kZ4VA',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::M4JfvvFNMyylFLaZ' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'succesFactor-Privacystatement  ',
+      'uri' => 'terms_of_service',
       'action' => 
       array (
         'middleware' => 
@@ -1945,7 +2786,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::M4JfvvFNMyylFLaZ',
+        'as' => 'generated::4xSC80ghKS419Sw8',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1961,64 +2802,28 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'user.listing' => 
+    'generated::02cf3j54ybzUbwy3' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'users',
+      'uri' => 'privacy_statement',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'uses' => 'App\\Http\\Controllers\\UsersController@showListing',
-        'controller' => 'App\\Http\\Controllers\\UsersController@showListing',
+        'uses' => 'App\\Http\\Controllers\\SuccessFactor@Privacystatement',
+        'controller' => 'App\\Http\\Controllers\\SuccessFactor@Privacystatement',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'user.listing',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'user.change-password' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'users/change-password',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\UsersController@changePassword',
-        'controller' => 'App\\Http\\Controllers\\UsersController@changePassword',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'user.change-password',
+        'as' => 'generated::02cf3j54ybzUbwy3',
       ),
       'fallback' => false,
       'defaults' => 

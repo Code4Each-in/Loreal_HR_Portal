@@ -47,11 +47,29 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Basic Modal</h5>
-            <button class="btn btn-primary" id="show_btn">Show</button>
-            <button class="btn btn-primary"  id="hide_btn">Hide</button>
+            <div class="show_hide_btn"> 
+            <button class="btn btn-primary" id="show_btn">Show Details</button>
+            <button class="btn btn-primary"  id="hide_btn">Hide Details</button>
+            </div>
+           
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" id="append_emp_detail">
+          <table class='table'>
+        <thead>
+            <tr>
+                <th scope='col'>Head Title</th>
+                <th scope='col' id='show_formula' style='display:none;'>Formula</th>
+                <th scope='col' id='show_cal' style='display:none;'>Calculation</th>
+                <th scope='col'>Result</th>
+            </tr>
+        </thead>
+        <tbody id="append_salary_structure">
+        
+       
+        
+        </tbody>
+    </table>
         
           
           </div>
@@ -62,7 +80,7 @@
     @section('js_scripts')
     <script>
 $(document).ready(function(){
-  $('#emp_table').DataTable({
+  $('#emp_table').DataTable({ 
         searching: true,
         language: {
         emptyTable: "No records found"
@@ -71,10 +89,15 @@ $(document).ready(function(){
             { "bSortable": false, "aTargets": [ 3] },
         ],
         });
+
   $('.salary-btn').on('click', function () {
+    $('#show_formula').hide();
+    $('.show_formula').hide();
+    $('#show_cal').hide();
+    $('.show_cal').hide();
     var id = $(this).attr("data-id");
     var grade = $(this).data("grade");
-   
+  
     // Now you have the employee ID and name, you can use them as needed
     vdata = {id:id, grade:grade, "_token": "{{ csrf_token() }}"};
     $.ajax({
@@ -83,8 +106,19 @@ $(document).ready(function(){
       dataType: "html",
       data: vdata,
       success:function(data){
-        $('#append_emp_detail').html(data);
-        $("#basicModal").modal('show');
+        var data = JSON.parse(data);
+        $("#append_salary_structure").empty(); 
+        $.each(data, function(index, val) {
+          var tr = $("<tr>");
+                tr.append("<td>" + val.head_title + "</td>");
+                tr.append("<td style='display:none' class='show_formula'>" + val.formula + "</td>");
+                tr.append("<td style='display:none'  class='show_cal'>" + val.calculation + "</td>");
+                tr.append("<td>" + val.amount + "</td>");
+                // Append the table row to an existing table body
+                $("#append_salary_structure").append(tr);
+                $("#basicModal").modal('show');
+            });
+      
 
       }
     });

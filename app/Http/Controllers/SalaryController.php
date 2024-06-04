@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\SalaryHead;
 use Illuminate\Http\Request;
+use App\Models\SalaryHead;
+use App\Models\DeleteSalaryheadId;
+
 
 class SalaryController extends Controller
 {
@@ -14,8 +16,6 @@ class SalaryController extends Controller
      
     public function store(Request $req)
     {
-       
-       
        
         $method = $req->method;
         if($method ==  "wid_formula")
@@ -32,7 +32,25 @@ class SalaryController extends Controller
                'formula'           => $req->formulaOutput,
                'method'            => $req->method
            ]);
-      
+           $salary_head_id = $salary_head->id;
+
+        //--------------------------------------------------------
+            //dd($req->formulaOutput);
+            // $pattern = '/\{([^}]+)\}/';
+            // preg_match_all($pattern, $req->formulaOutput, $matches);
+            // $keywords = $matches[1];
+            // foreach($keywords as $val)
+            // {
+            //  $head = SalaryHead::where('head_title', $val)->first();
+             
+            //   $delete_salary_head_data = array(
+            //     "salary_head_id" =>   $salary_head_id,
+            //     "involve_head_id" => $head->id
+            //   );
+            //   $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+             
+            // }
+
           }
         else{
             
@@ -47,16 +65,11 @@ class SalaryController extends Controller
                         'amount'            =>$req->amount,
                         'method'            => $req->method
                   
-                    ]);
-               
-
-
-        
-         
+                    ]);        
         }
 
-        return redirect()->route('allsalaryHead')
-        ->with('message', 'Salary Head added successfully!');    
+       return redirect()->route('allsalaryHead')
+       ->with('message', 'Salary Head added successfully!');    
     }
 
     public  function allsalaryHead()
