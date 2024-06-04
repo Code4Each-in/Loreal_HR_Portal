@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GradeSalaryStructure extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'grade',
         'basic'

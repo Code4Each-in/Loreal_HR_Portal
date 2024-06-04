@@ -180,7 +180,7 @@ $form_type = (old('formType') );
         // Append the clicked button's value to the textarea content
         function showFormula(value) {
             var textarea = document.getElementById("formulaOutput");
-            textarea.value += value + " ";
+            textarea.value += value;
         }
 
         // To clear the formulaOutput textarea

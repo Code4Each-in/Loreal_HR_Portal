@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class GradeWiseSalaryMaster extends Model
 {
    
     use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'head_title',
         'amount',
@@ -20,6 +22,7 @@ class GradeWiseSalaryMaster extends Model
     ];
 
     protected $table = 'grade_wise_salary_masters';
+  
 
     public function grade(): BelongsTo
     {
