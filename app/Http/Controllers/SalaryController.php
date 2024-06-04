@@ -36,20 +36,20 @@ class SalaryController extends Controller
 
         //--------------------------------------------------------
             //dd($req->formulaOutput);
-            $pattern = '/\{([^}]+)\}/';
-            preg_match_all($pattern, $req->formulaOutput, $matches);
-            $keywords = $matches[1];
-            foreach($keywords as $val)
-            {
-             $head = SalaryHead::where('head_title', $val)->first();
+            // $pattern = '/\{([^}]+)\}/';
+            // preg_match_all($pattern, $req->formulaOutput, $matches);
+            // $keywords = $matches[1];
+            // foreach($keywords as $val)
+            // {
+            //  $head = SalaryHead::where('head_title', $val)->first();
              
-              $delete_salary_head_data = array(
-                "salary_head_id" =>   $salary_head_id,
-                "involve_head_id" => $head->id
-              );
-              $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+            //   $delete_salary_head_data = array(
+            //     "salary_head_id" =>   $salary_head_id,
+            //     "involve_head_id" => $head->id
+            //   );
+            //   $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
              
-            }
+            // }
 
           }
         else{
