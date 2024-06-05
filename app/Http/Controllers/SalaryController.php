@@ -19,6 +19,10 @@ class SalaryController extends Controller
   {
 
     $method = $req->method;
+    $headTitleNormalized = preg_replace('/\s+/', '_', trim($req->input('head_title')));
+    $req->merge([
+      'head_title' => $headTitleNormalized
+    ]);
     if ($method ==  "wid_formula") {
       $validated = $req->validate([
         'head_title' => 'required|unique:salary_heads,head_title,NULL,id,deleted_at,NULL',
@@ -26,6 +30,7 @@ class SalaryController extends Controller
 
       ]);
       $head_title = preg_replace('/\s+/', ' ', $req->head_title);
+      
       $head_title = str_replace(' ', '_', $head_title);
       $salary_head = SalaryHead::create([
         'head_title'        => $head_title,
@@ -102,14 +107,40 @@ class SalaryController extends Controller
 
       );
       $affectedRows = SalaryHead::where("id", $id)->update($sal_head_data);
+
+      //-------------------------------------------------------------------
+      // Update  dependent_salary_head table when we update the formula 
+      $pattern = '/\{([^}]+)\}/';
+      preg_match_all($pattern, $req->formulaOutput, $matches);
+      $keywords = $matches[1];
+      $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '1')->delete();
+      foreach ($keywords as $val) {
+
+        $head = SalaryHead::where('head_title', $val)->get();
+        if (!empty($head[0]->id)) {
+          $delete_salary_head_data = array(
+            "salary_head_id" =>   $id,
+            "involve_head_id" => $head[0]->id,
+            "type" => "1"
+          );
+          $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+        }
+      }
+      //-------------------------------------------------------------------
     } else {
       $sal_head_data = array(
         "head_title" => $req->head_title,
         "formula"  => '',
         "amount" => $req->amount,
+        'method' => $method
 
       );
       $affectedRows = SalaryHead::where("id", $id)->update($sal_head_data);
+
+      //-------------------------------------------------------------------
+      // when we update the  head title from formula to fixed amount then delete the record  dependent_salary_head table 
+      $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '1')->delete();
+      //-------------------------------------------------------------------
     }
     return redirect()->route('allsalaryHead')
       ->with('message', 'Salary Head Update successfully!');

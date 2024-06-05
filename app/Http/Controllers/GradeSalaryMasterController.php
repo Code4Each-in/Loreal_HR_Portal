@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\BasicGrade;
 use App\Models\SalaryHead;
 use Illuminate\Http\Request;
@@ -26,48 +27,48 @@ class GradeSalaryMasterController extends Controller
 
         if ($method == "wid_formula") {
             $validated = $req->validate([
-                'head_title' => 'required|unique:grade_wise_salary_masters,head_title,'.$req->id.',id,deleted_at,NULL',
+                'head_title' => 'required',
                 'formulaOutput' => 'required',
                 'grade' => 'required'
             ]);
-        
+
             // Create a new salary head with formula
             $head_title = preg_replace('/\s+/', ' ', $req->head_title);
-            $head_title = str_replace(' ', '_', $head_title); 
+            $head_title = str_replace(' ', '_', $head_title);
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' =>  $head_title,
                 'formula' => $req->formulaOutput,
                 'method' => $req->method,
                 'grade' => $req->grade
             ]);
-         
+
             //-------------------------------------------------------
             $salary_head_id = $salary_head->id;
             $pattern = '/\{([^}]+)\}/';
             preg_match_all($pattern, $req->formulaOutput, $matches);
             $keywords = $matches[1];
 
-            foreach($keywords as $val){
-             
-               $head = GradeWiseSalaryMaster::where('head_title', $val)->where('deleted_at', '=', NULL)->get();
-              if(!empty($head[0]->id)){
-                $delete_salary_head_data = array(
-                  "salary_head_id" =>   $salary_head_id,
-                  "involve_head_id" => $head[0]->id,
-                  "type" => "2"
-                );
-                $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
-              }
+            foreach ($keywords as $val) {
+
+                $head = GradeWiseSalaryMaster::where('head_title', $val)->where('deleted_at', '=', NULL)->get();
+                if (!empty($head[0]->id)) {
+                    $delete_salary_head_data = array(
+                        "salary_head_id" =>   $salary_head_id,
+                        "involve_head_id" => $head[0]->id,
+                        "type" => "2"
+                    );
+                    $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+                }
             }
             //------------------------------------------------------=
         } else {
             $validated = $req->validate([
-                'head_title' => 'required|unique:grade_wise_salary_masters,head_title,NULL,id,deleted_at,NULL',
+                'head_title' => 'required',
                 'amount' => 'required',
                 'grade' => 'required'
             ]);
             // Create a new salary head with fixed amount
-            $head_title = str_replace(' ', '_', $req->head_title); 
+            $head_title = str_replace(' ', '_', $req->head_title);
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' => $head_title,
                 'formula' => '',
@@ -104,34 +105,58 @@ class GradeSalaryMasterController extends Controller
             'grade' => 'required'
         ]);
         // Determine the method for calculating the salary
-          $method = $req->method;
-          if($method ==  "wid_formula")
-          {
+        $method = $req->method;
+        if ($method ==  "wid_formula") {
             $sal_head_data = array(
-                "grade" => $req-> grade,
-                "head_title" => $req-> head_title,
-                "formula"  => $req-> formulaOutput,
-                "amount" => $req-> amount,
+                "grade" => $req->grade,
+                "head_title" => $req->head_title,
+                "formula"  => $req->formulaOutput,
+                "amount" => $req->amount,
+                'method' => $method
 
-              );
+            );
             $affectedRows = GradeWiseSalaryMaster::where("id", $id)->update($sal_head_data);
 
+
+            //-------------------------------------------------------------------
+            // Update  dependent_salary_head table when we update the formula 
+            $pattern = '/\{([^}]+)\}/';
+            preg_match_all($pattern, $req->formulaOutput, $matches);
+            $keywords = $matches[1];
+            $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->delete();
+            foreach ($keywords as $val) {
+
+                $head = SalaryHead::where('head_title', $val)->get();
+                if (!empty($head[0]->id)) {
+                    $delete_salary_head_data = array(
+                        "salary_head_id" =>   $id,
+                        "involve_head_id" => $head[0]->id,
+                        "type" => "2"
+                    );
+                    $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+                }
             }
-          else{
+            //-------------------------------------------------------------------
+
+
+        } else {
             $sal_head_data = array(
-                "grade" => $req-> grade,
-                "head_title" => $req-> head_title,
+                "grade" => $req->grade,
+                "head_title" => $req->head_title,
                 "formula"  => '',
-                "amount" => $req-> amount,
+                "amount" => $req->amount,
+                'method' => $method
 
-              );
+            );
             $affectedRows = GradeWiseSalaryMaster::where("id", $id)->update($sal_head_data);
-          }
-          // Update the salary head details
-          return redirect()->route('allBasicGradeSalary')
-          ->with('message', 'Basic Grade Salary Master Update successfully!');
-
-
+            //-------------------------------------------------------------------
+            // when we update the  head title from formula to fixed amount then delete the record  dependent_salary_head table 
+            $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->delete();
+            //-------------------------------------------------------------------
+        }
+        // Update the salary head details
+        return redirect()->route('allBasicGradeSalary')
+            ->with('message', 'Basic Grade Salary Master Update successfully!');
     }
 
     // Delete basic grade salary master
@@ -139,18 +164,20 @@ class GradeSalaryMasterController extends Controller
     {
         $id = $req->sal_head_id;
         $check =  DeleteSalaryheadId::where('involve_head_id', $id)->where('type', '2')->get();
-        
-        if ($check->isEmpty())
-        {
+
+        if ($check->isEmpty()) {
             $delete = GradeWiseSalaryMaster::find($id)->delete();
             DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->delete();
             return redirect()->back()->with('message', 'Basic Grade Salary Master Deleted Successfully');
-            
-         
         } else {
             return redirect()->back()->with('error', 'You Cannot delete this! Its depend on other Succces Factors');
         }
     }
-    
 
+    public function get_grade_data(Request  $req)
+    {
+        $grade_id = $req->input('grade');
+       $get_grade_data =  GradeWiseSalaryMaster::where('grade', $grade_id)->get();
+       return json_encode($get_grade_data);
+    }
 }

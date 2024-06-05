@@ -1456,3 +1456,16 @@ h5.modal-title {
   font-size: 20px;
   width: -webkit-fill-available;
 }
+
+div#append_grade_data a.button-design {
+  padding: 10px 10px;
+  border: 1px solid #898989;
+  background: #898989;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  /* font-family: ui-monospace; */
+  text-align: center;
+  cursor: pointer;
+}

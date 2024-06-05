@@ -32,9 +32,10 @@
         </div>
         @endif
         @foreach($allbasicgradesal as $val)
+        <?php $head_title = str_replace("_", " ", $val['head_title']); ?>
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            <td>{{ $val['head_title'] }}</td>
+            <td>{{ $head_title }}</td>
             <td>{{ $val['formula'] }}</td>
             <td>{{ $val['amount'] }}</td>
             <td>{{ $val['grade']['grade'] }}</td>

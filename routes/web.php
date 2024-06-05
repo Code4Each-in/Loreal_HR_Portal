@@ -71,6 +71,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
     Route::get('/edit_basic_salary/{id}', [GradeSalaryMasterController::class, 'edit_basic_salary']);
     Route::post('/update_basic_salary/{id}', [GradeSalaryMasterController::class, 'update_basic_salary']);
     Route::post('/delete_basic_sal', [GradeSalaryMasterController::class, 'delete_basic_sal']);
+    Route::post('/get_grade_data', [GradeSalaryMasterController::class, 'get_grade_data']);
  });
 
 
