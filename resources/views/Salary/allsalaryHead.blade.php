@@ -1,5 +1,5 @@
 @section('title', 'All Salary Head')
-@section('sub-title', 'All Salary Head')
+@section('sub-title', 'Master Salary Head')
 @extends('layout.app')
 
 @section('content')
@@ -31,7 +31,7 @@
     </div>
     @endif
     @foreach($allsalHead as $val)
-    <?php $head_title = str_replace("_", " ", $val->head_title); ?>
+    <?php $head_title = str_replace("_", " ", $val->head_title); ?> 
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>{{ $head_title }}</td>

@@ -158,14 +158,7 @@ class EmployeeController extends Controller
             $all_salary_head[$data->head_title] = $data; 
             }
         }
-        // foreach ($only_salary_head as $data) {
-        //     if (isset($all_salary_head[$data->head_title])) {
-        //        $all_salary_head[$data->head_title];
-        //     }else {
-           
-        //     $all_salary_head[$data->head_title] = $data; 
-        //     }
-        // }
+    
         $keywords = '';
 
         $results['Basic_PAY'] = $base_pay;
@@ -180,26 +173,30 @@ class EmployeeController extends Controller
             $result = 0;
             $pattern = "/\{([A-Za-z_]+)\}/";
             $formula = str_replace(' ', '_', $val->formula);
+          
             preg_match_all($pattern, $formula, $matches);
             $keywordss = $matches[1];
-
+          // print_r($keywordss);
             $dynamicKeywords = array_map(function ($keyword) {
                 return "{" . $keyword . "}";
             }, $keywordss);
+            
             if (!empty($val->formula)) {
                 $formulaMasterVals =  [];
                 foreach ($dynamicKeywords as $dynamicVals) {
-
+                    
                     $withoutBrackets = str_replace('{', '', $dynamicVals);
                     $withoutBrackets = str_replace('}', '', $withoutBrackets);
                     $formulaMasterVals[$dynamicVals] = $results[$withoutBrackets];
                 }
+               
 
 
                 $basic = str_replace($dynamicKeywords, array_values($formulaMasterVals), $val->formula);
 
                 $result = eval("return $basic;");
                 $results[$val->head_title] = $result;
+                
             } else {
                 $results[$val->head_title] = is_numeric($val->amount) ? floatval($val->amount) : $val->amount;
             }

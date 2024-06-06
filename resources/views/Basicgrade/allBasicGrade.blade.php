@@ -12,7 +12,6 @@
     <thead>
         <tr>
             <th scope="col">Grade</th>
-            <!-- <th scope="col">Basic Salary</th> -->
             <th scope="col">Action</th>
 
         </tr>
@@ -28,7 +27,6 @@
         @foreach($basic_grades as $val)
         <tr>
             <th scope="row">{{ $val-> grade}} </th>
-            <!-- <td>{{ $val-> basic_salary}}</td> -->
 
             <td>
                <a href="#" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
@@ -115,6 +113,9 @@
     $(document).ready(function(){
          $('#pagination').DataTable({
             searching: true,
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [ 1] },
+            ],
             language: {
                 emptyTable: "No records found"
             }
