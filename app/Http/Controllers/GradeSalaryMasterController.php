@@ -62,7 +62,8 @@ class GradeSalaryMasterController extends Controller
                     $delete_salary_head_data = array(
                         "salary_head_id" =>   $salary_head_id,
                         "involve_head_id" => $head[0]->id,
-                        "type" => "2"
+                        "type" => "2",
+                        'grade' => $req->grade
                     );
                     $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
                 }

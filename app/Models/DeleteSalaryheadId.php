@@ -13,7 +13,8 @@ class DeleteSalaryheadId extends Model
     protected $fillable = [
         'salary_head_id',
         'involve_head_id',
-        'type'
+        'type',
+        'grade'
 
     ];
     protected  $table = "dependent_salary_head";
