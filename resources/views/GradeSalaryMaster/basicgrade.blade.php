@@ -300,8 +300,8 @@ $form_type = (old('formType'));
                 $('#append_grade_data').empty();
                 var data = JSON.parse(data);
                 $.each(data, function(index, value) {
-                    var head_title =   value.head_title ;
-                    var data = '<a onclick="showFormula(\'{' + head_title + '}\')" data-salary-formula="" class="button-design">' + head_title + '</a>';
+                    var head_title = value.head_title;
+                    var data = '<a onclick="showFormula(\'{G-' + head_title + '}\')" data-salary-formula="" class="button-design">' +"G-" + head_title + '</a>';
                     $('#append_grade_data').append(data);
                 });
 

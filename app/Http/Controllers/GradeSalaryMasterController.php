@@ -31,21 +31,28 @@ class GradeSalaryMasterController extends Controller
                 'formulaOutput' => 'required',
                 'grade' => 'required'
             ]);
+      
+          //$formulaOutput = str_replace("M-", "", $req->formulaOutput);
+          //$formulaOutput = str_replace("G-", "", $req->formulaOutput);
+          $formulaOutput = str_replace(["M-", "G-"], "", $req->formulaOutput);
 
+      
             // Create a new salary head with formula
             $head_title = preg_replace('/\s+/', ' ', $req->head_title);
             $head_title = str_replace(' ', '_', $head_title);
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' =>  $head_title,
-                'formula' => $req->formulaOutput,
+                'formula' => $formulaOutput,
+              // 'formula' => $req->formulaOutput,
                 'method' => $req->method,
                 'grade' => $req->grade
             ]);
 
             //-------------------------------------------------------
+            // Store  the id of salary head in dependent_salary_head table
             $salary_head_id = $salary_head->id;
             $pattern = '/\{([^}]+)\}/';
-            preg_match_all($pattern, $req->formulaOutput, $matches);
+            preg_match_all($pattern, $formulaOutput, $matches);
             $keywords = $matches[1];
 
             foreach ($keywords as $val) {
