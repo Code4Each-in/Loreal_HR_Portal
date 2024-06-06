@@ -121,7 +121,8 @@ class SalaryController extends Controller
           $delete_salary_head_data = array(
             "salary_head_id" =>   $id,
             "involve_head_id" => $head[0]->id,
-            "type" => "1"
+            "type" => "1",
+            
           );
           $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
         }

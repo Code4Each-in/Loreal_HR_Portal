@@ -17,7 +17,6 @@ class GradeSalaryMasterController extends Controller
     {
         $all_grades  = BasicGrade::all();
         $all_master_head = SalaryHead::all();
-        // dd($all_grades);
         return view('GradeSalaryMaster.basicgrade', compact("all_grades"), compact("all_master_head"));
     }
 
@@ -32,8 +31,6 @@ class GradeSalaryMasterController extends Controller
                 'grade' => 'required'
             ]);
       
-          //$formulaOutput = str_replace("M-", "", $req->formulaOutput);
-          //$formulaOutput = str_replace("G-", "", $req->formulaOutput);
           $formulaOutput = str_replace(["M-", "G-"], "", $req->formulaOutput);
 
       
@@ -57,7 +54,7 @@ class GradeSalaryMasterController extends Controller
 
             foreach ($keywords as $val) {
 
-                $head = GradeWiseSalaryMaster::where('head_title', $val)->where('deleted_at', '=', NULL)->get();
+                $head = GradeWiseSalaryMaster::where('head_title', $val)->where('deleted_at', '=', NULL)->where('grade', $req->grade)->get();
                 if (!empty($head[0]->id)) {
                     $delete_salary_head_data = array(
                         "salary_head_id" =>   $salary_head_id,
@@ -88,11 +85,23 @@ class GradeSalaryMasterController extends Controller
         return redirect()->route('allBasicGradeSalary')->with('message', 'Basic Grade Salary Master Added Successfully!');
     }
     // Display all basic grade salary masters
-    public  function allBasicGradeSalary()
+    public  function allBasicGradeSalary(Request $request)
     {
-        $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->get()->toArray();
-        //dump($allbasicgradesal); dd();
-        return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"));
+        $grade = $request->query('grade');
+        if(!empty($grade))
+        {
+         $all_grades  = BasicGrade::all();
+         $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->where('grade', $grade)->get()->toArray();
+         return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"),compact("all_grades"));
+
+        }else{
+            $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->where('grade', '1')->get()->toArray();
+            $all_grades  = BasicGrade::all();
+            return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"),compact("all_grades"));
+        }
+
+
+     
     }
 
     // Display the form to edit basic grade salary master
@@ -131,15 +140,16 @@ class GradeSalaryMasterController extends Controller
             $pattern = '/\{([^}]+)\}/';
             preg_match_all($pattern, $req->formulaOutput, $matches);
             $keywords = $matches[1];
-            $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->delete();
+            $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->where('grade', $req->grade)->delete();
             foreach ($keywords as $val) {
 
-                $head = SalaryHead::where('head_title', $val)->get();
+                $head = GradeWiseSalaryMaster::where('head_title', $val)->where('grade',$req->grade)->get();
                 if (!empty($head[0]->id)) {
                     $delete_salary_head_data = array(
                         "salary_head_id" =>   $id,
                         "involve_head_id" => $head[0]->id,
-                        "type" => "2"
+                        "type" => "2",
+                        'grade' => $req->grade
                     );
                     $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
                 }
@@ -168,11 +178,13 @@ class GradeSalaryMasterController extends Controller
     }
 
     // Delete basic grade salary master
-    public function delete_basic_sal(Request $req)
+    public function delete_basic_sal(Request $req) 
     {
         $id = $req->sal_head_id;
-        $check =  DeleteSalaryheadId::where('involve_head_id', $id)->where('type', '2')->get();
-
+        $grade = $req->grade;
+      
+        $check =  DeleteSalaryheadId::where('involve_head_id', $id)->where('type', '2')->where('grade', $grade)->get();
+         
         if ($check->isEmpty()) {
             $delete = GradeWiseSalaryMaster::find($id)->delete();
             DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->delete();

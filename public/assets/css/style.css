@@ -1469,3 +1469,14 @@ div#append_grade_data a.button-design {
   text-align: center;
   cursor: pointer;
 }
+.grade_btn {
+  display: flex;
+  gap: 5px;
+}
+
+.create_btn1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px auto 10px;
+}
