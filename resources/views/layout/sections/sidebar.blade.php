@@ -47,6 +47,13 @@
             </a>
 
       </li>
+      <li>
+        <a class="nav-link collapsed" href="{{  url('roles')}}">
+            <i class="bi bi-people"></i>
+            <span>Roles </span>
+            </a>
+
+      </li>
      
      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">

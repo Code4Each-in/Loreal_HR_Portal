@@ -31,7 +31,7 @@
     </div>
     @endif
     @foreach($allsalHead as $val)
-    <?php $head_title = str_replace("_", " ", $val->head_title); ?> 
+    <?php $head_title = str_replace("_", " ", $val->head_title); ?>
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>{{ $head_title }}</td>

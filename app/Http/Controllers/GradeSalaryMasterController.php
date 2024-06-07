@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
+
 class GradeSalaryMasterController extends Controller
 {
     public function index()
@@ -133,16 +134,17 @@ class GradeSalaryMasterController extends Controller
 
             );
             $affectedRows = GradeWiseSalaryMaster::where("id", $id)->update($sal_head_data);
+           
 
-
+          
             //-------------------------------------------------------------------
+            
             // Update  dependent_salary_head table when we update the formula 
             $pattern = '/\{([^}]+)\}/';
             preg_match_all($pattern, $req->formulaOutput, $matches);
             $keywords = $matches[1];
             $delete = DeleteSalaryheadId::where('salary_head_id', $id)->where('type', '2')->where('grade', $req->grade)->delete();
             foreach ($keywords as $val) {
-
                 $head = GradeWiseSalaryMaster::where('head_title', $val)->where('grade',$req->grade)->get();
                 if (!empty($head[0]->id)) {
                     $delete_salary_head_data = array(
@@ -155,6 +157,16 @@ class GradeSalaryMasterController extends Controller
                 }
             }
             //-------------------------------------------------------------------
+
+             //------------------------------------
+               
+             $update_grade = array(
+                "grade" => $req->grade
+            );
+            $update_grade = DeleteSalaryheadId::where("salary_head_id", $id)->where('type','2')->update($update_grade);
+   
+         //------------------------------------
+           
 
 
         } else {

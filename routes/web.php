@@ -9,6 +9,7 @@ use App\Http\Controllers\SuccessFactor;
 use App\Http\Controllers\BasicGradeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GradeSalaryMasterController;
+use App\Http\Controllers\RoleController;
 
 
 /*
@@ -28,7 +29,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
 
  Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Salary  head
+    // Salary  head  
     Route::get('/master_salary_head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
     Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
@@ -52,7 +53,7 @@ use App\Http\Controllers\GradeSalaryMasterController;
      // End Basic with grade pay
 
      // Employee Route
-     Route::get('/emp_listing', [EmployeeController::class, 'index']);
+     Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
      Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
      // End employee route
 
@@ -100,6 +101,14 @@ use App\Http\Controllers\GradeSalaryMasterController;
         Route::get('/privacy_statement', [SuccessFactor::class, 'Privacystatement']);
 
     //End Success factor API
+
+    //  Roles
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::post('/add/role', [RoleController::class, 'store'])->name('roles.add');
+    Route::post('/edit/role', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::post('/update/role', [RoleController::class, 'update'])->name('roles.update');
+    Route::post('/delete/role', [RoleController::class, 'destroy'])->name('roles.delete');
+    //End roles 
 
 
 
