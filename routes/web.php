@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SuccessFactor;
 use App\Http\Controllers\BasicGradeController;
+use App\Http\Controllers\EmployeeBenefitsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GradeSalaryMasterController;
 
@@ -72,7 +73,11 @@ use App\Http\Controllers\GradeSalaryMasterController;
     Route::post('/update_basic_salary/{id}', [GradeSalaryMasterController::class, 'update_basic_salary']);
     Route::post('/delete_basic_sal', [GradeSalaryMasterController::class, 'delete_basic_sal']);
     Route::post('/get_grade_data', [GradeSalaryMasterController::class, 'get_grade_data']);
- });
+
+    Route::resource('employee_benefits', EmployeeBenefitsController::class)->except(['show','destroy']);
+    Route::post('/employee_benefits/delete', [EmployeeBenefitsController::class, 'destroy'])->name('employee_benefits.delete');
+ 
+});
 
 
 // Route::group(['middleware' => ['auth']], function () {
