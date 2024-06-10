@@ -7,7 +7,12 @@
 
 <!-- Buttons to trigger modals -->
 <button class="btn btn-primary mt-3" onClick="openroleModal()" href="javascript:void(0)">Add Role</button>
-
+@if(session()->has('message'))
+        <div id="successMessage" class="alert alert-success fade show" role="alert">
+            <i class="bi bi-check-circle me-1"></i>
+            {{ session()->get('message') }}
+        </div>
+        @endif
 
 <!-- Role Table -->
 <table class="table table-borderless dashboard" id="role_table">
@@ -18,6 +23,7 @@
         </tr>
     </thead>
     <tbody>
+
         @foreach ($roleData as $roles)
         <tr>
             <td>{{ $roles->name }}</td>
@@ -181,7 +187,7 @@
 <script>
     $(document).ready(function() {
         setTimeout(function() {
-            $('.message').fadeOut("slow");
+            $('#successMessage').fadeOut("slow");
         }, 2000);
         $('#role_table').DataTable({
             "order": []

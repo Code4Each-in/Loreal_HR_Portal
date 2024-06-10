@@ -19,7 +19,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = \Validator::make($request->all(), [ 
             'role_name' => 'required',       
         ]);
     

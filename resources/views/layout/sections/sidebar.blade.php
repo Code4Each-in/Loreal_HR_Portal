@@ -23,7 +23,7 @@
         <a class="nav-link collapsed" href="{{  url('salary_head_listing')}}">
             <i class="bi bi-menu-button-wide"></i>
             <span>Salary Head Listing</span>
-            </a>
+        </a>
 
       </li>
       <li>
