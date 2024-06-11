@@ -88,17 +88,14 @@ class GradeSalaryMasterController extends Controller
     // Display all basic grade salary masters
     public  function allBasicGradeSalary(Request $request)
     {
-        $grade = $request->query('grade');
+        $grade = request()->segment(2);
+      
         if(!empty($grade))
         {
          $all_grades  = BasicGrade::all();
-         $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->where('grade', $grade)->get()->toArray();
+         $allbasicgradesal = GradeWiseSalaryMaster::where('grade', $grade)->get()->toArray();
          return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"),compact("all_grades"));
 
-        }else{
-            $allbasicgradesal = GradeWiseSalaryMaster::with('grade')->where('grade', '1')->get()->toArray();
-            $all_grades  = BasicGrade::all();
-            return view('GradeSalaryMaster.allbasicgradesalarymaster', compact("allbasicgradesal"),compact("all_grades"));
         }
 
 

@@ -26,7 +26,7 @@ class User extends Authenticatable
         'state',
         'zipcode',
         'address',
-        'role_id',
+        'role_id', 
         'email',
         'password',
         'status',

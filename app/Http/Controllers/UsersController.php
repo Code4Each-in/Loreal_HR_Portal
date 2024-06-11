@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function registration()
     {
-        return view('Users.register');
+       return view('Users.register');
     }
     public function register(UserRequest $request)
     {
@@ -68,10 +68,20 @@ class UsersController extends Controller
     public function showListing()
     {
         // Retrieve all users
-        $users = User::with('role')->get();
-        $all_roles = Role::all();
-        //dump($users); dd();
-        return view('Users.listing', compact('users', 'all_roles'));
+        $role_id = auth()->user()->role_id;
+       
+        if($role_id == "1"){
+            $users = User::with('role')->get();
+            $all_roles = Role::all();
+            return view('Users.listing', compact('users', 'all_roles'));
+        }else{
+            $id = auth()->user()->id;
+            $users = User::with('role')->where('id',  $id)->get();
+            $all_roles = Role::all();
+          
+            return view('Users.listing', compact('users', 'all_roles'));
+        }
+      
     }
 
     //to save new user

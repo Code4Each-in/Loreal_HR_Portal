@@ -25,9 +25,6 @@ class PageSeeder extends Seeder
                 'name' => "Grade",
             ],
             [
-                'name' => "Grade Salary Listing",
-            ],
-            [
                 'name' => "Employees",
             ],
             [

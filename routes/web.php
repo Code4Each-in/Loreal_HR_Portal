@@ -34,13 +34,13 @@ use App\Http\Controllers\RoleController;
       Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
       Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
       Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
-      Route::get('/basic_grade_salary_master_listing', [GradeSalaryMasterController::class, 'allBasicGradeSalary'])->name('allBasicGradeSalary');
+      Route::get('/basic_grade_salary_master_listing/{id?}', [GradeSalaryMasterController::class, 'allBasicGradeSalary'])->name('allBasicGradeSalary');
        Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
 
 
    });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Salary  head  
+    // Salary  head   
     Route::get('/master_salary_head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
    
@@ -127,3 +127,4 @@ use App\Http\Controllers\RoleController;
     // Route::post('/users/{id}/activate', [UsersController::class, 'activateUser'])->name('user.activate');
 
     // Route::post('/users/{id}/deactivate', [UsersController::class, 'deactivateUser'])->name('user.deactivate');
+    Route::get('/permissions', [DashboardController::class, 'permissions']);

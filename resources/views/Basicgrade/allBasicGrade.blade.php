@@ -31,6 +31,8 @@
             <td>
                <a href="#" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
                 <a href="" class="btn btn-danger delete" data-id ="{{$val->id}}"><i class="bi bi-trash"></i></a>
+                <a href="{{ url('basic_grade_salary_master_listing/' . $val->grade) }}" class="btn btn-primary">Grade Salary Master</a>
+
 
             </td>
         </tr>

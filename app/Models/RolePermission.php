@@ -17,4 +17,9 @@ class RolePermission extends Model
 
     ];
 
+    public function module()
+    {
+        return $this->hasMany(Module::class, 'page_id' , 'module_id');
+    }
+
 }
