@@ -79,10 +79,10 @@
         </li><!-- End Profile Nav -->
 
       </ul>
-          @if(session()->has('error'))
+          @if(session()->has('permission_error'))
        <div class="alert alert-danger header-alert fade show" role="alert" id="header-alert">
                 <i class="bi bi-exclamation-octagon me-1"></i>
-                {{ session()->get('error') }}
+                {{ session()->get('permission_error') }}
         </div>
         @endif    
     </nav><!-- End Icons Navigation -->

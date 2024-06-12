@@ -6,7 +6,8 @@
 
 
 <div class="create_btn">
- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a>
+    <h4> Grade {{ ($allbasicgradesal[0]['grade']) }}</h4>
+    <!-- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a> -->
 </div>
 
 <table class="table" id="pagination">
@@ -34,7 +35,7 @@
         </div>
         @endif
         @foreach($allbasicgradesal as $val)
-       
+
         <?php $head_title = str_replace("_", " ", $val['head_title']); ?>
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>

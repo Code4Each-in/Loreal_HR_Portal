@@ -1,7 +1,7 @@
   <!-- ======= Sidebar ======= -->
-   
 
-  
+
+
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -14,22 +14,24 @@
       </li>
 
       <?php
-        use App\Http\Controllers\DashboardController;
-        $permissions = DashboardController::permissions();
-        foreach($permissions as  $val){ ?>
-        
-         <li>
-         <a class="nav-link collapsed" href="{{ route($val['module'][0]['route_name']) }}">
-             <i class="{{ $val['module'][0]['icon'] }}"></i>
-             <span>{{ $val['module'][0]['text'] }}</span>
-             </a>
- 
-       </li> 
-        
-       <?php  }
-         
-         ?>
-<!-- 
+
+      use App\Http\Controllers\DashboardController;
+
+      $permissions = DashboardController::permissions();
+      foreach ($permissions as  $val) { ?>
+
+        <li>
+          <a class="nav-link collapsed" href="{{ route($val['module'][0]['route_name']) }}">
+            <i class="{{ $val['module'][0]['icon'] }}"></i>
+            <span>{{ $val['module'][0]['text'] }}</span>
+          </a>
+
+        </li>
+
+      <?php  }
+
+      ?>
+      <!-- 
       <li>
         <a class="nav-link collapsed" href="{{ route('user.listing') }}">
             <i class="bi bi-person"></i>
@@ -38,8 +40,8 @@
 
       </li>  -->
 
-     
-    
+
+
       <!-- <li>
         <a class="nav-link collapsed" href="{{  url('salary_head_listing')}}">
             <i class="bi bi-menu-button-wide"></i>
@@ -47,7 +49,7 @@
         </a>
 
       </li> -->
-      
+
       <!-- <li>
         <a class="nav-link collapsed" href="{{  url('grade_listing')}}">
             <i class="bi bi-layout-text-window-reverse"></i>
@@ -76,8 +78,8 @@
             </a>
 
       </li> -->
-     
-     <!-- <li class="nav-item">
+
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Master Salary Head</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -126,10 +128,10 @@
         </ul>
       </li> -->
 
-            <!-- <a class="nav-link collapsed" data-bs-target="#basic_grade_salary_master" data-bs-toggle="collapse" href="#">
+      <!-- <a class="nav-link collapsed" data-bs-target="#basic_grade_salary_master" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Basic Grade Salary Master</span><i class="bi bi-chevron-down ms-auto"></i>
             </a> -->
-            <!-- <ul id="basic_grade_salary_master" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <!-- <ul id="basic_grade_salary_master" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ url('basic_grade') }}">
                         <i class="bi bi-circle"></i><span>Create BasicSalary</span>
@@ -141,7 +143,7 @@
                     </a>
                 </li>
             </ul> -->
-        </li>
+      </li>
     </ul>
 
   </aside>

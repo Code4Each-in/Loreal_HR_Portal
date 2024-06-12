@@ -259,10 +259,7 @@
         $("#deleteModal").modal('show');
     }
 
-    function deleteRole(id) {
-        $('#role_id').val(id);
-        $("#deleteModal").modal('show');
-    }
+  
 
     $("#delete_form").submit(function(event) {
         event.preventDefault(); // Prevent the form from submitting normally

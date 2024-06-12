@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function registration()
     {
-       return view('Users.register');
+        return view('Users.register');
     }
     public function register(UserRequest $request)
     {
@@ -44,11 +44,11 @@ class UsersController extends Controller
 
         // Retrieve the newly created user
         $user = User::where('email', $validatedData['email'])->first();
- 
+
         // Prepare notification messages
         $messages = [
             'subject' => 'Welcome to Local Integration Portal',
-            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',', 
+            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',',
             'lines_array' => [
                 'body-text' => 'Thank you for registering with us. Your account has been successfully created.',
                 'info' => "You can now log in to your account using the credentials you provided during registration.",
@@ -69,19 +69,18 @@ class UsersController extends Controller
     {
         // Retrieve all users
         $role_id = auth()->user()->role_id;
-       
-        if($role_id == "1"){
+        // admin_access = 1;  
+        if ($role_id == config('app.temp_test_var')) {
             $users = User::with('role')->get();
             $all_roles = Role::all();
             return view('Users.listing', compact('users', 'all_roles'));
-        }else{
+        } else {
             $id = auth()->user()->id;
             $users = User::with('role')->where('id',  $id)->get();
             $all_roles = Role::all();
-          
+
             return view('Users.listing', compact('users', 'all_roles'));
         }
-      
     }
 
     //to save new user
@@ -104,7 +103,7 @@ class UsersController extends Controller
         // Create a new User and with validated data
         $user = new User();
         $user->role_id = $validatedData['role_id'];
-        $user->type_id = env('type_id'); 
+        $user->type_id = env('type_id');
         $user->Fname = $validatedData['firstname'];
         $user->Lname = $validatedData['lastname'];
         $user->phone = $validatedData['phone'];
@@ -141,13 +140,13 @@ class UsersController extends Controller
     {
         $user = User::find($request->userId);
         $new_status = 0;
-        if($request->status == 0){
+        if ($request->status == 0) {
             $new_status = 1;
         }
-            $user->status = $new_status;
-            $user->save();
-            Session::flash('message', 'User status updated successfully');
-            return response()->json(['success' => 'Status updates successfully']);
+        $user->status = $new_status;
+        $user->save();
+        Session::flash('message', 'User status updated successfully');
+        return response()->json(['success' => 'Status updates successfully']);
     }
     /**
      * UPDATE USER DATA
@@ -173,18 +172,18 @@ class UsersController extends Controller
             //dd($validatedData);
 
             // Update the user data
-            $userToUpdate->where('id',$request->edit_form_id)
-                        ->update([
-                            'Fname' => $validatedData['firstname'],
-                            'Lname' => $validatedData['lastname'],
-                            'phone' => $validatedData['phone'],
-                            'city' => $validatedData['city'],
-                            'state' => $validatedData['state'],
-                            'zipcode' => $validatedData['zip'],
-                            'address' => $validatedData['address'],
-                            'email' => $validatedData['email'],
-                            'role_id' => $validatedData['role_id'],
-                        ]);
+            $userToUpdate->where('id', $request->edit_form_id)
+                ->update([
+                    'Fname' => $validatedData['firstname'],
+                    'Lname' => $validatedData['lastname'],
+                    'phone' => $validatedData['phone'],
+                    'city' => $validatedData['city'],
+                    'state' => $validatedData['state'],
+                    'zipcode' => $validatedData['zip'],
+                    'address' => $validatedData['address'],
+                    'email' => $validatedData['email'],
+                    'role_id' => $validatedData['role_id'],
+                ]);
             Session::flash('message', 'User data updated successfully.');
         }
     }

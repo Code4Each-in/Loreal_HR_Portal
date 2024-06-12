@@ -27,7 +27,7 @@ use App\Http\Controllers\RoleController;
  Route::get('/reset/password/{token}', [LoginController::class, 'resetPassword']);
  Route::post('/reset/password', [LoginController::class, 'submitResetPasswordForm'])->name('submit.reset.password');
 
- Route::group(['middleware' => ['auth']], function() {
+  Route::group(['middleware' => ['auth']], function() {
    
    Route::middleware(['rolepermission'])->group(function () {
       
@@ -48,11 +48,14 @@ use App\Http\Controllers\RoleController;
     Route::post('/update_salary_head/{id}', [SalaryController::class, 'update_salary_head']);
     Route::post('/delete_sal_head', [SalaryController::class, 'delete_sal_head']);
     Route::get('/get_master_head_title', [SalaryController::class, 'get_master_head_title']);
+    
+  
     // End salary Head
 
     // Basic with grade pay
 
     Route::get('/create_grade', [BasicGradeController::class, 'index']);
+    Route::get('/edit_grade/{id}', [BasicGradeController::class, 'edit_grade']);
     Route::get('/redirectURL', [BasicGradeController::class, 'redirectURL']);
     Route::post('/storegrade', [BasicGradeController::class, 'store']);
     //Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
@@ -66,6 +69,7 @@ use App\Http\Controllers\RoleController;
      // Employee Route
     // Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
      Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
+     Route::get('/salary_struc/{id}', [EmployeeController::class, 'salary_struc']);
      // End employee route
 
     // End Basic with grade pay

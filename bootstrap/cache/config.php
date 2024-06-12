@@ -89,6 +89,7 @@
       'View' => 'Illuminate\\Support\\Facades\\View',
       'Vite' => 'Illuminate\\Support\\Facades\\Vite',
     ),
+    'temp_test_var' => '1',
   ),
   'auth' => 
   array (
@@ -696,7 +697,7 @@
   ),
   'session' => 
   array (
-    'driver' => 'file',
+    'driver' => 'cookie',
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
