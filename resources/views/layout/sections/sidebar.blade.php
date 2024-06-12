@@ -1,4 +1,7 @@
   <!-- ======= Sidebar ======= -->
+   
+
+  
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -10,23 +13,42 @@
         </a>
       </li>
 
-      <li class="nav-item">
-
+      <?php
+        use App\Http\Controllers\DashboardController;
+        $permissions = DashboardController::permissions();
+        foreach($permissions as  $val){ ?>
+        
+         <li>
+         <a class="nav-link collapsed" href="{{ route($val['module'][0]['route_name']) }}">
+             <i class="{{ $val['module'][0]['icon'] }}"></i>
+             <span>{{ $val['module'][0]['text'] }}</span>
+             </a>
+ 
+       </li> 
+        
+       <?php  }
+         
+         ?>
+<!-- 
       <li>
         <a class="nav-link collapsed" href="{{ route('user.listing') }}">
             <i class="bi bi-person"></i>
             <span>Users</span>
             </a>
 
-      </li>
-      <li>
+      </li>  -->
+
+     
+    
+      <!-- <li>
         <a class="nav-link collapsed" href="{{  url('salary_head_listing')}}">
             <i class="bi bi-menu-button-wide"></i>
             <span>Salary Head Listing</span>
-            </a>
+        </a>
 
-      </li>
-      <li>
+      </li> -->
+      
+      <!-- <li>
         <a class="nav-link collapsed" href="{{  url('grade_listing')}}">
             <i class="bi bi-layout-text-window-reverse"></i>
             <span>Grade Listing</span>
@@ -39,14 +61,21 @@
             <span>Grade Salary Listing</span>
             </a>
 
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a class="nav-link collapsed" href="{{  url('emp_listing')}}">
             <i class="bi bi-person"></i>
             <span>Employee Listing </span>
             </a>
 
-      </li>
+      </li> -->
+      <!-- <li>
+        <a class="nav-link collapsed" href="{{  url('roles')}}">
+            <i class="bi bi-people"></i>
+            <span>Roles </span>
+            </a>
+
+      </li> -->
      
      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">

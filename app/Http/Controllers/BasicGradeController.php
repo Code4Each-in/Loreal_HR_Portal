@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BasicGrade;
+use App\Models\SalaryHead;
+use App\Models\GradeWiseSalaryMaster;
 use Session;
 
 class BasicGradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
-        return view('Basicgrade.basic_grade');
+        $salary_head = SalaryHead::all();
+        return view('Basicgrade.basic_grade',  compact("salary_head"));
     }
 
     /**
@@ -29,14 +30,24 @@ class BasicGradeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'grade' => 'required|unique:basic_grades',
-            // 'basic_salary' => 'required'
+            'grade'            => 'required',
+            'salary_head'      =>  'required'
         ]);
 
-        $salary_head = BasicGrade::create([
-            'grade'        => $request->grade,
-            // 'basic_salary'        => $request->basic_salary
+        $salary_head = $request->salary_head;
+        foreach($salary_head as $id)
+        {
+            $salary = SalaryHead::where('id', $id)->get();
+          
+               $salary_head = GradeWiseSalaryMaster::create([
+                    'grade'        => $request->grade,
+                    'head_title'   => $salary[0]->head_title,
+                    'amount'       =>  $salary[0]->amount,
+                    'method'       =>  $salary[0]->method,
+                    'formula'        => $salary[0]->formula
         ]);
+           
+        }
 
         return redirect()->route('allBasicGrade')->with('message', 'New Grade Added successfully!');
     }

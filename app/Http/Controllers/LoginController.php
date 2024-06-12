@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         if($request->isMethod('get')) {
             $userId = request()->user()->id ?? null;
-            if ($userId) {
+            if ($userId) {               
                 return redirect()->route('dashboard');
             } else {
                 return view('Login.index');

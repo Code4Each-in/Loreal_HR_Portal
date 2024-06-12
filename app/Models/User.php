@@ -26,7 +26,7 @@ class User extends Authenticatable
         'state',
         'zipcode',
         'address',
-        'role_id',
+        'role_id', 
         'email',
         'password',
         'status',
@@ -61,6 +61,18 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
          return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function isAdmin()
+    {
+        if($this->role_id == 1)
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        }
     }
 
 }

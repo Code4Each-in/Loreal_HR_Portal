@@ -75,9 +75,17 @@
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
+
         </li><!-- End Profile Nav -->
 
       </ul>
+          @if(session()->has('error'))
+       <div class="alert alert-danger header-alert fade show" role="alert" id="header-alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                {{ session()->get('error') }}
+        </div>
+        @endif    
     </nav><!-- End Icons Navigation -->
+
 
   </header><!-- End Header -->

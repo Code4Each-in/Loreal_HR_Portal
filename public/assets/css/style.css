@@ -1480,3 +1480,19 @@ div#append_grade_data a.button-design {
   align-items: center;
   margin: 0px auto 10px;
 }
+
+nav.header-nav.ms-auto {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0px auto;
+  width: 100%;
+}
+div#header-alert {
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}

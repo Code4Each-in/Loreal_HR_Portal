@@ -4,21 +4,10 @@
 
 @section('content')
 
-<?php $defaultGradeId = "1";  $grade_id = Request::get('grade', $defaultGradeId);   ?>
-<div class="create_btn1">
-    <div class="grade_btn">
-        @foreach($all_grades as $grade)
-        <input type="radio" id="{{ $grade->id}}" name="grade" {{ ($grade_id == $grade->id) ? 'checked' : '' }} value="{{$grade->grade}}" ckecked>
-          <label for="html">{{$grade->grade}}</label><br>
-        @endforeach
-    </div>
-    <div class="create_btn_sal">
-        <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a>
-    </div>
 
+<div class="create_btn">
+ <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a>
 </div>
-
-
 
 <table class="table" id="pagination">
     <thead>
@@ -45,17 +34,17 @@
         </div>
         @endif
         @foreach($allbasicgradesal as $val)
-
+       
         <?php $head_title = str_replace("_", " ", $val['head_title']); ?>
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $head_title }}</td>
             <td>{{ $val['formula'] }}</td>
             <td>{{ $val['amount'] }}</td>
-            <td>{{ $val['grade']['grade'] }}</td>
+            <td>{{ $val['grade'] }}</td>
             <td>
                 <a href="{{ url('edit_basic_salary/' . $val['id']) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                <a href="#" class="btn btn-danger delete-btn" data-grade="{{ $val['grade']['id'] }}" data-id="{{ $val['id'] }}"><i class="bi bi-trash"></i></a>
+                <a href="#" class="btn btn-danger delete-btn" data-grade="{{ $val['grade'] }}" data-id="{{ $val['id'] }}"><i class="bi bi-trash"></i></a>
 
             </td>
         </tr>
@@ -119,19 +108,6 @@
     });
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const radioButtons = document.querySelectorAll('input[name="grade"]');
-        radioButtons.forEach(radio => {
-            radio.addEventListener('click', () => {
-                // alert('You selected: ' + radio.id);
-                const currentUrl = window.location.href;
-                const newUrl = new URL(currentUrl);
-                newUrl.searchParams.set('grade', radio.id);
-                window.location.href = newUrl.toString();
-            });
-        });
-    });
-</script>
+
 
 @endsection
