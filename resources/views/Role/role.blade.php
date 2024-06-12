@@ -8,11 +8,11 @@
 <!-- Buttons to trigger modals -->
 <button class="btn btn-primary mt-3" onClick="openroleModal()" href="javascript:void(0)">Add Role</button>
 @if(session()->has('message'))
-        <div id="successMessage" class="alert alert-success fade show" role="alert">
-            <i class="bi bi-check-circle me-1"></i>
-            {{ session()->get('message') }}
-        </div>
-        @endif
+<div id="successMessage" class="alert alert-success fade show" role="alert">
+    <i class="bi bi-check-circle me-1"></i>
+    {{ session()->get('message') }}
+</div>
+@endif
 
 <!-- Role Table -->
 <table class="table table-borderless dashboard" id="role_table">
@@ -70,35 +70,16 @@
                         <div class="form-check col">
                             <label class="form-check-label" for="{{'listing_page_'.$val->id}}">
                                 {{$val->module_name}}</label>
-                            <input class="form-check-input" name="role_permissions[]" type="checkbox"
-                                id="{{'listing_page_'.$val->id}}" value="{{$val->id}}">
+                            <input class="form-check-input" name="role_permissions[]" type="checkbox" id="{{'listing_page_'.$val->id}}" value="{{$val->id}}">
                         </div>
                         @empty
                         @endforelse
-                        <!--<div class="form-check col-md-4">
-						<label class="form-check-label" for="add_page">Add</label>
-						<input class="form-check-input" type="checkbox" id="add_page" >					  
-					</div>
-				</div>
-				<div class="row mb-3">
-					<div class="form-check col-md-4">
-					</div>
-					<div class="form-check col-md-4">
-						<label class="form-check-label" for="edit_page">Edit</label>
-						<input class="form-check-input" type="checkbox" id="edit_page" >					  
-					</div>
-					<div class="form-check col-md-4">
-						<label class="form-check-label" for="delete_page">Delete</label>
-						<input class="form-check-input" type="checkbox" id="delete_page" >					  
-					</div>
-						-->
                     </div>
                     @empty
                     @endforelse
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onClick="addRole()"
-                            href="javascript:void(0)">Save</button>
+                        <button type="button" class="btn btn-primary" onClick="addRole()" href="javascript:void(0)">Save</button>
                     </div>
             </form>
         </div>
@@ -137,8 +118,7 @@
                         <div class="form-check col">
                             <label class="form-check-label" for="{{'role_permissions_'.$val->id}}">
                                 {{$val->module_name}}</label>
-                            <input class="form-check-input" name="role_permissions[]" type="checkbox"
-                                id="{{'role_permissions_'.$val->id}}" value="{{$val->id}}">
+                            <input class="form-check-input" name="role_permissions[]" type="checkbox" id="{{'role_permissions_'.$val->id}}" value="{{$val->id}}">
                         </div>
                         @empty
                         @endforelse
@@ -147,8 +127,7 @@
                     @endforelse
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onClick="updateRole()"
-                            href="javascript:void(0)">Update</button>
+                        <button type="button" class="btn btn-primary" onClick="updateRole()" href="javascript:void(0)">Update</button>
                     </div>
                 </div>
             </form>
@@ -165,7 +144,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
                     <input type="hidden" name="role_id" id="role_id" value="">
-                  
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -200,9 +179,9 @@
     });
 
     function openroleModal() {
-    $('#role_name').val('');
-    $('#addRole').modal('show');
-}
+        $('#role_name').val('');
+        $('#addRole').modal('show');
+    }
 
     function addRole() {
         $.ajax({
@@ -230,28 +209,28 @@
     }
 
     function editRole(id) {
-    $('#hidden_role_id').val(id);
-    $.ajax({
-        type: "POST",
-        url: "{{ url('/edit/role') }}",
-        data: {
-            id: id
-        },
-        dataType: 'json',
-        success: function(res) {
-            if (res.role != null) {
-                $('#editRole').modal('show');
-                $('#edit_role_name').val(res.role.name);
+        $('#hidden_role_id').val(id);
+        $.ajax({
+            type: "POST",
+            url: "{{ url('/edit/role') }}",
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(res) {
+                if (res.role != null) {
+                    $('#editRole').modal('show');
+                    $('#edit_role_name').val(res.role.name);
+                }
+                $('input[type=checkbox]').prop('checked', false);
+                if (res.RolePermission != null) {
+                    $.each(res.RolePermission, function(key, value) {
+                        $('#role_permissions_' + value.module_id).prop('checked', true);
+                    });
+                }
             }
-            $('input[type=checkbox]').prop('checked', false);
-            if (res.RolePermission != null) {
-                $.each(res.RolePermission, function(key, value) {
-                    $('#role_permissions_' + value.module_id).prop('checked', true);
-                });
-            }
-        }
-    });
-}
+        });
+    }
 
     function updateRole() {
         $.ajax({
@@ -285,7 +264,7 @@
         $("#deleteModal").modal('show');
     }
 
-    $("#delete_form").submit(function(event){
+    $("#delete_form").submit(function(event) {
         event.preventDefault(); // Prevent the form from submitting normally
         $.ajax({
             type: "POST",
@@ -305,7 +284,5 @@
             }
         });
     });
-
- 
 </script>
 @endsection
