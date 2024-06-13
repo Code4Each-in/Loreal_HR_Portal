@@ -70,7 +70,6 @@
                                         <button class="btn btn-primary w-100" type="submit">Login</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Don't have an account? <a href="{{ route('register-user') }}">Create an account</a></p>
                                         <p class="small mb-0"><a href="{{ url('forgot-password') }} ">Forgot Password? </a></p>
                                     </div>
                                 </form>

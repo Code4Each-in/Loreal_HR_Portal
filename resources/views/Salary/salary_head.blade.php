@@ -63,7 +63,7 @@ $form_type = (old('formType') );
                 </section>
                 <section class="cal2">
                     <div class="design-button">
-                        <h4>Source Factor</h4>
+                        <h4>Success Factor</h4>
                         <div class="cal-button ">
                             <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
                             <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
@@ -179,7 +179,7 @@ $form_type = (old('formType') );
     // Append the clicked button's value to the textarea content
     function showFormula(value) {
         var textarea = document.getElementById("formulaOutput");
-        textarea.value += value;
+        textarea.value = (textarea.value + value).trim();
     }
 
     // To clear the formulaOutput textarea

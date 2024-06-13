@@ -26,12 +26,13 @@
 
         @foreach($basic_grades as $val)
         <tr>
-            <th scope="row">{{ $val-> grade}} </th>
+       
+            <th scope="row">{{ $val[0]-> grade}} </th>
 
             <td>
-               <a href="#" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
-                <a href="" class="btn btn-danger delete" data-id ="{{$val->id}}"><i class="bi bi-trash"></i></a>
-                <a href="{{ url('basic_grade_salary_master_listing/' . $val->grade) }}" class="btn btn-primary">Grade Salary Master</a>
+               <a href="{{ url('edit_grade/'.$val[0]->grade) }}" class="btn btn-primary update" data-id="{{$val[0]->id}}"><i class="bi bi-pencil"></i></a>
+                <a href="" class="btn btn-danger delete" data-id ="{{$val[0]->grade}}"><i class="bi bi-trash"></i></a>
+                <a href="{{ url('basic_grade_salary_master_listing/' . $val[0]->grade) }}" class="btn btn-primary">Grade Salary Master</a>
 
 
             </td>
@@ -122,30 +123,30 @@
                 emptyTable: "No records found"
             }
         });
-        $('.update').click(function(e){
-            e.preventDefault();
-            var id = $(this).data('id');
+        // $('.update').click(function(e){
+        //     e.preventDefault();
+        //     var id = $(this).data('id');
 
-            var token = "{{ csrf_token() }}";
-            var vdata = {id:id, _token: token};
+        //     var token = "{{ csrf_token() }}";
+        //     var vdata = {id:id, _token: token};
 
-            $.ajax({
-                url : "{{ url('editBasicGrade')}}",
-                type : "post",
-                data: vdata,
-                success:function(data){
-                    var data = JSON.parse(data);
-                    $('#sal_head_id').val(data.id);
-                    $('#edit_grade').val(data.grade);
-                    // $('#edit_basic_salary').val(data.basic_salary);
-                    $('#updatemodel').modal('show');
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
+        //     $.ajax({
+        //         url : "{{ url('editBasicGrade')}}",
+        //         type : "post",
+        //         data: vdata,
+        //         success:function(data){
+        //             var data = JSON.parse(data);
+        //             $('#sal_head_id').val(data.id);
+        //             $('#edit_grade').val(data.grade);
+        //             // $('#edit_basic_salary').val(data.basic_salary);
+        //             $('#updatemodel').modal('show');
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error(xhr.responseText);
+        //         }
+        //     });
 
-        });
+        // });
     });
 </script>
 

@@ -37,7 +37,7 @@ class RolePermissionMiddleware
                     return $next($request);
                }
                // If the user doesn't have the required role or permission, you can return a response or redirect as needed
-               return Redirect::back()->with('error', 'You do not have permission to access this page.');
+               return Redirect::back()->with('permission_error', 'You do not have permission to access this page.');
                 
             }
           
