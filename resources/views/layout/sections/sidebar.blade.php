@@ -15,22 +15,27 @@
 
       <?php
 
-      use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardController;
 
-      $permissions = DashboardController::permissions();
-      foreach ($permissions as  $val) { ?>
+$permissions = DashboardController::permissions();
+$currentRouteName = Route::currentRouteName();
 
-        <li>
-          <a class="nav-link collapsed" href="{{ route($val['module'][0]['route_name']) }}">
-            <i class="{{ $val['module'][0]['icon'] }}"></i>
-            <span>{{ $val['module'][0]['text'] }}</span>
-          </a>
+foreach ($permissions as $val) {
+    $isActive = $currentRouteName == $val['module'][0]['route_name'] ? 'active' : 'collapsed';
+?>
 
-        </li>
+<li>
+    <a class="nav-link {{ $isActive }}" href="{{ route($val['module'][0]['route_name']) }}">
+        <i class="{{ $val['module'][0]['icon'] }}"></i>
+        <span>{{ $val['module'][0]['text'] }}</span>
+    </a>
+</li>
 
-      <?php  }
+<?php
+}
+?>
 
-      ?>
+
       <!-- 
       <li>
         <a class="nav-link collapsed" href="{{ route('user.listing') }}">

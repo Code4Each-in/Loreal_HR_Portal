@@ -39,6 +39,8 @@ class UsersController extends Controller
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'role_id' => 2,
+            
+
 
         ]);
 
@@ -103,12 +105,12 @@ class UsersController extends Controller
         // Create a new User and with validated data
         $user = new User();
         $user->role_id = $validatedData['role_id'];
-        $user->type_id = env('type_id');
+        $user->type_id =  config('app.type_id');
         $user->Fname = $validatedData['firstname'];
         $user->Lname = $validatedData['lastname'];
         $user->phone = $validatedData['phone'];
         $user->city = $validatedData['city'];
-        $user->state = $validatedData['state'];
+        $user->state = $validatedData['state']; 
         $user->zipcode = $validatedData['zip'];
         $user->address = $validatedData['address'];
         $user->email = $validatedData['email'];

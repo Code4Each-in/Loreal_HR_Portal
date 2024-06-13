@@ -26,7 +26,7 @@ class ModuleSeeder extends Seeder
                 'page_id' => 2,
                 'module_name' => "Listing",
                 'route_name' => "allsalaryHead",
-                'text'  => "Salary Head Listing",
+                'text'  => "Master Salary Head",
                 'icon'  => "bi bi-menu-button-wide" 
 
             ],
@@ -34,14 +34,14 @@ class ModuleSeeder extends Seeder
                 'page_id' => 3,
                 'module_name' => "Listing",
                 'route_name' => "allBasicGrade",
-                'text'  => "Grade Listing",
+                'text'  => "Grades",
                 'icon'  => "bi bi-layout-text-window-reverse" 
             ],
             [
                 'page_id' => 4,
                 'module_name' => "Listing",
                 'route_name' => "emp_listing",
-                'text'  => "Employee Listing",
+                'text'  => "Employee",
                 'icon'  => "bi bi-person" 
             ],
             [

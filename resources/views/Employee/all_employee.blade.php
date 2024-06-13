@@ -25,7 +25,7 @@
 
       <td> {{ $val['post'][0]['base_pay'] ?? '' }} </td>
       <td>
-        <a href="{{ url('salary_struc/'.$val['id']) }} " class="btn btn-primary salary-btn55">Salary Struc</a>
+        <a href="{{ url('salary_struc/'.$val['id']) }} " class="btn btn-primary salary-btn55">Salary Structure</a>
         <!-- <a type="button" class="btn btn-primary salary-btn" data-id="{{ $val['id'] }}" data-grade="{{ $val['post'][0]['grade'] ?? '' }}" data-bs-toggle="modal" data-bs-target="#basicModal5">Salary</a> -->
       </td>
     </tr>

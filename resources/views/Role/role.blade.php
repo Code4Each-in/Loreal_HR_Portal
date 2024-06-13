@@ -15,7 +15,7 @@
 @endif
 
 <!-- Role Table -->
-<table class="table table-borderless dashboard" id="role_table">
+<table class="table  dashboard" id="role_table">
     <thead>
         <tr>
             <th>Name</th>
@@ -164,13 +164,26 @@
 
 @section('js_scripts')
 <script>
+$(document).ready(function() {
+    $('#role_table').DataTable({
+      searching: true,
+      language: {
+        emptyTable: "No records found"
+      },
+      "aoColumnDefs": [{
+        "bSortable": false,
+        "aTargets": [1]
+      }, ],
+    });
+});
+</script>
+
+<script>
     $(document).ready(function() {
         setTimeout(function() {
             $('#successMessage').fadeOut("slow");
         }, 2000);
-        $('#role_table').DataTable({
-            "order": []
-        });
+  
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -271,7 +284,7 @@
             success: (res) => {
                 if (res.success) {
                     $("#deleteModal").modal('hide');
-                    location.reload();
+                    location.reload(); 
                 } else {
                     alert('An error occurred: ' + res.message);
                 }
@@ -283,3 +296,7 @@
     });
 </script>
 @endsection
+
+
+
+

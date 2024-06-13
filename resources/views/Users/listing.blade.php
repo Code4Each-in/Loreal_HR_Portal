@@ -375,7 +375,7 @@
         $('.error_e').html('');
         $('.alert-danger').css('display', 'none');
         $('#Create_user')[0].reset();
-        $('#userModal').modal('show');
+        $('#userModal').modal('show'); 
     });
 
     // Use event delegation for save user button
