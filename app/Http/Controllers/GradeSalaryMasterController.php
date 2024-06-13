@@ -42,7 +42,6 @@ class GradeSalaryMasterController extends Controller
             $salary_head = GradeWiseSalaryMaster::create([
                 'head_title' =>  $head_title,
                 'formula' => $formulaOutput,
-                // 'formula' => $req->formulaOutput,
                 'method' => $req->method,
                 'grade' => $req->grade
             ]);
@@ -65,9 +64,12 @@ class GradeSalaryMasterController extends Controller
                         'grade' => $req->grade
                     );
                     $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
+                  
                 }
             }
             //------------------------------------------------------=
+
+
         } else {
             $validated = $req->validate([
                 'head_title' => 'required',
@@ -84,6 +86,7 @@ class GradeSalaryMasterController extends Controller
                 'grade' => $req->grade
             ]);
         }
+
         return redirect()->route('allBasicGradeSalary')->with('message', 'Basic Grade Salary Master Added Successfully!');
     }
     // Display all basic grade salary masters

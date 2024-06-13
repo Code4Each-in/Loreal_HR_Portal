@@ -26,12 +26,13 @@
 
         @foreach($basic_grades as $val)
         <tr>
-            <th scope="row">{{ $val-> grade}} </th>
+       
+            <th scope="row">{{ $val[0]-> grade}} </th>
 
             <td>
-               <a href="{{ url('edit_grade/'.$val->grade) }}" class="btn btn-primary update" data-id="{{$val->id}}"><i class="bi bi-pencil"></i></a>
-                <a href="" class="btn btn-danger delete" data-id ="{{$val->id}}"><i class="bi bi-trash"></i></a>
-                <a href="{{ url('basic_grade_salary_master_listing/' . $val->grade) }}" class="btn btn-primary">Grade Salary Master</a>
+               <a href="{{ url('edit_grade/'.$val[0]->grade) }}" class="btn btn-primary update" data-id="{{$val[0]->id}}"><i class="bi bi-pencil"></i></a>
+                <a href="" class="btn btn-danger delete" data-id ="{{$val[0]->grade}}"><i class="bi bi-trash"></i></a>
+                <a href="{{ url('basic_grade_salary_master_listing/' . $val[0]->grade) }}" class="btn btn-primary">Grade Salary Master</a>
 
 
             </td>

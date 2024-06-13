@@ -15,12 +15,14 @@ class EmployeeController extends Controller
     {
         // Get all  employees  came  from success factor  
         //  Join with user detail table 
-        $all_emp = User::with('post')->where('type_id', '2')->get()->toarray();
+        // type_id = 2;
+        $type =  config('app.type_id');
+        $all_emp = User::with('post')->where('type_id', $type)->get()->toarray();
         $all_salary_head = SalaryHead::all();
         return view('Employee.all_employee',  compact("all_emp"), compact("all_salary_head"));
     }
 
- 
+
 
     public function emp_data(Request $req)
     {
@@ -71,7 +73,7 @@ class EmployeeController extends Controller
 
             preg_match_all($pattern, $formula, $matches);
             $keywordss = $matches[1];
-            // print_r($keywordss);
+
             $dynamicKeywords = array_map(function ($keyword) {
                 return "{" . $keyword . "}";
             }, $keywordss);
@@ -127,7 +129,7 @@ class EmployeeController extends Controller
             $all_salary_head[$head->head_title] = $head;
         }
         $td_variables = [];
-      
+
 
         $keywords = '';
 
@@ -183,7 +185,7 @@ class EmployeeController extends Controller
         }
 
         $emp_data = User::with('post')->where('type_id', '2')->where('id', $id)->get();
-        //dd($emp_data);
+
         return view('Employee.salary_structure',  compact("td_variables"),  compact("emp_data"));
     }
 }

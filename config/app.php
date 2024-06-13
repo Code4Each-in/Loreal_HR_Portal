@@ -186,5 +186,6 @@ return [
     ])->toArray(),
 
     'admin_access'  =>  env('admin_access'),
+    'type_id'  =>  env('type_id'),
 
 ];

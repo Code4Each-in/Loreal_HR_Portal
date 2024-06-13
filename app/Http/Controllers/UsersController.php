@@ -70,7 +70,7 @@ class UsersController extends Controller
         // Retrieve all users
         $role_id = auth()->user()->role_id;
         // admin_access = 1;  
-        if ($role_id == config('app.temp_test_var')) {
+        if ($role_id == config('app.admin_access')) {
             $users = User::with('role')->get();
             $all_roles = Role::all();
             return view('Users.listing', compact('users', 'all_roles'));

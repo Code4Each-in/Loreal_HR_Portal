@@ -89,7 +89,8 @@
       'View' => 'Illuminate\\Support\\Facades\\View',
       'Vite' => 'Illuminate\\Support\\Facades\\Vite',
     ),
-    'temp_test_var' => '1',
+    'admin_access' => '1',
+    'type_id' => '2',
   ),
   'auth' => 
   array (
