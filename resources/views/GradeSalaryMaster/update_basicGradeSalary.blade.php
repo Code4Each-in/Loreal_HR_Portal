@@ -12,19 +12,6 @@
     @csrf
     <div class="modal-body"> 
         <div class="row mb-3 mt-4">
-            <!-- <label for="grade" class="col-sm-3 col-form-label required">Grade <span class='asterisk'>*</span></label> -->
-            <!-- <div class="col-sm-9">
-                <select class="form-select" name="grade" id="grade">
-                    <option value="" selected>Select Grade</option>
-                    @foreach($all_grades as $grade)
-                    <option value="{{ $grade->grade }}" {{ $basic_salary->grade == $grade->grade ? 'selected' : '' }}>{{ $grade->grade }}</option>
-
-                    @endforeach
-                </select>
-                @if ($errors->has('grade'))
-                <span class="text-danger">{{ $errors->first('grade') }}</span>
-                @endif
-            </div> -->
         </div>
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Head Title<span class='asterisk'>*</span></label>
@@ -116,9 +103,7 @@
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula<span class='asterisk'>*</span></label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
-                    {{ $basic_salary->formula}}
-                    </textarea>
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">{{ $basic_salary->formula}}</textarea>
 
                 </div>
             </div>
@@ -140,7 +125,7 @@
     </div> -->
     <div class="modal-footer back-btn">
               <button type="submit" class="btn btn-default">Save</button>
-            <a href="{{ url('basic_grade_salary_master_listing/'.$basic_salary->grade) }}" class="btn btn-primary">Back</a>
+            <a href="{{ url('basic_grade_salary_master_listing/'.$basic_salary->grade) }}" class="btn btn-primary back_btn">Back</a>
      </div>
 
 </form>

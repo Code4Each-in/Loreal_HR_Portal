@@ -13,10 +13,8 @@
         </a>
       </li>
 
-      <?php
-
+<?php
 use App\Http\Controllers\DashboardController;
-
 $permissions = DashboardController::permissions();
 $currentRouteName = Route::currentRouteName();
 

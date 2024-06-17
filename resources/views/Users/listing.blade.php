@@ -1,4 +1,5 @@
 @section('title', 'Users')
+@section('sub-title', 'Users')
 @extends('layout.app')
 @section('content')
 <div class="create_btn">
@@ -15,43 +16,16 @@
     <table class="table dataTable" id="pagination" style="width:100%">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Role</th>
+                <th>Role</th>  
                 <th>Status</th>
                 <th width="150px">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $user->Fname }} {{ $user->Lname }}</td>
-                <td>{{ $user->phone }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ optional($user->role)->name }}</td>
 
-                <td>
-                    <button class="status-toggle btn {{ $user->status == 1 ? 'btn-danger' : 'btn-success' }}" data-user-id="{{ $user->id }}" data-status="{{ $user->status }}">
-                        {{ $user->status == 1 ? 'Inactive' : 'Active' }}
-                    </button>
-                </td>
-                <td>
-                    <a href="" class="btn btn-primary edit-userdata-btn" data-toggle="modal" data-target="#editUserDataModal" data-user-id="{{ $user->id }}">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                    <a href="#" class="btn btn-danger delete-user-btn" data-user-id="{{ $user->id }}">
-                        <i class="bi bi-trash"></i>
-                    </a>
-
-                    <a href="#" class="btn btn-warning change-password-btn" data-id="{{ $user->id  }}" data-toggle="modal" data-target="#changePasswordModal">
-                        <i class="bi bi-key"></i>
-                    </a>
-                </td>
-            </tr>
-            @endforeach
         </tbody>
     </table>
 </div>
@@ -72,9 +46,11 @@
                     <label for="role" class="form-label">Role<span class="text-danger">*</span></label>
                         <select name="role_id" class="form-select" id="role_id">
                             <option value="" selected>Select Role</option>
+                          
                             @foreach($all_roles as $role)
-                            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                            <option value="{{ $role->id }}" >{{ $role->name }}</option>
                             @endforeach
+                         
                         </select>
                         <div id="role_id_error_up" class="text-danger error_ee"></div>
                     </div>
@@ -121,7 +97,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="updateForm" class="btn btn-primary">Update</button>
+                        <button type="button" id="updateForm" class="btn btn-primary update_btn">Update</button>
                     </div>
                 </form>
             </div>
@@ -153,7 +129,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary  sbt_btn">Submit</button>
                     </div>
                 </form>
             </div>
@@ -235,7 +211,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="saveuser" class="btn btn-primary">Save</button>
+                        <button type="button" id="saveuser" class="btn btn-primary sbt_btn">Save</button>
                     </div>
                 </form>
             </div>
@@ -263,20 +239,91 @@
             }
         });
     // Function to initialize DataTable
-    function initializeDataTable() {
-        $('#pagination').DataTable({
-            searching: true,
-            "aoColumnDefs": [
-                { "bSortable": false, "aTargets": [ 6] },
+   
+        pendingCatalogsTable = $('#pagination').DataTable({
+            processing: true,
+            serverSide: true,
+            tooltip:true,
+            ajax: "{{ url('users') }}",
+            paging: true, // Enable server-side pagination
+            pageLength: 10, // Initial number of entries per page
+            columns: [
+              
+                { name: 'Name', 
+                    render: function (data, type, row) {
+                      return row.Fname ?? 'NA';    
+                    }
+                },
+                { name: 'Phone', 
+                    render: function (data, type, row) {
+                   
+                        return row.phone ?? 'NA';    
+                    }
+                },
+                { name: 'Email', 
+                    render: function (data, type, row) {
+                        return row.email ?? 'NA';     
+                    }
+                },
+                { name: 'Role', 
+                    render: function (data, type, row) {
+                        return row.role.name ?? 'NA';     
+                    }
+                },
+                
+                {
+                    name: 'Status',
+                    render: function (data, type, row) {
+                       
+                        const status = row.status; // Assuming 'status' is under 'role' in the row object
+                        const userId = row.id; // Assuming 'id' is directly in the row object
+                        const buttonClass = status === 1 ? 'btn-danger' : 'btn-success';
+                        const buttonText = status === 1 ? 'Inactive' : 'Active';
+                        
+                        return `
+                            <button class="status-toggle btn ${buttonClass}" data-user-id="${userId}" data-status="${status}">
+                                ${buttonText}
+                            </button>
+                        `;
+                    }
+                },
+
+                {
+                    name: 'Action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                    var action = '';
+                    action += '<a href="#" class="btn btn-primary edit-userdata-btn" data-toggle="modal" data-target="#editUserDataModal" data-user-id="' + row.id + '">';
+                    action += '<i class="bi bi-pencil"></i>';
+                    action += '</a> ';
+                    action += '<a href="#" class="btn btn-danger delete-user-btn" data-user-id="' + row.id + '">';
+                    action += '<i class="bi bi-trash"></i>';
+                    action += '</a> ';
+                    action += '<a href="#" class="btn btn-warning change-password-btn" data-id="' + row.id + '" data-toggle="modal" data-target="#changePasswordModal">';
+                    action += '<i class="bi bi-key"></i>';
+                    action += '</a>';
+                    return action;
+                }
+                }
             ],
-            language: {
-                emptyTable: "No records found"
+            rowCallback: function (row, data) {
+                $(row).addClass('row_status_'+data.id); // Add a CSS class to the row
             }
-        });
-    }
+    });
+        // $('#pagination').DataTable({
+        //     searching: true,
+        //     "aoColumnDefs": [
+        //         { "bSortable": false, "aTargets": [ 6] },
+        //     ],
+        //     language: {
+        //         emptyTable: "No records found"
+        //     }
+        // });
+    
 
     // Call the function to initialize DataTable initially
-    initializeDataTable();
+   
 
     // Use event delegation for status toggle
     $(document).on('click', '.status-toggle', function() {
@@ -351,7 +398,7 @@
                 url: "{{ url('/users/delete') }}",
                 data: data,
                 success: function(response) {
-                    console.log(response.success);
+                    
                     location.reload();
                 },
                 error: function(xhr, status, error) {

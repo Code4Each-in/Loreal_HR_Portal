@@ -20,12 +20,14 @@ class RolePermissionMiddleware
     {
         if (Auth::check()) {
             $user = auth()->user();
-            if(auth()->user()->isAdmin())
+            if(auth()->user()->isAdmin()) 
             {
                 return $next($request); 
             }
             else{
+                
                 $name = \Request::route()->getName();
+                
                 $modules = Module::where('route_name',$name)->first();
                 if ($modules == null) {
                     return Redirect::back()->with('error', 'Permission Module Is Not Registered. Try to Access Again After Register.');

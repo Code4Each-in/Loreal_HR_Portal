@@ -13,7 +13,7 @@
 <form action="{{ url('update_salary_head/'.$SalaryHead->id) }}" method="POST">
     @csrf
     <div class="modal-body">
-
+    
         <div class="row mb-3 mt-4">
             <label for="title" class="col-sm-3 col-form-label required">Head Title</label>
             <div class="col-sm-9">
@@ -105,9 +105,7 @@
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula</label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
-                    {{ $SalaryHead->formula}}
-                    </textarea>
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">{{ $SalaryHead->formula}}</textarea>
 
                 </div>
             </div>
@@ -129,7 +127,7 @@
     </div> -->
     <div class="modal-footer back-btn">
         <button type="submit" class="btn btn-default">Save</button>
-        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary">Back</a>
+        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary  back_btn">Back</a>
     </div>
 
 </form>

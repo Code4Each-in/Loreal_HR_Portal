@@ -211,4 +211,11 @@ class BasicGradeController extends Controller
         $GradeWiseSalaryMaster = GradeWiseSalaryMaster::where('grade', $grade)->get()->toarray();
         return view('Basicgrade.edit_grade', compact("salary_head"), compact("GradeWiseSalaryMaster"), compact('grade'));
     }
+
+    public static function head_title($grade)
+    {
+        $head_titles = GradeWiseSalaryMaster::where('grade', $grade)->pluck('head_title')->toArray();;
+        return implode(", ", $head_titles);
+    }
+    
 }

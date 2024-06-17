@@ -32,13 +32,16 @@ use App\Http\Controllers\RoleController;
    Route::middleware(['rolepermission'])->group(function () {
       
       Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
+      Route::get('/all_users', [UsersController::class, 'all_users'])->name('all_users');
       Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
       Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
       Route::get('/basic_grade_salary_master_listing/{id?}', [GradeSalaryMasterController::class, 'allBasicGradeSalary'])->name('allBasicGradeSalary');
       Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
+     
 
 
    });
+   
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Salary  head   
     Route::get('/master_salary_head', [SalaryController::class, 'index'])->name('salaryHead');

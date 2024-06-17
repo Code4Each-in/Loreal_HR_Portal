@@ -127,8 +127,7 @@ $form_type = (old('formType'));
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula<span class="asterisk">*</span></label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
-                        </textarea>
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50"></textarea>
 
                 </div>
             </div>

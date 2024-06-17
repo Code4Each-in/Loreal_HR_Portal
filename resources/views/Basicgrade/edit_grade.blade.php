@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <h3>Select Default Master Salary Head </h3>
+    <h3 class="heading-select">Select Default Master Salary Head </h3>
     <table class="table" id="pagination">
         <thead>
             <tr>
@@ -57,7 +57,7 @@
 
     <div class="modal-footer back-btn">
         <button type="submit" class="btn btn-default">Save</button>
-        <a href="{{ url('grade_listing') }}" class="btn btn-primary">Back</a>
+        <a href="{{ url('grade_listing') }}" class="btn btn-primary back_btn">Back</a>
     </div>
 
 </form>

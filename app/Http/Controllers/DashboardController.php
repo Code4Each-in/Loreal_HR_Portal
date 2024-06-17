@@ -19,11 +19,7 @@ class DashboardController extends Controller
     public static function permissions()
     {
         $role_id = auth()->user()->role_id;
-        return  $rolePermissions = RolePermission::with('module')->where('role_id', $role_id)->get()->toArray();;
-  
-  
-        
-      
+        return  $rolePermissions = RolePermission::with('module')->where('role_id', $role_id)->get()->toArray();
     }
 
 }

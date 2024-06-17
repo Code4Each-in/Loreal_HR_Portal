@@ -1,5 +1,5 @@
-@section('title', 'Employee')
-@section('sub-title', 'Employee')
+@section('title', 'Employees')
+@section('sub-title', 'Employees')
 @extends('layout.app')
 
 @section('content')
@@ -17,19 +17,7 @@
   </thead>
   <tbody>
 
-    @foreach ($all_emp as $val)
-
-    <tr>
-      <td>{{ $val['Fname'] ?? '' }} {{ $val['Lname'] ?? '' }}</td>
-      <td>{{ $val['post'][0]['grade'] ?? '' }}</td>
-
-      <td> {{ $val['post'][0]['base_pay'] ?? '' }} </td>
-      <td>
-        <a href="{{ url('salary_struc/'.$val['id']) }} " class="btn btn-primary salary-btn55">Salary Structure</a>
-        <!-- <a type="button" class="btn btn-primary salary-btn" data-id="{{ $val['id'] }}" data-grade="{{ $val['post'][0]['grade'] ?? '' }}" data-bs-toggle="modal" data-bs-target="#basicModal5">Salary</a> -->
-      </td>
-    </tr>
-    @endforeach
+   
   </tbody>
 </table>
 <!-- Basic Modal -->
@@ -68,20 +56,57 @@
     </div>
   </div>
 </div><!-- End Basic Modal-->
+@endsection
 
 @section('js_scripts')
 <script>
-  $(document).ready(function() {
-    $('#emp_table').DataTable({
-      searching: true,
-      language: {
-        emptyTable: "No records found"
-      },
-      "aoColumnDefs": [{
-        "bSortable": false,
-        "aTargets": [3]
-      }, ],
+  var pendingCatalogsTable;
+$(document).ready(function() {
+    // DataTable initialization
+    pendingCatalogsTable = $('#emp_table').DataTable({
+            processing: true,
+            serverSide: true,
+            tooltip:true,
+            ajax: "{{ route('emp_listing') }}",
+            paging: true, // Enable server-side pagination
+            pageLength: 10, // Initial number of entries per page
+            columns: [
+                { name: 'Name', 
+                    render: function (data, type, row) {
+                     
+                      return row.Fname ?? 'NA';    
+                    }
+                },
+                { name: 'Grade', 
+                    render: function (data, type, row) {
+                      console.log(row.post[0].grade);
+                      return row.post[0].grade ?? 'NA';    
+                    }
+                },
+                { name: 'Base Pay', 
+                    render: function (data, type, row) {
+                      return row.post[0].base_pay ?? 'NA';    
+                    }
+                },
+                {
+                    name: 'Action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                      return '<a href="/salary_struc/' + row.id + '" class="btn btn-primary salary-btn55">Salary Structure</a>';
+                  }
+
+
+
+                }
+
+
+            ],
+            rowCallback: function (row, data) {
+                $(row).addClass('row_status_'+data.id); // Add a CSS class to the row
+            }
     });
+  
 
     $('.salary-btn').on('click', function() {
       $('#show_formula').hide();
@@ -97,28 +122,7 @@
         grade: grade,
         "_token": "{{ csrf_token() }}"
       };
-      $.ajax({
-        url: "{{ url('get_emp_data')}}",
-        type: "post",
-        dataType: "html",
-        data: vdata,
-        success: function(data) {
-          var data = JSON.parse(data);
-          $("#append_salary_structure").empty();
-          $.each(data, function(index, val) {
-            var tr = $("<tr>");
-            tr.append("<td>" + val.head_title + "</td>");
-            tr.append("<td style='display:none' class='show_formula'>" + val.formula + "</td>");
-            tr.append("<td style='display:none'  class='show_cal'>" + val.calculation + "</td>");
-            tr.append("<td>" + val.amount + "</td>");
-            // Append the table row to an existing table body
-            $("#append_salary_structure").append(tr);
-            $("#basicModal").modal('show');
-          });
 
-
-        }
-      });
     });
   });
 </script>
@@ -185,4 +189,3 @@
 
 
 
-@endsection

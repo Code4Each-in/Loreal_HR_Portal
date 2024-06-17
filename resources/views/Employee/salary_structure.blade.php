@@ -10,8 +10,7 @@
 
       <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-
+        <label  class="custom-file-upload fas"><div class="img-wrap img-upload"><img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"></div></label>
           <h2> @if($emp_data[0]->Fname){{ $emp_data[0]->Fname }} @endif @if($emp_data[0]->Lname) {{ $emp_data[0]->Lname }}@endif</h2>
           <h3>Employee</h3>
 

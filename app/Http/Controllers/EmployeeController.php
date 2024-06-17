@@ -13,14 +13,127 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        // Get all  employees  came  from success factor  
-        //  Join with user detail table 
-        // type_id = 2;
-        $type =  config('app.type_id');
-        $all_emp = User::with('post')->where('type_id', $type)->get()->toarray();
-        $all_salary_head = SalaryHead::all();
-        return view('Employee.all_employee',  compact("all_emp"), compact("all_salary_head"));
+
+
+        if (request()->ajax()) {
+            $type = config('app.type_id');
+
+            if (request()->has('search') && request()->input('search.value') !== null) {
+                $searchText = request()->input('search.value');
+                $query = User::with('post')
+                    ->has('post')
+                    ->where('type_id', $type)
+                    ->where(function ($query) use ($searchText) {
+                        $query->where('Fname', 'like', '%' . $searchText . '%')
+                            ->orWhere('Lname', 'like', '%' . $searchText . '%'); // Example of searching by Lname as well
+                    })
+                    ->orWhereHas('post', function ($query) use ($searchText) {
+                        $query->where('grade', 'like', '%' . $searchText . '%')
+                            ->orWhere('base_pay', 'like', '%' . $searchText . '%');
+                    });
+                $results = $query->get();
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+
+                // Total number of records (employees) without pagination
+                $totalRecords = $query->count();
+
+                // Paginate the results
+                $data = $query->skip($start)->take($length)->get();
+
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            } else {
+                // Query to fetch users with their associated posts, filtered by type_id
+
+                $query = User::with('post')->has('post')->where('type_id', $type);
+
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+
+                // Total number of records (employees) without pagination
+                $totalRecords = $query->count();
+
+                // Paginate the results
+                $data = $query->skip($start)->take($length)->get();
+
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            }
+        }
+        return view('Employee.all_employee');
     }
+
+    public function all_emp()
+    {
+
+        if (request()->ajax()) {
+            $type = config('app.type_id');
+
+            if (request()->has('search') && request()->input('search.value') !== null) {
+                $searchText = request()->input('search.value');
+                $query = User::with('post')
+                    ->has('post')
+                    ->where('type_id', $type)
+                    ->where(function ($query) use ($searchText) {
+                        $query->where('Fname', 'like', '%' . $searchText . '%')
+                            ->orWhere('Lname', 'like', '%' . $searchText . '%'); // Example of searching by Lname as well
+                    })
+                    ->orWhereHas('post', function ($query) use ($searchText) {
+                        $query->where('grade', 'like', '%' . $searchText . '%')
+                            ->orWhere('base_pay', 'like', '%' . $searchText . '%');
+                    });
+                $results = $query->get();
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+
+                // Total number of records (employees) without pagination
+                $totalRecords = $query->count();
+
+                // Paginate the results
+                $data = $query->skip($start)->take($length)->get();
+
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            } else {
+                // Query to fetch users with their associated posts, filtered by type_id
+
+                $query = User::with('post')->has('post')->where('type_id', $type);
+
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+
+                // Total number of records (employees) without pagination
+                $totalRecords = $query->count();
+
+                // Paginate the results
+                $data = $query->skip($start)->take($length)->get();
+
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            }
+        }
+    }
+
+
+
+
 
 
 
