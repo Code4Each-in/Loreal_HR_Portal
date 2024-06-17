@@ -71,7 +71,6 @@ class UsersController extends Controller
     {
         // Retrieve all users
         if (request()->ajax()) {
-          
             $role_id = auth()->user()->role_id;
             // admin_access = 1;  
             if ($role_id == config('app.admin_access')) {
@@ -138,16 +137,6 @@ class UsersController extends Controller
            }
            $all_roles = Role::all();
            return view('Users.listing', compact('all_roles'));
-
-        
-        // else {
-        //     $id = auth()->user()->id;
-        //     $users = User::with('role')->where('id',  $id)->get();
-        //     $all_roles = Role::all();
-
-        //     return view('Users.listing', compact('all_roles'));
-        // }
-     
     }
     public function all_users()
     {

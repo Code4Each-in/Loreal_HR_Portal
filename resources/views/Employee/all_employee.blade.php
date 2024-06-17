@@ -79,13 +79,13 @@ $(document).ready(function() {
                 },
                 { name: 'Grade', 
                     render: function (data, type, row) {
-                      console.log(row.post[0].grade);
-                      return row.post[0].grade ?? 'NA';    
+                      console.log(row.user_detail[0].grade);
+                      return row.user_detail[0].grade ?? 'NA';    
                     }
                 },
                 { name: 'Base Pay', 
                     render: function (data, type, row) {
-                      return row.post[0].base_pay ?? 'NA';    
+                      return row.user_detail[0].base_pay ?? 'NA';    
                     }
                 },
                 {

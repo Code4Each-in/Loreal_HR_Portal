@@ -7,12 +7,15 @@ use App\Models\RolePermission;
 use App\Models\Module;
 Use Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('Dashboard.index');
+        $total_emp = User::where('type_id', 2)->get();
+        $total_emp =  $total_emp->count();
+        return view('Dashboard.index', compact('total_emp'));
     
     }
 

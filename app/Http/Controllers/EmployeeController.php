@@ -20,14 +20,14 @@ class EmployeeController extends Controller
 
             if (request()->has('search') && request()->input('search.value') !== null) {
                 $searchText = request()->input('search.value');
-                $query = User::with('post')
-                    ->has('post')
+                $query = User::with('user_detail')
+                    ->has('user_detail')
                     ->where('type_id', $type)
                     ->where(function ($query) use ($searchText) {
                         $query->where('Fname', 'like', '%' . $searchText . '%')
                             ->orWhere('Lname', 'like', '%' . $searchText . '%'); // Example of searching by Lname as well
                     })
-                    ->orWhereHas('post', function ($query) use ($searchText) {
+                    ->orWhereHas('user_detail', function ($query) use ($searchText) {
                         $query->where('grade', 'like', '%' . $searchText . '%')
                             ->orWhere('base_pay', 'like', '%' . $searchText . '%');
                     });
@@ -48,9 +48,9 @@ class EmployeeController extends Controller
                     'recordsFiltered' => $totalRecords,
                 ]);
             } else {
-                // Query to fetch users with their associated posts, filtered by type_id
+                // Query to fetch users with their associated , filtered by type_id
 
-                $query = User::with('post')->has('post')->where('type_id', $type);
+                $query = User::with('user_detail')->has('user_detail')->where('type_id', $type);
 
                 $start = request()->input('start', 0);
                 $length = request()->input('length', 10);
@@ -80,14 +80,14 @@ class EmployeeController extends Controller
 
             if (request()->has('search') && request()->input('search.value') !== null) {
                 $searchText = request()->input('search.value');
-                $query = User::with('post')
-                    ->has('post')
+                $query = User::with('user_detail')
+                    ->has('user_detail')
                     ->where('type_id', $type)
                     ->where(function ($query) use ($searchText) {
                         $query->where('Fname', 'like', '%' . $searchText . '%')
                             ->orWhere('Lname', 'like', '%' . $searchText . '%'); // Example of searching by Lname as well
                     })
-                    ->orWhereHas('post', function ($query) use ($searchText) {
+                    ->orWhereHas('user_detail', function ($query) use ($searchText) {
                         $query->where('grade', 'like', '%' . $searchText . '%')
                             ->orWhere('base_pay', 'like', '%' . $searchText . '%');
                     });
@@ -108,9 +108,9 @@ class EmployeeController extends Controller
                     'recordsFiltered' => $totalRecords,
                 ]);
             } else {
-                // Query to fetch users with their associated posts, filtered by type_id
+                // Query to fetch users with their associated, filtered by type_id
 
-                $query = User::with('post')->has('post')->where('type_id', $type);
+                $query = User::with('user_detail')->has('user_detail')->where('type_id', $type);
 
                 $start = request()->input('start', 0);
                 $length = request()->input('length', 10);
@@ -297,7 +297,7 @@ class EmployeeController extends Controller
             ];
         }
 
-        $emp_data = User::with('post')->where('type_id', '2')->where('id', $id)->get();
+        $emp_data = User::with('user_detail')->where('type_id', '2')->where('id', $id)->get();
 
         return view('Employee.salary_structure',  compact("td_variables"),  compact("emp_data"));
     }
