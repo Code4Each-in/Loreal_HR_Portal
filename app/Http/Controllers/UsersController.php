@@ -39,6 +39,8 @@ class UsersController extends Controller
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'role_id' => 2,
+            
+
 
         ]);
 
@@ -68,18 +70,97 @@ class UsersController extends Controller
     public function showListing()
     {
         // Retrieve all users
+        if (request()->ajax()) {
+            $role_id = auth()->user()->role_id;
+            // admin_access = 1;  
+            if ($role_id == config('app.admin_access')) {
+                //---------------------------------------------------------------------------------------
+               // For Search 
+                if (request()->has('search') && request()->input('search.value') !== null) {
+                    $searchText = request()->input('search.value');
+                   
+                    $query = User::with('role')
+                    ->where('Fname', 'like', '%' . $searchText . '%')
+                    ->orWhere('email', 'like', '%' . $searchText . '%')
+                    ->orWhere('phone', 'like', '%' . $searchText . '%')
+                    ->orWhereHas('role', function ($query) use ($searchText) {
+                        $query->where('name', 'like', '%' . $searchText . '%');
+                    });
+                    $start = request()->input('start', 0);
+                    $length = request()->input('length', 10);
+                    $totalRecords = $query->count();
+                  
+                    $data = $query->skip($start)->take($length)->get();
+                    return response()->json([
+                        'data' => $data,
+                        'draw' => request()->input('draw', 1),
+                        'recordsTotal' => $totalRecords,
+                        'recordsFiltered' => $totalRecords,
+                    ]);
+
+                }
+
+                //---------------------------------------------------------------------------------------------------
+                $query = User::with('role');
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+                $totalRecords = $query->count();
+              
+                $data = $query->skip($start)->take($length)->get();
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            } 
+            //--------------------------------------------------------------------------------------------
+            //  Show data  of user that is logged in  
+            else{
+          
+                $id = auth()->user()->id;
+                $query = User::with('role')->where('id',  $id);
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+                $totalRecords = $query->count();
+              
+                $data = $query->skip($start)->take($length)->get();
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            }
+            //-----------------------------------------------------------------------------------------------
+         
+           }
+           $all_roles = Role::all();
+           return view('Users.listing', compact('all_roles'));
+    }
+    public function all_users()
+    {
         $role_id = auth()->user()->role_id;
         // admin_access = 1;  
         if ($role_id == config('app.admin_access')) {
-            $users = User::with('role')->get();
-            $all_roles = Role::all();
-            return view('Users.listing', compact('users', 'all_roles'));
-        } else {
+            $query = User::with('role');
+            $start = request()->input('start', 0);
+            $length = request()->input('length', 10);
+            $totalRecords = $query->count();
+          
+            $data = $query->skip($start)->take($length)->get();
+            return response()->json([
+                'data' => $data,
+                'draw' => request()->input('draw', 1),
+                'recordsTotal' => $totalRecords,
+                'recordsFiltered' => $totalRecords,
+            ]);
+        }
+        else{
             $id = auth()->user()->id;
             $users = User::with('role')->where('id',  $id)->get();
-            $all_roles = Role::all();
-
-            return view('Users.listing', compact('users', 'all_roles'));
+            
+           
         }
     }
 
@@ -103,12 +184,12 @@ class UsersController extends Controller
         // Create a new User and with validated data
         $user = new User();
         $user->role_id = $validatedData['role_id'];
-        $user->type_id = env('type_id');
+        $user->type_id =  config('app.type_id');
         $user->Fname = $validatedData['firstname'];
         $user->Lname = $validatedData['lastname'];
         $user->phone = $validatedData['phone'];
         $user->city = $validatedData['city'];
-        $user->state = $validatedData['state'];
+        $user->state = $validatedData['state']; 
         $user->zipcode = $validatedData['zip'];
         $user->address = $validatedData['address'];
         $user->email = $validatedData['email'];

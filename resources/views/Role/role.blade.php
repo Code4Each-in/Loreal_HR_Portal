@@ -1,12 +1,12 @@
 @extends('layout.app')
-
 @section('title', 'Roles')
 @section('sub-title', 'Roles')
-
 @section('content')
 
 <!-- Buttons to trigger modals -->
-<button class="btn btn-primary mt-3" onClick="openroleModal()" href="javascript:void(0)">Add Role</button>
+ <div class="create_btn">
+<button class="btn btn-primary1 " onClick="openroleModal()" href="javascript:void(0)">Add Role</button>
+</div>
 @if(session()->has('message'))
 <div id="successMessage" class="alert alert-success fade show" role="alert">
     <i class="bi bi-check-circle me-1"></i>
@@ -15,7 +15,7 @@
 @endif
 
 <!-- Role Table -->
-<table class="table table-borderless dashboard" id="role_table">
+<table class="table  dashboard" id="role_table">
     <thead>
         <tr>
             <th>Name</th>
@@ -127,7 +127,7 @@
                     @endforelse
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onClick="updateRole()" href="javascript:void(0)">Update</button>
+                        <button type="button" class="btn btn-primary update_btn" onClick="updateRole()" href="javascript:void(0)">Update</button>
                     </div>
                 </div>
             </form>
@@ -148,7 +148,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are You want to delete
+                    Are You Sure You  Want To Delete Role ?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -164,13 +164,26 @@
 
 @section('js_scripts')
 <script>
+$(document).ready(function() {
+    $('#role_table').DataTable({
+      searching: true,
+      language: {
+        emptyTable: "No records found"
+      },
+      "aoColumnDefs": [{
+        "bSortable": false,
+        "aTargets": [1]
+      }, ],
+    });
+});
+</script>
+
+<script>
     $(document).ready(function() {
         setTimeout(function() {
             $('#successMessage').fadeOut("slow");
         }, 2000);
-        $('#role_table').DataTable({
-            "order": []
-        });
+  
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -271,7 +284,7 @@
             success: (res) => {
                 if (res.success) {
                     $("#deleteModal").modal('hide');
-                    location.reload();
+                    location.reload(); 
                 } else {
                     alert('An error occurred: ' + res.message);
                 }
@@ -283,3 +296,7 @@
     });
 </script>
 @endsection
+
+
+
+

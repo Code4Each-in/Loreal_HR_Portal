@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <h3>Select Default Master Salary Head </h3>
+    <h3  class="heading-select">Select Default Master Salary Head </h3>
     <table class="table" id="pagination">
     <thead>
         <tr>

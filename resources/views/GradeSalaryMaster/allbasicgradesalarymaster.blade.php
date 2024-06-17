@@ -5,8 +5,8 @@
 @section('content')
 
 
-<div class="create_btn">
-    <h4> Grade {{ ($allbasicgradesal[0]['grade']) }}</h4>
+<div class="grade">
+    <h4 class="grade_heading"> Grade {{ ($allbasicgradesal[0]['grade']) }}</h4>
     <!-- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a> -->
 </div>
 

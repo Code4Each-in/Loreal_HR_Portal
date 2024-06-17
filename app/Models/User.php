@@ -26,12 +26,14 @@ class User extends Authenticatable
         'state',
         'zipcode',
         'address',
-        'role_id', 
+        'role_id',  
         'email',
         'password',
         'status',
     ];
-    public function post()
+ 
+
+    public function user_detail()
     {
         return $this->hasMany(UserDetail::class, 'emp_id' , 'id');
     }

@@ -112,11 +112,11 @@ class BasicGradeController extends Controller
     {
 
         $validated = $request->validate([
-            'grade'            => 'required',
+            'grade'  => 'required',
         ]);
-
         $salary_head = $request->salary_head;
 
+      
 
         $current_heads = GradeWiseSalaryMaster::where('grade', $request->grade)->pluck('head_title')->toArray();
         if ($salary_head) {
@@ -187,17 +187,7 @@ class BasicGradeController extends Controller
         }
         //-------------------------------------------------------
         // Store  the id of salary head in dependent_salary_head table
-
-
-
-
-
-
         //------------------------------------------------------=
-
-
-
-
         return redirect()->route('allBasicGrade')->with('message', ' Grade Updated successfully!');
     }
 
@@ -221,4 +211,11 @@ class BasicGradeController extends Controller
         $GradeWiseSalaryMaster = GradeWiseSalaryMaster::where('grade', $grade)->get()->toarray();
         return view('Basicgrade.edit_grade', compact("salary_head"), compact("GradeWiseSalaryMaster"), compact('grade'));
     }
+
+    public static function head_title($grade)
+    {
+        $head_titles = GradeWiseSalaryMaster::where('grade', $grade)->pluck('head_title')->toArray();;
+        return implode(", ", $head_titles);
+    }
+    
 }
