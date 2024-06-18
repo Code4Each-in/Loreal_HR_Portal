@@ -28,6 +28,9 @@ class PageSeeder extends Seeder
                 'name' => "Employees",
             ],
             [
+                'name' => "Salary",
+            ],
+            [
                 'name' => "Roles",
             ]
         ]);

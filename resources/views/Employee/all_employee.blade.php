@@ -63,6 +63,7 @@
   var pendingCatalogsTable;
 $(document).ready(function() {
     // DataTable initialization
+    const baseUrl = "{{ url('/') }}";
     pendingCatalogsTable = $('#emp_table').DataTable({
             processing: true,
             serverSide: true,
@@ -79,7 +80,6 @@ $(document).ready(function() {
                 },
                 { name: 'Grade', 
                     render: function (data, type, row) {
-                      console.log(row.user_detail[0].grade);
                       return row.user_detail[0].grade ?? 'NA';    
                     }
                 },
@@ -93,11 +93,8 @@ $(document).ready(function() {
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row) {
-                      return '<a href="/salary_struc/' + row.id + '" class="btn btn-primary salary-btn55">Salary Structure</a>';
-                  }
-
-
-
+                    return `<a href="${baseUrl}/salary_struc/${row.id}" class="btn btn-primary salary-btn55">Salary Structure</a>`;
+                }
                 }
 
 

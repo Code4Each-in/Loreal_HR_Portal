@@ -47,6 +47,13 @@ class ModuleSeeder extends Seeder
             [
                 'page_id' => 5,
                 'module_name' => "Listing",
+                'route_name' => "emp_salary",
+                'text'  => "Salary",
+                'icon'  => "bi bi-currency-rupee" 
+            ],
+            [
+                'page_id' => 6,
+                'module_name' => "Listing",
                 'route_name' => "roles.index",
                 'text'  => "Roles",
                 'icon'  => "bi bi-person" 

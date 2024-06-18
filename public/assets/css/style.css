@@ -1501,7 +1501,7 @@ div#header-alert {
   justify-content: center;
   margin: 0px auto;
   align-items: center;
-  width: 100%;
+  width: 70%;
   padding: 10px;
 }
 
@@ -1704,4 +1704,14 @@ a.btn.btn-primary.back_btn {
   opacity: 0;
   transition: .5s ease;
   background-color: #fff;
+}
+
+a.btn.btn-primary.switch_btn {
+  background-color: #5e5df0;
+  border: 2px solid #5e5df0;
+  font-size: 14px;
+}
+a.btn.btn-primary.switch_btn:hover{
+  background-color: transparent;
+  color: #5e5df0;
 }

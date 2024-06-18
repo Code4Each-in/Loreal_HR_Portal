@@ -237,3 +237,13 @@
     </section>
 
 @endsection
+
+@section('js_scripts')
+
+  <script>
+        setTimeout(function() {
+            $('#header-alert').fadeOut('fast');
+        }, 2000);
+    </script>
+
+@endsection
