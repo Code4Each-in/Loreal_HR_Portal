@@ -71,14 +71,6 @@ class EmployeeController extends Controller
         return view('Employee.all_employee');
     }
 
-  
-
-
-
-
-
-
-
     public function emp_data(Request $req)
     {
         $grade = $req->grade;
@@ -252,9 +244,8 @@ class EmployeeController extends Controller
 
         //-----------------
         $id = auth()->user()->id;
-
         $all_emp = UserDetail::where('emp_id', $id)->get();
-        $base_pay = ($all_emp[0]->base_pay);
+        $base_pay = $all_emp[0]->base_pay;
         $incentive = $all_emp[0]->incentive;
         $basic_percentage = $all_emp[0]->basic_percentage;
         $basic_percentage = str_replace('%', '/100', $basic_percentage);
@@ -326,6 +317,6 @@ class EmployeeController extends Controller
         }
 
         $emp_data = User::with('user_detail')->has('user_detail')->where('id', $id)->get();
-        return view('Employee.salary_structure',  compact("td_variables"),  compact("emp_data"));
+        return view('Employee.salary_structure',  compact("td_variables"),  compact("emp_data")); 
     }
 }

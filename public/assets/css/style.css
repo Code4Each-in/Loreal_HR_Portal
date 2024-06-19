@@ -1715,3 +1715,13 @@ a.btn.btn-primary.switch_btn:hover{
   background-color: transparent;
   color: #5e5df0;
 }
+
+.display_btn {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px auto;
+  padding: 0px 0px 30px;
+}
+.display_btn a#show_hide {
+  font-size: 14px;
+}

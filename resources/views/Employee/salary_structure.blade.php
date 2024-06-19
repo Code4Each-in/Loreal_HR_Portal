@@ -85,8 +85,10 @@
     </div>
   </div>
 </section>
-
+<div class="display_btn">
 <a href="" class="btn btn-primary show_hide" id="show_hide">Show Formula and Calculation</a>
+</div>
+
 <table class="table" id="emp_table" style="width:100%">
   <thead>
     <tr>
@@ -105,7 +107,7 @@
     </div>
     @endif
 
-    @foreach ($td_variables as $val)
+    @foreach ($td_variables as $val) 
 
     <tr>
       <td scope="row"> {{$val['head_title']}}</td>
