@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
 
+
 class UsersController extends Controller
 {
     public function registration()
@@ -67,13 +68,88 @@ class UsersController extends Controller
     }
 
 
-    public function showListing()
-    {
-        // Retrieve all users
+    // public function showListing()
+    // {
+    //     // Retrieve all users 
+    //     if (request()->ajax()) {
+    //         $role_id = auth()->user()->role_id;
+    //         // admin_access = 1;  
+    //         if ($role_id == config('app.admin_access')) {
+    //             //---------------------------------------------------------------------------------------
+    //            // For Search 
+    //             if (request()->has('search') && request()->input('search.value') !== null) {
+    //                 $searchText = request()->input('search.value');
+                   
+    //                 $query = User::with('role')
+    //                 ->where('Fname', 'like', '%' . $searchText . '%')
+    //                 ->orWhere('email', 'like', '%' . $searchText . '%')
+    //                 ->orWhere('phone', 'like', '%' . $searchText . '%')
+    //                 ->orWhereHas('role', function ($query) use ($searchText) {
+    //                     $query->where('name', 'like', '%' . $searchText . '%');
+    //                 });
+    //                 $start = request()->input('start', 0);
+    //                 $length = request()->input('length', 10);
+    //                 $totalRecords = $query->count();
+                  
+    //                 $data = $query->skip($start)->take($length)->get();
+    //                 return response()->json([
+    //                     'data' => $data,
+    //                     'draw' => request()->input('draw', 1),
+    //                     'recordsTotal' => $totalRecords,
+    //                     'recordsFiltered' => $totalRecords,
+    //                 ]);
+
+    //             }
+
+    //             //---------------------------------------------------------------------------------------------------
+    //             $query = User::with('role');
+    //             $start = request()->input('start', 0);
+    //             $length = request()->input('length', 10);
+    //             $totalRecords = $query->count();
+              
+    //             $data = $query->skip($start)->take($length)->get();
+    //             return response()->json([
+    //                 'data' => $data,
+    //                 'draw' => request()->input('draw', 1),
+    //                 'recordsTotal' => $totalRecords,
+    //                 'recordsFiltered' => $totalRecords,
+    //             ]);
+    //         } 
+    //         //--------------------------------------------------------------------------------------------
+    //         //  Show data  of user that is logged in  
+    //         else{
+          
+    //             $id = auth()->user()->id;
+    //             $query = User::with('role')->where('id',  $id);
+    //             $start = request()->input('start', 0);
+    //             $length = request()->input('length', 10);
+    //             $totalRecords = $query->count();
+              
+    //             $data = $query->skip($start)->take($length)->get();
+    //             return response()->json([
+    //                 'data' => $data,
+    //                 'draw' => request()->input('draw', 1),
+    //                 'recordsTotal' => $totalRecords,
+    //                 'recordsFiltered' => $totalRecords,
+    //             ]);
+    //         }
+    //         //-----------------------------------------------------------------------------------------------
+         
+    //        }
+    //        $all_roles = Role::all();
+    //        return view('Users.listing', compact('all_roles'));
+    // }
+
+        public function showListing()
+       {
+        // Retrieve all users 
+     
         if (request()->ajax()) {
+            $val = Session::get('user_session_type');
+           
             $role_id = auth()->user()->role_id;
             // admin_access = 1;  
-            if ($role_id == config('app.admin_access')) {
+            if ($val ==  config('app.USER_SESSION_TYPE')) {
                 //---------------------------------------------------------------------------------------
                // For Search 
                 if (request()->has('search') && request()->input('search.value') !== null) {
@@ -138,6 +214,7 @@ class UsersController extends Controller
            $all_roles = Role::all();
            return view('Users.listing', compact('all_roles'));
     }
+
     public function all_users()
     {
         $role_id = auth()->user()->role_id;
@@ -298,5 +375,6 @@ class UsersController extends Controller
         // Update the user's password
         User::where('id', $id)->update($data);
         Session::flash('message', 'Password changed successfully');
+       
     }
 }

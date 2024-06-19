@@ -43,6 +43,11 @@ use App\Http\Controllers\RoleController;
    });
    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // change profile to admin
+    Route::get('/profile_to_admin', [DashboardController::class, 'profile_to_admin'])->name('profile_to_admin');
+    //change profile  to employee
+    Route::get('/profile_to_emp', [DashboardController::class, 'profile_to_emp'])->name('profile_to_emp');
     // Salary  head   
     Route::get('/master_salary_head', [SalaryController::class, 'index'])->name('salaryHead');
     Route::post('/salaryHead', [SalaryController::class, 'store']);
@@ -73,6 +78,8 @@ use App\Http\Controllers\RoleController;
     // Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
      Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
      Route::get('/salary_struc/{id}', [EmployeeController::class, 'salary_struc']);
+     Route::get('/emp_salary', [EmployeeController::class, 'emp_salary'])->name('emp_salary');
+     
      // End employee route
 
     // End Basic with grade pay

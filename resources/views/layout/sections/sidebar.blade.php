@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 $permissions = DashboardController::permissions();
 $currentRouteName = Route::currentRouteName();
 
+
 foreach ($permissions as $val) {
     $isActive = $currentRouteName == $val['module'][0]['route_name'] ? 'active' : 'collapsed';
 ?>
@@ -29,9 +30,16 @@ foreach ($permissions as $val) {
     </a>
 </li>
 
+
 <?php
-}
-?>
+}  ?>
+<!-- <li>
+    <a class="nav-link " href="{{ url('emp_salary') }}">
+    <i class="bi bi-currency-rupee"></i>
+        <span>Salary</span>
+    </a>
+</li> -->
+
 
 
       <!-- 
