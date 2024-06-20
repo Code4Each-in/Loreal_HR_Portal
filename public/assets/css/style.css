@@ -1725,3 +1725,7 @@ a.btn.btn-primary.switch_btn:hover{
 .display_btn a#show_hide {
   font-size: 14px;
 }
+
+h5#detail {
+  color: #5e5df0;
+}

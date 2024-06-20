@@ -27,7 +27,6 @@ class RolePermissionMiddleware
             else{
                 
                 $name = \Request::route()->getName();
-               
                 
                 $modules = Module::where('route_name',$name)->first();
                 if ($modules == null) {
