@@ -98,6 +98,14 @@ use App\Http\Controllers\RoleController;
     Route::post('/update_basic_salary/{id}', [GradeSalaryMasterController::class, 'update_basic_salary']);
     Route::post('/delete_basic_sal', [GradeSalaryMasterController::class, 'delete_basic_sal']);
     Route::post('/get_grade_data', [GradeSalaryMasterController::class, 'get_grade_data']);
+
+       //  Roles
+       Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+       Route::post('/add/role', [RoleController::class, 'store'])->name('roles.add');
+       Route::post('/edit/role', [RoleController::class, 'edit'])->name('roles.edit');
+       Route::post('/update/role', [RoleController::class, 'update'])->name('roles.update');
+       Route::post('/delete/role', [RoleController::class, 'destroy'])->name('roles.delete');
+       //End roles 
  });
 
 
@@ -127,13 +135,7 @@ use App\Http\Controllers\RoleController;
 
     //End Success factor API
 
-    //  Roles
-    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
-    Route::post('/add/role', [RoleController::class, 'store'])->name('roles.add');
-    Route::post('/edit/role', [RoleController::class, 'edit'])->name('roles.edit');
-    Route::post('/update/role', [RoleController::class, 'update'])->name('roles.update');
-    Route::post('/delete/role', [RoleController::class, 'destroy'])->name('roles.delete');
-    //End roles 
+ 
 
 
 

@@ -127,7 +127,7 @@
 @endsection
 @section('js_scripts')
 
-<script>
+<!-- <script>
   $(document).ready(function() {
     $('#emp_table').DataTable({
       searching: true,
@@ -136,7 +136,7 @@
       },
       "aoColumnDefs": [{
         "bSortable": false,
-        "aTargets": [3]
+        "aTargets": [0]
       }, ],
     });
     $('#emp_table th#formula, #emp_table th#calculation').hide();
@@ -158,5 +158,31 @@
       $(this).text('Show Formula and Calculation');
     }
   });
-  </script>
+  </script> -->
+
+  <script>
+  $(document).ready(function() {
+    var table = $('#emp_table').DataTable({
+      searching: true,
+      language: {
+        emptyTable: "No records found"
+      },
+      "columns": [
+        null,
+        { "visible": false },
+        { "visible": false },
+        null
+      ],
+      "order": []
+    });
+
+    $('#show_hide').on('click', function(e) { 
+      e.preventDefault();
+      var isHidden = !table.column(1).visible();
+      table.column(1).visible(isHidden);
+      table.column(2).visible(isHidden);
+      $(this).text(isHidden ? 'Hide Formula and Calculation' : 'Show Formula and Calculation');
+    });
+  });
+</script>
 @endsection
