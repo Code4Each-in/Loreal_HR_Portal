@@ -34,6 +34,7 @@ $form_type = (old('formType') );
             </div>
         </div>
         <div class="row mb-3">
+            <div class="check_btn">
             <label for="content" class="col-sm-3 col-form-label required">Select the option</label>
             <div class="col-sm-3">
                 <input type="radio" id="wid_formula" name="method" value="wid_formula" checked>
@@ -43,6 +44,7 @@ $form_type = (old('formType') );
                 <input type="radio" id="fixed" name="method" value="fixed">
                   <label for="fixed">Fixed</label>
             </div>
+          </div>
         </div>
 
         <div id="formula_div" <?php if($form_type=="fixed") { ?> style="display: none;" <?php } ?>>
@@ -63,7 +65,7 @@ $form_type = (old('formType') );
                 </section>
                 <section class="cal2">
                     <div class="design-button">
-                        <h4>Source Factor</h4>
+                        <h4>Success Factor</h4>
                         <div class="cal-button ">
                             <a onclick="showFormula('{Basic_PAY}')" class="button-deisgn">Basic pay</a>
                             <a onclick="showFormula('{BASIC_PR}')" class="button-deisgn">Basic %</a>
@@ -113,9 +115,7 @@ $form_type = (old('formType') );
             <div class="row mb-3 mt-4">
                 <label for="title" class="col-sm-3 col-form-label required">Formula<span class='asterisk'>*</span></label>
                 <div class="col-sm-9">
-                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50">
-              
-            </textarea>
+                    <textarea id="formulaOutput" name="formulaOutput" rows="4" cols="50"></textarea>
             @if ($errors->has('formulaOutput'))
                 <span class="text-danger">{{ $errors->first('formulaOutput') }}</span>
                 @endif
@@ -140,7 +140,7 @@ $form_type = (old('formType') );
 
     <div class="modal-footer back-btn">
         <button type="submit" class="btn btn-default">Save</button>
-        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary">Back</a>
+        <a href="{{ url('salary_head_listing') }}" class="btn btn-primary back_btn">Back</a>
     </div>
 </form>
 
@@ -179,7 +179,7 @@ $form_type = (old('formType') );
     // Append the clicked button's value to the textarea content
     function showFormula(value) {
         var textarea = document.getElementById("formulaOutput");
-        textarea.value += value;
+        textarea.value = (textarea.value + value).trim();
     }
 
     // To clear the formulaOutput textarea

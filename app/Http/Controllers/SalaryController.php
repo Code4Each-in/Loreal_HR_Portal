@@ -30,7 +30,7 @@ class SalaryController extends Controller
 
       ]);
       $head_title = preg_replace('/\s+/', ' ', $req->head_title);
-      
+
       $head_title = str_replace(' ', '_', $head_title);
       $salary_head = SalaryHead::create([
         'head_title'        => $head_title,
@@ -122,7 +122,7 @@ class SalaryController extends Controller
             "salary_head_id" =>   $id,
             "involve_head_id" => $head[0]->id,
             "type" => "1",
-            
+
           );
           $salary_head = DeleteSalaryheadId::create($delete_salary_head_data);
         }

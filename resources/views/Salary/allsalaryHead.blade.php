@@ -31,7 +31,7 @@
     </div>
     @endif
     @foreach($allsalHead as $val)
-    <?php $head_title = str_replace("_", " ", $val->head_title); ?> 
+    <?php $head_title = str_replace("_", " ", $val->head_title); ?>
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>{{ $head_title }}</td>
@@ -59,7 +59,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are You want to delete
+          Are You Sure You Want To Delete Head Title ?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

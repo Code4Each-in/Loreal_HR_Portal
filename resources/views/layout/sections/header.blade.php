@@ -20,9 +20,26 @@
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
+       <?php 
+            use App\Http\Controllers\DashboardController;
+            $check_type_id = DashboardController::check_type_id();
+          
+       ?>
+        @if($check_type_id== "1")
+        @if(session('user_session_type') == "1")
+       <a href="{{ url('profile_to_emp') }}" class="btn btn-primary switch_btn" id="change_profile">Switch to Employee</a>
+          @elseif(session('user_session_type') == "2")
+          <a href="{{ url('profile_to_admin') }}" class="btn btn-primary switch_btn" id="change_profile">Switch to Admin</a>
+          @else
+        <a href="{{ url('profile_to_admin') }}" class="btn btn-primary switch_btn" id="change_profile">Switch to Admin</a>
+        @endif
+        @endif
+
+         
+
+
 
         <li class="nav-item dropdown pe-3">
-
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{ url('assets/img/profile_image.png') }} " alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">@if(Auth::check()) {{ Auth::user()->Fname }}  @endif</span>
@@ -37,31 +54,14 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
+          
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
+          
             <li>
               <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -75,9 +75,26 @@
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
+
         </li><!-- End Profile Nav -->
 
       </ul>
+          @if(session()->has('permission_error'))
+       <div class="alert alert-danger header-alert fade show" role="alert" id="header-alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                {{ session()->get('permission_error') }}
+        </div>
+        @endif   
+     
+        @if(session()->has('success'))
+        <div class="alert alert-success fade show" role="alert" id="header-alert">
+            <i class="bi bi-check-circle me-1"></i>
+            {{ session()->get('success') }}
+        </div>
+     @endif
     </nav><!-- End Icons Navigation -->
 
+
   </header><!-- End Header -->
+
+

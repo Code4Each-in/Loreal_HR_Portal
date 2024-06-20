@@ -89,6 +89,10 @@
       'View' => 'Illuminate\\Support\\Facades\\View',
       'Vite' => 'Illuminate\\Support\\Facades\\Vite',
     ),
+    'admin_access' => '1',
+    'type_id' => '1',
+    'USER_SESSION_TYPE' => '1',
+    'EMP_TYPE_ID' => '2',
   ),
   'auth' => 
   array (
@@ -696,7 +700,7 @@
   ),
   'session' => 
   array (
-    'driver' => 'file',
+    'driver' => 'cookie',
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,

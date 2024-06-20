@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
 
+
 class UsersController extends Controller
 {
     public function registration()
@@ -39,16 +40,18 @@ class UsersController extends Controller
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'role_id' => 2,
+            
+
 
         ]);
 
         // Retrieve the newly created user
         $user = User::where('email', $validatedData['email'])->first();
- 
+
         // Prepare notification messages
         $messages = [
             'subject' => 'Welcome to Local Integration Portal',
-            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',', 
+            'greeting-text' => 'Dear ' . ucfirst($user->Fname) . ',',
             'lines_array' => [
                 'body-text' => 'Thank you for registering with us. Your account has been successfully created.',
                 'info' => "You can now log in to your account using the credentials you provided during registration.",
@@ -65,13 +68,177 @@ class UsersController extends Controller
     }
 
 
-    public function showListing()
+    // public function showListing()
+    // {
+    //     // Retrieve all users 
+    //     if (request()->ajax()) {
+    //         $role_id = auth()->user()->role_id;
+    //         // admin_access = 1;  
+    //         if ($role_id == config('app.admin_access')) {
+    //             //---------------------------------------------------------------------------------------
+    //            // For Search 
+    //             if (request()->has('search') && request()->input('search.value') !== null) {
+    //                 $searchText = request()->input('search.value');
+                   
+    //                 $query = User::with('role')
+    //                 ->where('Fname', 'like', '%' . $searchText . '%')
+    //                 ->orWhere('email', 'like', '%' . $searchText . '%')
+    //                 ->orWhere('phone', 'like', '%' . $searchText . '%')
+    //                 ->orWhereHas('role', function ($query) use ($searchText) {
+    //                     $query->where('name', 'like', '%' . $searchText . '%');
+    //                 });
+    //                 $start = request()->input('start', 0);
+    //                 $length = request()->input('length', 10);
+    //                 $totalRecords = $query->count();
+                  
+    //                 $data = $query->skip($start)->take($length)->get();
+    //                 return response()->json([
+    //                     'data' => $data,
+    //                     'draw' => request()->input('draw', 1),
+    //                     'recordsTotal' => $totalRecords,
+    //                     'recordsFiltered' => $totalRecords,
+    //                 ]);
+
+    //             }
+
+    //             //---------------------------------------------------------------------------------------------------
+    //             $query = User::with('role');
+    //             $start = request()->input('start', 0);
+    //             $length = request()->input('length', 10);
+    //             $totalRecords = $query->count();
+              
+    //             $data = $query->skip($start)->take($length)->get();
+    //             return response()->json([
+    //                 'data' => $data,
+    //                 'draw' => request()->input('draw', 1),
+    //                 'recordsTotal' => $totalRecords,
+    //                 'recordsFiltered' => $totalRecords,
+    //             ]);
+    //         } 
+    //         //--------------------------------------------------------------------------------------------
+    //         //  Show data  of user that is logged in  
+    //         else{
+          
+    //             $id = auth()->user()->id;
+    //             $query = User::with('role')->where('id',  $id);
+    //             $start = request()->input('start', 0);
+    //             $length = request()->input('length', 10);
+    //             $totalRecords = $query->count();
+              
+    //             $data = $query->skip($start)->take($length)->get();
+    //             return response()->json([
+    //                 'data' => $data,
+    //                 'draw' => request()->input('draw', 1),
+    //                 'recordsTotal' => $totalRecords,
+    //                 'recordsFiltered' => $totalRecords,
+    //             ]);
+    //         }
+    //         //-----------------------------------------------------------------------------------------------
+         
+    //        }
+    //        $all_roles = Role::all();
+    //        return view('Users.listing', compact('all_roles'));
+    // }
+
+        public function showListing()
+       {
+        // Retrieve all users 
+     
+        if (request()->ajax()) {
+            $val = Session::get('user_session_type');
+           
+            $role_id = auth()->user()->role_id;
+            // admin_access = 1;  
+            if ($val ==  config('app.USER_SESSION_TYPE')) {
+                //---------------------------------------------------------------------------------------
+               // For Search 
+                if (request()->has('search') && request()->input('search.value') !== null) {
+                    $searchText = request()->input('search.value');
+                   
+                    $query = User::with('role')
+                    ->where('Fname', 'like', '%' . $searchText . '%')
+                    ->orWhere('email', 'like', '%' . $searchText . '%')
+                    ->orWhere('phone', 'like', '%' . $searchText . '%')
+                    ->orWhereHas('role', function ($query) use ($searchText) {
+                        $query->where('name', 'like', '%' . $searchText . '%');
+                    });
+                    $start = request()->input('start', 0);
+                    $length = request()->input('length', 10);
+                    $totalRecords = $query->count();
+                  
+                    $data = $query->skip($start)->take($length)->get();
+                    return response()->json([
+                        'data' => $data,
+                        'draw' => request()->input('draw', 1),
+                        'recordsTotal' => $totalRecords,
+                        'recordsFiltered' => $totalRecords,
+                    ]);
+
+                }
+
+                //---------------------------------------------------------------------------------------------------
+                $query = User::with('role');
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+                $totalRecords = $query->count();
+              
+                $data = $query->skip($start)->take($length)->get();
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            } 
+            //--------------------------------------------------------------------------------------------
+            //  Show data  of user that is logged in  
+            else{
+          
+                $id = auth()->user()->id;
+                $query = User::with('role')->where('id',  $id);
+                $start = request()->input('start', 0);
+                $length = request()->input('length', 10);
+                $totalRecords = $query->count();
+              
+                $data = $query->skip($start)->take($length)->get();
+                return response()->json([
+                    'data' => $data,
+                    'draw' => request()->input('draw', 1),
+                    'recordsTotal' => $totalRecords,
+                    'recordsFiltered' => $totalRecords,
+                ]);
+            }
+            //-----------------------------------------------------------------------------------------------
+         
+           }
+           $all_roles = Role::all();
+           return view('Users.listing', compact('all_roles'));
+    }
+
+    public function all_users()
     {
-        // Retrieve all users
-        $users = User::with('role')->get();
-        $all_roles = Role::all();
-        //dump($users); dd();
-        return view('Users.listing', compact('users', 'all_roles'));
+        $role_id = auth()->user()->role_id;
+        // admin_access = 1;  
+        if ($role_id == config('app.admin_access')) {
+            $query = User::with('role');
+            $start = request()->input('start', 0);
+            $length = request()->input('length', 10);
+            $totalRecords = $query->count();
+          
+            $data = $query->skip($start)->take($length)->get();
+            return response()->json([
+                'data' => $data,
+                'draw' => request()->input('draw', 1),
+                'recordsTotal' => $totalRecords,
+                'recordsFiltered' => $totalRecords,
+            ]);
+        }
+        else{
+            $id = auth()->user()->id;
+            $users = User::with('role')->where('id',  $id)->get();
+            
+           
+        }
     }
 
     //to save new user
@@ -94,12 +261,12 @@ class UsersController extends Controller
         // Create a new User and with validated data
         $user = new User();
         $user->role_id = $validatedData['role_id'];
-        $user->type_id = env('type_id'); 
+        $user->type_id =  config('app.type_id');
         $user->Fname = $validatedData['firstname'];
         $user->Lname = $validatedData['lastname'];
         $user->phone = $validatedData['phone'];
         $user->city = $validatedData['city'];
-        $user->state = $validatedData['state'];
+        $user->state = $validatedData['state']; 
         $user->zipcode = $validatedData['zip'];
         $user->address = $validatedData['address'];
         $user->email = $validatedData['email'];
@@ -131,13 +298,13 @@ class UsersController extends Controller
     {
         $user = User::find($request->userId);
         $new_status = 0;
-        if($request->status == 0){
+        if ($request->status == 0) {
             $new_status = 1;
         }
-            $user->status = $new_status;
-            $user->save();
-            Session::flash('message', 'User status updated successfully');
-            return response()->json(['success' => 'Status updates successfully']);
+        $user->status = $new_status;
+        $user->save();
+        Session::flash('message', 'User status updated successfully');
+        return response()->json(['success' => 'Status updates successfully']);
     }
     /**
      * UPDATE USER DATA
@@ -163,18 +330,18 @@ class UsersController extends Controller
             //dd($validatedData);
 
             // Update the user data
-            $userToUpdate->where('id',$request->edit_form_id)
-                        ->update([
-                            'Fname' => $validatedData['firstname'],
-                            'Lname' => $validatedData['lastname'],
-                            'phone' => $validatedData['phone'],
-                            'city' => $validatedData['city'],
-                            'state' => $validatedData['state'],
-                            'zipcode' => $validatedData['zip'],
-                            'address' => $validatedData['address'],
-                            'email' => $validatedData['email'],
-                            'role_id' => $validatedData['role_id'],
-                        ]);
+            $userToUpdate->where('id', $request->edit_form_id)
+                ->update([
+                    'Fname' => $validatedData['firstname'],
+                    'Lname' => $validatedData['lastname'],
+                    'phone' => $validatedData['phone'],
+                    'city' => $validatedData['city'],
+                    'state' => $validatedData['state'],
+                    'zipcode' => $validatedData['zip'],
+                    'address' => $validatedData['address'],
+                    'email' => $validatedData['email'],
+                    'role_id' => $validatedData['role_id'],
+                ]);
             Session::flash('message', 'User data updated successfully.');
         }
     }
@@ -208,5 +375,6 @@ class UsersController extends Controller
         // Update the user's password
         User::where('id', $id)->update($data);
         Session::flash('message', 'Password changed successfully');
+       
     }
 }
