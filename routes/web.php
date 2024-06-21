@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
       Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
       Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
       Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
+       // Apply Benefits 
+       Route::get('/apply_benefit', [EmployeeBenefitsController::class, 'apply_benefit'])->name('apply_benefit.index');
+       // End apply Benefits 
    });
 
    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -114,10 +117,15 @@ Route::group(['middleware' => ['auth']], function () {
    // End employee benefits
 
    // Apply Benefits 
-      Route::get('/apply_benefit', [EmployeeBenefitsController::class, 'apply_benefit'])->name('apply_benefit.index');
       Route::post('/sbt_detail', [EmployeeBenefitsController::class, 'sbt_detail'])->name('sbt_detail.index');
-
    // End Apply Benefits
+
+    // Show Benefit to admin for approvel
+      Route::get('/benefits/approval', [EmployeeBenefitsController::class, 'approval_benefits'])->name('approval_benefits.index');
+      Route::post('/approve_benefit', [EmployeeBenefitsController::class, 'approve_benefit'])->name('approve_benefit.index');
+      Route::post('/reject_benefit', [EmployeeBenefitsController::class, 'reject_benefit'])->name('reject_benefit.index');
+      
+    // End Show Benefit to admin for approvel
 });
 
 

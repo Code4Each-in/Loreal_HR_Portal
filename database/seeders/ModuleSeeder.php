@@ -61,6 +61,13 @@ class ModuleSeeder extends Seeder
             [
                 'page_id' => 7,
                 'module_name' => "Listing",
+                'route_name' => "apply_benefit.index",
+                'text'  => "Apply Benefit",
+                'icon'  => "bi bi-plus-lg"
+            ],
+            [
+                'page_id' => 8,
+                'module_name' => "Listing",
                 'route_name' => "roles.index",
                 'text'  => "Roles",
                 'icon'  => "bi bi-person" 

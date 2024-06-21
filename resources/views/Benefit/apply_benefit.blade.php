@@ -5,6 +5,10 @@
 @section('content')
 
 
+<div class="grade">
+    <h4 class="grade_heading"> Grade {{ ($benefits[0]['grade_id']) }}</h4>
+    <!-- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a> -->
+</div>
 
 <table class="table" id="benefits" style="width:100%">
     <thead>
@@ -30,12 +34,30 @@
             <td scope="row">{{ $val->name }}</td>
             <td scope="row">{{ $val->amount }}</td>
             <td scope="row">
-            <a href="" class="btn btn-primary apply" id="change_profile" data-id="{{ $val->id }}">Apply</a>
+            @php
+                $isApplied = false;
+                foreach ($apply_benefits as $apply_benefit) {
+                    if ($val->id == $apply_benefit->benefit_id) {
+                        if ($apply_benefit->status == 1) {
+                            echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-success approved " data-id="' . $val->id . '">Approved</a>';
+                        } elseif ($apply_benefit->status == 2) {
+                            echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-warning pending" data-id="' . $val->id . '">Pending</a>';
+                        } elseif ($apply_benefit->status == 3) {
+                            echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-danger rejected" data-id="' . $val->id . '">Rejected</a>';
+                        } 
+                        $isApplied = true;
+                        break;
+                    }
+                }
+                if (!$isApplied) {
+                    echo '<a href="javascript:void(0)" onclick="applyForBenefit(' . $val->id . ')" class="btn btn-primary apply" data-id="' . $val->id . '">Apply</a>';
+                }
+            @endphp
+
+          
             </td>
         </tr>
         @endforeach 
-
-    
     </tbody>
 </table>
 
@@ -117,9 +139,9 @@
                     url: '{{ url("sbt_detail") }}',
                     data: formData,
                     success: function(response) {
-                      //  $('.alert-danger').html('');
-                       // $('#changePasswordModal').modal('hide');
-                       // location.reload();
+                      $('.alert-danger').html('');
+                      $('#detailmodel').modal('hide');
+                        location.reload();
                     },
                     error: function(xhr, status, error) {
                         var errorMessage = JSON.parse(xhr.responseText);
@@ -137,6 +159,11 @@
         // Show the error container
         $('.alert-danger').show();
     }
+
+            function changeApplyStatus(status)
+            {
+               alert($status);
+            }
         });
     </script>
 @endsection

@@ -45,6 +45,10 @@ class AdminRolePermissionSeeder extends Seeder
                 'role_id' => 1,
                 'module_id' => 7 
             ],
+            [
+                'role_id' => 1,
+                'module_id' => 8
+            ],
         ]);
     }
 }

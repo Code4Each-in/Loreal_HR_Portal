@@ -1729,3 +1729,71 @@ a.btn.btn-primary.switch_btn:hover{
 h5#detail {
   color: #5e5df0;
 }
+
+h5#update_benefit {
+  color: #5e5df0;
+}
+a.btn.btn-success.approved {
+  padding: 7px 10px;
+  border:2px solid #198754 !important;
+
+}
+a.btn.btn-danger.rejected {
+  padding: 7px 15px;
+  border:2px solid #bb2d3b !important;
+}
+a.btn.btn-warning.pending {
+  padding: 7px 15px;
+  border:2px solid #ffc107 !important;
+}
+a.btn.btn-success.approved:hover{
+  background: transparent;
+  color: #198754;
+
+}
+a.btn.btn-danger.rejected:hover {
+  padding: 7px 15px;
+  background: transparent;
+  color: #bb2d3b;
+  
+}
+a.btn.btn-warning.pending:hover {
+  padding: 7px 15px;
+  background: transparent;
+  color: #ffc107;
+ 
+}
+
+/* tabs desgn css */
+
+.tabs-design {
+  padding: 10px 0px 30px;
+}
+ul#myTab {
+  padding: 0px 0px;
+}
+button#profile-tab {
+  color: #5e5df0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+button#home-tab {
+  color: #5e5df0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.nav-tabs .nav-link.active {
+  color: #000 !;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.table-btndesign {
+  display: flex;
+  column-gap: 10px;
+}
+.table-btndesign a.btn.btn-danger {
+  padding: 5px 25px;
+}
