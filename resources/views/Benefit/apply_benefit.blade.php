@@ -6,7 +6,7 @@
 
 
 <div class="grade">
-    <h4 class="grade_heading"> Grade {{ ($benefits[0]['grade_id']) }}</h4>
+    <h4 class="grade_heading"> Grade {{ ($benefits[0]['grade_id']) ?? '' }}</h4>
     <!-- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a> -->
 </div>
 
