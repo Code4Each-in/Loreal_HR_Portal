@@ -141,7 +141,7 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
-        // 'store' => 'redis',
+        // 'store' => 'redis', 
     ],
 
     /*
@@ -188,7 +188,11 @@ return [
     'admin_access'  =>  env('admin_access'),
     'type_id'  =>  env('type_id'),
     'USER_SESSION_TYPE' => env('USER_SESSION_TYPE'),
-    'EMP_TYPE_ID' => env('EMP_TYPE_ID')
+    'EMP_TYPE_ID' => env('EMP_TYPE_ID'),
+    'APPROVED' => env('APPROVED'),
+    'REJECTED' => env('REJECTED'),
+    'PENDING' => env('PENDING'),
+     
 
 ];
  

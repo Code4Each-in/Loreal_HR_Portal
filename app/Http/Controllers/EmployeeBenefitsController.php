@@ -126,20 +126,39 @@ class EmployeeBenefitsController extends Controller
        $benefits_applied = AppliedBenefit::create($data);
 
     }
-
     public function approval_benefits()
     {
         if (request()->ajax()) {
+            $status = request()->input('status');
+            
             $query = AppliedBenefit::with('users', 'EmployeeBenefit');
-        
+            
+            if ($status == config('app.APPROVED') || $status == config('app.PENDING') || $status == config('app.REJECTED')) {
+                $query->where('status', $status);
+            }
+            
+            if (request()->has('search') && request()->input('search.value') !== null) {
+                $searchText = request()->input('search.value');
+                $query->where(function ($query) use ($searchText) {
+                    $query->whereHas('users', function ($query) use ($searchText) {
+                        $query->where('Fname', 'like', '%' . $searchText . '%')
+                              ->orWhere('Lname', 'like', '%' . $searchText . '%');
+                    })
+                    ->orWhereHas('EmployeeBenefit', function ($query) use ($searchText) {
+                        $query->where('name', 'like', '%' . $searchText . '%')
+                              ->orWhere('amount', 'like', '%' . $searchText . '%');
+                    });
+                });
+            }
+            
             $start = request()->input('start', 0);
             $length = request()->input('length', 10);
             $draw = request()->input('draw', 1);
-        
+            
             $totalRecords = $query->count();
             
             $data = $query->skip($start)->take($length)->get()->toArray();
-        
+            
             return response()->json([
                 'data' => $data,
                 'draw' => $draw,
@@ -150,6 +169,7 @@ class EmployeeBenefitsController extends Controller
         
         return view('Benefit.benefits_for_approval');
     }
+    
 
     public function approve_benefit(Request $request)
     {

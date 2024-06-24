@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+<a href="{{ url('benefits/approval') }}" class="btn btn-primary switch_btn" id="change_profile">Benefit Approval</a>
 <section class="section dashboard">
       <div class="row">
 

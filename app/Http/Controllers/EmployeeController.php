@@ -18,8 +18,7 @@ class EmployeeController extends Controller
             if (request()->has('search') && request()->input('search.value') !== null) {
                 $searchText = request()->input('search.value');
                 $query = User::with('user_detail')
-                    ->has('user_detail')
-                    //->where('type_id', $type)
+                    ->has('user_detail') 
                     ->where(function ($query) use ($searchText) {
                         $query->where('Fname', 'like', '%' . $searchText . '%')
                             ->orWhere('Lname', 'like', '%' . $searchText . '%'); 

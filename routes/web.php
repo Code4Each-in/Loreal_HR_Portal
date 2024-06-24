@@ -37,9 +37,16 @@ Route::group(['middleware' => ['auth']], function () {
       Route::get('/salary_head_listing', [SalaryController::class, 'allsalaryHead'])->name('allsalaryHead');
       Route::get('/grade_listing', [BasicGradeController::class, 'show'])->name('allBasicGrade');
       Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
+      // Employye benefit
+           Route::get('/employee_benefits', [EmployeeBenefitsController::class, 'index'])->name('employee_benefits.index');
+      // End Employye benefit
        // Apply Benefits 
        Route::get('/apply_benefit', [EmployeeBenefitsController::class, 'apply_benefit'])->name('apply_benefit.index');
        // End apply Benefits 
+
+       //Employee salary
+       Route::get('/emp_salary', [EmployeeController::class, 'emp_salary'])->name('emp_salary');
+       //End Employee salary
    });
 
    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -78,7 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
    // Route::get('/emp_listing', [EmployeeController::class, 'index'])->name('emp_listing');
    Route::post('/get_emp_data', [EmployeeController::class, 'emp_data']);
    Route::get('/salary_struc/{id}', [EmployeeController::class, 'salary_struc']);
-   Route::get('/emp_salary', [EmployeeController::class, 'emp_salary'])->name('emp_salary');
+   // Route::get('/emp_salary', [EmployeeController::class, 'emp_salary'])->name('emp_salary');
 
    // End employee route
 
@@ -108,7 +115,7 @@ Route::group(['middleware' => ['auth']], function () {
    //End roles 
 
    // Create Benefits
-   Route::get('/employee_benefits', [EmployeeBenefitsController::class, 'index'])->name('employee_benefits.index');
+ //  Route::get('/employee_benefits', [EmployeeBenefitsController::class, 'index'])->name('employee_benefits.index');
    Route::get('/employee_benefits_create', [EmployeeBenefitsController::class, 'create'])->name('employee_benefits.create');
    Route::post('/employee_benefits_edit', [EmployeeBenefitsController::class, 'edit'])->name('employee_benefits.edit');
    Route::post('/employee_benefits_update', [EmployeeBenefitsController::class, 'update'])->name('employee_benefits.update');

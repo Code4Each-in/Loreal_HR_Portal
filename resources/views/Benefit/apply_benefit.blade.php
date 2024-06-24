@@ -16,8 +16,6 @@
             <th scope="col">Benefit</th>
             <th scope="col">Amount</th>
             <th scope="col">ACTION</th>
-            
-
         </tr>
     </thead>
     <tbody>
@@ -34,15 +32,15 @@
             <td scope="row">{{ $val->name }}</td>
             <td scope="row">{{ $val->amount }}</td>
             <td scope="row">
-            @php
+            @php 
                 $isApplied = false;
                 foreach ($apply_benefits as $apply_benefit) {
                     if ($val->id == $apply_benefit->benefit_id) {
-                        if ($apply_benefit->status == 1) {
+                        if ($apply_benefit->status == config('app.APPROVED')) {
                             echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-success approved " data-id="' . $val->id . '">Approved</a>';
-                        } elseif ($apply_benefit->status == 2) {
+                        } elseif ($apply_benefit->status == config('app.PENDING')) {
                             echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-warning pending" data-id="' . $val->id . '">Pending</a>';
-                        } elseif ($apply_benefit->status == 3) {
+                        } elseif ($apply_benefit->status == config('app.REJECTED')) {
                             echo '<a href="javascript:void(0)" onclick="changeApplyStatus(' . $apply_benefit->status . ')" class="btn btn-danger rejected" data-id="' . $val->id . '">Rejected</a>';
                         } 
                         $isApplied = true;

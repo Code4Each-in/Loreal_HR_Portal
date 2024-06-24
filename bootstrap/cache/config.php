@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Loreal',
+    'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -93,6 +93,9 @@
     'type_id' => '1',
     'USER_SESSION_TYPE' => '1',
     'EMP_TYPE_ID' => '2',
+    'APPROVED' => '1',
+    'REJECTED' => '3',
+    'PENDING' => '2',
   ),
   'auth' => 
   array (
@@ -247,7 +250,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'loreal_cache_',
+    'prefix' => 'laravel_cache_',
   ),
   'cors' => 
   array (
@@ -346,7 +349,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'loreal_database_',
+        'prefix' => 'laravel_database_',
       ),
       'default' => 
       array (
@@ -584,7 +587,7 @@
     'from' => 
     array (
       'address' => 'fuzail.code4each@gmail.com',
-      'name' => 'Loreal',
+      'name' => 'Laravel',
     ),
     'markdown' => 
     array (
@@ -700,7 +703,7 @@
   ),
   'session' => 
   array (
-    'driver' => 'cookie',
+    'driver' => 'file',
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
@@ -713,7 +716,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'loreal_session',
+    'cookie' => 'laravel_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
