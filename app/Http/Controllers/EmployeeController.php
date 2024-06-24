@@ -13,18 +13,15 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-
-
         if (request()->ajax()) {
             $type = config('app.type_id');
             if (request()->has('search') && request()->input('search.value') !== null) {
                 $searchText = request()->input('search.value');
                 $query = User::with('user_detail')
-                    ->has('user_detail')
-                    ->where('type_id', $type)
+                    ->has('user_detail') 
                     ->where(function ($query) use ($searchText) {
                         $query->where('Fname', 'like', '%' . $searchText . '%')
-                            ->orWhere('Lname', 'like', '%' . $searchText . '%'); // Example of searching by Lname as well
+                            ->orWhere('Lname', 'like', '%' . $searchText . '%'); 
                     })
                     ->orWhereHas('user_detail', function ($query) use ($searchText) {
                         $query->where('grade', 'like', '%' . $searchText . '%')
@@ -238,9 +235,7 @@ class EmployeeController extends Controller
 
     public function emp_salary()
     {
-        // $id =  auth()->user()->id;
-        // $emp_data = User::with('user_detail')->has('user_detail')->where('id', $id)->get();
-        // return view('emp_salary');
+       
 
         //-----------------
         $id = auth()->user()->id;

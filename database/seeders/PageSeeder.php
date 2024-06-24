@@ -31,6 +31,12 @@ class PageSeeder extends Seeder
                 'name' => "Salary",
             ],
             [
+                'name' => "Benefits",
+            ],
+            [
+                'name' => "Apply Benefit",
+            ],
+            [
                 'name' => "Roles",
             ]
         ]);

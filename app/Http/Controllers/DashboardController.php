@@ -26,8 +26,11 @@ class DashboardController extends Controller
 
         if ($session_type == 1) {
             $role_id = 1;
-        } else {
-            $role_id = auth()->user()->role_id;
+        }else {
+            $user = auth()->user();
+            if ($user) {
+                $role_id = $user->role_id;
+            } 
         }
 
 
@@ -48,9 +51,14 @@ class DashboardController extends Controller
         return redirect()->route('dashboard')->with('success', 'You have change profile  to  Employee');
     }
 
-    public static function  check_type_id()
+    public static function check_type_id()
     {
-        $role_id = auth()->user()->type_id;
-        return $role_id;
+        $user = auth()->user();
+        
+        if ($user) {
+            return $user->type_id;
+        }
+       
     }
+    
 }
