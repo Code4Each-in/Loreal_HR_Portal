@@ -1797,3 +1797,12 @@ button#home-tab {
 .table-btndesign a.btn.btn-danger {
   padding: 5px 25px;
 }
+
+.beneft_btn {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px auto;
+  /* padding: 0px 0px 30px; */
+  position: relative;
+  bottom: 40px;
+}

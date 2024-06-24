@@ -46,7 +46,7 @@ class EmployeeBenefitsController extends Controller
          EmployeeBenefit::create($Validated);
          
          return redirect()->route('employee_benefits.index')
-         ->with('message', 'Record Saved successfully!');
+         ->with('message', 'Benefit Created successfully!');
     }
 
     /**
@@ -100,14 +100,21 @@ class EmployeeBenefitsController extends Controller
          ->with('message', 'Record Deleted successfully!');
     }
 
-    public function apply_benefit()
+    public function apply_benefit() 
     {
         $userId = Auth::id();
         $get_grade = User::with('user_detail')->has('user_detail')->where('id', $userId)->get()->toArray();
-        $grade = $get_grade[0]['user_detail'][0]['grade'];
-        $benefits = EmployeeBenefit::where('grade_id', $grade)->get();
-        $apply_benefits =   AppliedBenefit::where('user_id', $userId)->get();
-        return view('Benefit.apply_benefit', compact('benefits', 'apply_benefits'));
+        if($get_grade){
+            $grade = $get_grade[0]['user_detail'][0]['grade'];
+            $benefits = EmployeeBenefit::where('grade_id', $grade)->get();
+            $apply_benefits =   AppliedBenefit::where('user_id', $userId)->get();
+            return view('Benefit.apply_benefit', compact('benefits', 'apply_benefits'));
+        }else{
+            $benefits = [];
+            $apply_benefits = [];
+            return view('Benefit.apply_benefit', compact('benefits', 'apply_benefits'));
+        }
+       
     }
 
     public function sbt_detail(Request $request)
@@ -124,6 +131,10 @@ class EmployeeBenefitsController extends Controller
        ); 
 
        $benefits_applied = AppliedBenefit::create($data);
+       if($benefits_applied)
+       {
+        Session::flash('message', 'Benefit applied successfully');
+       }
 
     }
     public function approval_benefits()
@@ -183,8 +194,8 @@ class EmployeeBenefitsController extends Controller
         $update_status = AppliedBenefit::where(['user_id' =>$userid,'benefit_id' => $benefitId])->update($status);
         if($update_status )
         {
-            Session::flash('message', 'Status approved successfully');
-            echo json_encode(["success" => "Status approved successfully"]);
+           
+            echo json_encode(["success" => "Benefit approved successfully"]);
         }
     }
 
@@ -200,8 +211,8 @@ class EmployeeBenefitsController extends Controller
         $update_status = AppliedBenefit::where(['user_id' =>$userid,'benefit_id' => $benefitId])->update($status);
         if($update_status )
         {
-            Session::flash('message', 'Status rejected successfully');
-            echo json_encode(["success" => "Status rejected successfully"]);
+            
+            echo json_encode(["success" => "Benefit rejected successfully"]);
         }
     }
 }

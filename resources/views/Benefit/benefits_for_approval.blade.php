@@ -22,6 +22,9 @@
 </div>
 
 
+        <div id="successMessage" ></div>
+       
+
 <table class="table" id="approval" style="width:100%">
     <thead>
         <tr>
@@ -162,6 +165,13 @@ $(document).on("click", '#approve', function(event) {
           var actionContainer = $(event.target).closest('.table-btndesign');
           actionContainer.find('#reject').remove(); // Remove the Reject button
           $(event.target).removeClass('btn-success').addClass('btn-success').text('Approved');
+          var htmlContent = `
+                    <div class="alert alert-success fade show">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Benefit approved successfully
+                    </div>
+                `;
+            $('#successMessage').html(htmlContent);
         }
       },
       error: function(request, status, error) {
@@ -194,6 +204,13 @@ $(document).on("click", '#reject', function(event) {
               var actionContainer = $(event.target).closest('.table-btndesign');
               actionContainer.find('#approve').remove(); // Remove the Approve button
               $(event.target).removeClass('btn-danger').addClass('btn-danger').text('Rejected');
+              var htmlContent = `
+                    <div class="alert alert-success fade show">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Benefit Rejected successfully
+                    </div>
+                `;
+            $('#successMessage').html(htmlContent);
           }
       },
       error: function (request, status, error) {

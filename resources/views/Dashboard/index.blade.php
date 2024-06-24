@@ -3,8 +3,10 @@
 @extends('layout.app')
 
 @section('content')
-
+<div class="beneft_btn">
 <a href="{{ url('benefits/approval') }}" class="btn btn-primary switch_btn" id="change_profile">Benefit Approval</a>
+</div>
+
 <section class="section dashboard">
       <div class="row">
 

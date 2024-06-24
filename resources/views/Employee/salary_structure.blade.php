@@ -13,7 +13,13 @@
           <label class="custom-file-upload fas">
             <div class="img-wrap img-upload"><img for="photo-upload" src="{{ url('assets/img/emp_pic.jpg') }}"></div>
           </label>
-          <h2> @if($emp_data[0]->Fname){{ $emp_data[0]->Fname }} @endif @if($emp_data[0]->Lname) {{ $emp_data[0]->Lname }}@endif</h2>
+                    @if(!empty($emp_data) && isset($emp_data[0]))
+              <h2>
+                  @if(isset($emp_data[0]->Fname)){{ $emp_data[0]->Fname ?? '' }}@endif 
+                  @if(isset($emp_data[0]->Lname)) {{ $emp_data[0]->Lname }}@endif
+              </h2>
+          @endif
+       
           <h3>Employee</h3>
 
         </div>
@@ -45,36 +51,42 @@
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                <div class="col-lg-9 col-md-8"> @if($emp_data[0]->Fname){{ $emp_data[0]->Fname }} @endif @if($emp_data[0]->Lname) {{ $emp_data[0]->Lname }}@endif</div>
+                <div class="col-lg-9 col-md-8">
+    @if(isset($emp_data[0]))
+        @if($emp_data[0]->Fname){{ $emp_data[0]->Fname }} @endif
+        @if($emp_data[0]->Lname) {{ $emp_data[0]->Lname }}@endif
+  
+    @endif
+</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Phone</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]->phone){{ $emp_data[0]->phone }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0]))   @if($emp_data[0]->phone){{ $emp_data[0]->phone }} @endif  @endif</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">City</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]->city){{ $emp_data[0]->city }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0])) @if($emp_data[0]->city){{ $emp_data[0]->city }} @endif @endif</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">State</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]->state){{ $emp_data[0]->state }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0])) @if($emp_data[0]->state){{ $emp_data[0]->state }} @endif @endif</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Zipcode</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]->zipcode){{ $emp_data[0]->zipcode }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0])) @if($emp_data[0]->zipcode){{ $emp_data[0]->zipcode }} @endif @endif</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Email</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]->email){{ $emp_data[0]->email }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0])) @if($emp_data[0]->email){{ $emp_data[0]->email }} @endif  @endif</div>
               </div>
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Grade</div>
-                <div class="col-lg-9 col-md-8">@if($emp_data[0]['user_detail'][0]['grade']){{ $emp_data[0]['user_detail'][0]['grade'] }} @endif</div>
+                <div class="col-lg-9 col-md-8">@if(isset($emp_data[0])) @if($emp_data[0]['user_detail'][0]['grade']){{ $emp_data[0]['user_detail'][0]['grade'] }} @endif  @endif</div>
               </div>
             </div>
           </div><!-- End Bordered Tabs -->

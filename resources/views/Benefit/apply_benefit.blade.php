@@ -9,7 +9,12 @@
     <h4 class="grade_heading"> Grade {{ ($benefits[0]['grade_id']) ?? '' }}</h4>
     <!-- <a href="{{ url('basic_grade') }}" class="btn btn-primary">Create Basic Salary</a> -->
 </div>
-
+@if(session()->has('message'))
+        <div id="successMessage" class="alert alert-success fade show" role="alert">
+            <i class="bi bi-check-circle me-1"></i>
+            {{ session()->get('message') }}
+        </div>
+        @endif
 <table class="table" id="benefits" style="width:100%">
     <thead>
         <tr>
@@ -19,12 +24,7 @@
         </tr>
     </thead>
     <tbody>
-        @if(session()->has('message'))
-        <div id="successMessage" class="alert alert-success fade show" role="alert">
-            <i class="bi bi-check-circle me-1"></i>
-            {{ session()->get('message') }}
-        </div>
-        @endif
+   
 
        @foreach($benefits as $val)
       
