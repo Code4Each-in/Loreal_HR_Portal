@@ -93,7 +93,7 @@ $(document).ready(function() {
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row) {
-                    return `<a href="${baseUrl}/salary_struc/${row.id}" class="btn btn-primary salary-btn55">Salary Structure</a>`;
+                    return `<a href="${baseUrl}/salary_struc/${row.id}" target="_blank" class="btn btn-primary salary-btn55">Salary Structure</a>`;
                 }
                 }
 

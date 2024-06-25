@@ -93,7 +93,7 @@ Route::group(['middleware' => ['auth']], function () {
    //Route::get('/users', [UsersController::class, 'showListing'])->name('user.listing');
    Route::post('/users/edit', [UsersController::class, 'getUserById'])->name('user.get');
    Route::post('/users/update', [UsersController::class, 'update'])->name('user.update');
-   Route::delete('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
+   Route::post('/users/delete', [UsersController::class, 'destroy'])->name('user.destroy');
    Route::post('/users/change-password', [UsersController::class, 'changePassword'])->name('user.change-password');
    Route::get('/toggle-user-status', [UsersController::class, 'toggleStatus'])->name('toggle-user-status');
    Route::post('/save_user', [UsersController::class, 'saveUser'])->name('user.save');
@@ -162,3 +162,10 @@ Route::get('/privacy_statement', [SuccessFactor::class, 'Privacystatement']);
 
 //End Success factor API
 Route::get('/permissions', [DashboardController::class, 'permissions']);
+
+// Monthly salary of emp (Cron)
+  Route::get('/monthly_salary', [EmployeeController::class, 'monthly_salary']);
+// End monthly salary of emp
+
+ // Salary slip
+   Route::get('/salary_slip', [EmployeeController::class, 'salary_slip'])->name('salary_slip.index');

@@ -110,9 +110,8 @@ class EmployeeBenefitsController extends Controller
             $apply_benefits =   AppliedBenefit::where('user_id', $userId)->get();
             return view('Benefit.apply_benefit', compact('benefits', 'apply_benefits'));
         }else{
-            $benefits = [];
-            $apply_benefits = [];
-            return view('Benefit.apply_benefit', compact('benefits', 'apply_benefits'));
+          
+            return view('errorPage');
         }
        
     }

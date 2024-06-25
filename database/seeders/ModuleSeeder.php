@@ -54,19 +54,26 @@ class ModuleSeeder extends Seeder
             [
                 'page_id' => 6,
                 'module_name' => "Listing",
+                'route_name' => "salary_slip.index",
+                'text'  => "Salary Slips",
+                'icon'  => "bi bi-receipt" 
+            ],
+            [
+                'page_id' => 7,
+                'module_name' => "Listing",
                 'route_name' => "employee_benefits.index",
                 'text'  => "Benefits",
                 'icon'  => "bi bi-plus-square-fill"
             ],
             [
-                'page_id' => 7,
+                'page_id' => 8,
                 'module_name' => "Listing",
                 'route_name' => "apply_benefit.index",
                 'text'  => "Apply Benefit",
                 'icon'  => "bi bi-plus-lg"
             ],
             [
-                'page_id' => 8,
+                'page_id' => 9,
                 'module_name' => "Listing",
                 'route_name' => "roles.index",
                 'text'  => "Roles",

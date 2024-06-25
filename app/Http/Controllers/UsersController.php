@@ -281,9 +281,7 @@ class UsersController extends Controller
 
     public function getUserById(Request $request)
     {
-        //  print_r($request->id);
         $user = User::find($request->id);
-
         if (!$user) {
             return response()->json(['error' => 'User not found']);
         }
@@ -347,13 +345,14 @@ class UsersController extends Controller
     }
 
     public function destroy(Request $request)
-    {
-
+    { 
+       
         $user = User::find($request->id);
 
         if ($user) {
             $user->delete();
-            Session::flash('message', 'User deleted successfully');
+           // Session::flash('message', 'User deleted successfully');
+            return redirect()->route('user.listing')->with('message', 'User deleted successfully');
         }
     }
 

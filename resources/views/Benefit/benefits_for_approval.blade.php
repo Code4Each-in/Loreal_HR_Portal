@@ -150,7 +150,7 @@ $(document).on("click", '#approve', function(event) {
   var benefitId = $(this).data('benefitid');
   
   // Ask for confirmation
-  if (confirm('ARE YOU SURE YOU WANT TO APPROVE THIS REQUEST ?')) {
+  if (confirm('Are You Sure You Want To Approve This Request ?')) {
     var vdata = { userid: userid, benefitId: benefitId };
 
     $.ajax({
@@ -189,7 +189,7 @@ $(document).on("click", '#reject', function(event) {
   var benefitId = $(this).data('benefitid');
   
   // Ask for confirmation
-  if (confirm("ARE YOU SURE YOU WANT TO REJECT THIS APPROVAL ?")) {
+  if (confirm("Are You Sure You Want To Reject This Approval ?")) {
     var vdata = {userid: userid, benefitId: benefitId};
 
     $.ajax({
@@ -222,14 +222,8 @@ $(document).on("click", '#reject', function(event) {
 </script>
 
 
-<!-- <script>
- $('#all_approved').click(function(){
- // var querySearch =  $(location).attr('href')
- // alert("Formatted url is: " + querySearch + "?approved");
-  var currentUrl = window.location.href;
-            var newUrl = currentUrl + (currentUrl.indexOf('?') === -1 ? '?' : '&') + 'status=approved';
-            window.location.href = newUrl;
- });
-  </script> -->
+<script>
+
+</script>
 
 @endsection
