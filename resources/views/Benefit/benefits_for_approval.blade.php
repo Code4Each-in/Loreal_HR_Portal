@@ -22,6 +22,9 @@
 </div>
 
 
+        <div id="successMessage" ></div>
+       
+
 <table class="table" id="approval" style="width:100%">
     <thead>
         <tr>
@@ -147,7 +150,7 @@ $(document).on("click", '#approve', function(event) {
   var benefitId = $(this).data('benefitid');
   
   // Ask for confirmation
-  if (confirm('ARE YOU SURE YOU WANT TO APPROVE THIS REQUEST ?')) {
+  if (confirm('Are You Sure You Want To Approve This Request ?')) {
     var vdata = { userid: userid, benefitId: benefitId };
 
     $.ajax({
@@ -162,6 +165,13 @@ $(document).on("click", '#approve', function(event) {
           var actionContainer = $(event.target).closest('.table-btndesign');
           actionContainer.find('#reject').remove(); // Remove the Reject button
           $(event.target).removeClass('btn-success').addClass('btn-success').text('Approved');
+          var htmlContent = `
+                    <div class="alert alert-success fade show">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Benefit approved successfully
+                    </div>
+                `;
+            $('#successMessage').html(htmlContent);
         }
       },
       error: function(request, status, error) {
@@ -179,7 +189,7 @@ $(document).on("click", '#reject', function(event) {
   var benefitId = $(this).data('benefitid');
   
   // Ask for confirmation
-  if (confirm("ARE YOU SURE YOU WANT TO REJECT THIS APPROVAL ?")) {
+  if (confirm("Are You Sure You Want To Reject This Approval ?")) {
     var vdata = {userid: userid, benefitId: benefitId};
 
     $.ajax({
@@ -194,6 +204,13 @@ $(document).on("click", '#reject', function(event) {
               var actionContainer = $(event.target).closest('.table-btndesign');
               actionContainer.find('#approve').remove(); // Remove the Approve button
               $(event.target).removeClass('btn-danger').addClass('btn-danger').text('Rejected');
+              var htmlContent = `
+                    <div class="alert alert-success fade show">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Benefit Rejected successfully
+                    </div>
+                `;
+            $('#successMessage').html(htmlContent);
           }
       },
       error: function (request, status, error) {
@@ -205,14 +222,8 @@ $(document).on("click", '#reject', function(event) {
 </script>
 
 
-<!-- <script>
- $('#all_approved').click(function(){
- // var querySearch =  $(location).attr('href')
- // alert("Formatted url is: " + querySearch + "?approved");
-  var currentUrl = window.location.href;
-            var newUrl = currentUrl + (currentUrl.indexOf('?') === -1 ? '?' : '&') + 'status=approved';
-            window.location.href = newUrl;
- });
-  </script> -->
+<script>
+
+</script>
 
 @endsection

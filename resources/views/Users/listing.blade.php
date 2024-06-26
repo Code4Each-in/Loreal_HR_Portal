@@ -219,6 +219,29 @@
     </div>
 </div>
 <!--End of create user-->
+<!--Delete  Modal -->
+<form action="{{ url('/users/delete') }}" method="POST">
+    @csrf
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                    <input type="hidden" name="id" id="userid" value="">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are You Sure You Want To Delete This User ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- End of Delete Model -->
 @endsection
 
 @section('js_scripts')
@@ -311,15 +334,7 @@
                 $(row).addClass('row_status_'+data.id); // Add a CSS class to the row
             }
     });
-        // $('#pagination').DataTable({
-        //     searching: true,
-        //     "aoColumnDefs": [
-        //         { "bSortable": false, "aTargets": [ 6] },
-        //     ],
-        //     language: {
-        //         emptyTable: "No records found"
-        //     }
-        // });
+
     
 
     // Call the function to initialize DataTable initially
@@ -387,25 +402,27 @@
     // Use event delegation for delete user button
     $(document).on('click', '.delete-user-btn', function(e) {
         e.preventDefault();
+        $('#deleteUserModal').modal('show');
         var userId = $(this).data('user-id');
+        $('#userid').val(userId);
         var data = {
             id: userId
         };
-        var confirmDelete = confirm("Are you sure you want to delete this user?");
-        if (confirmDelete) {
-            $.ajax({
-                type: 'DELETE',
-                url: "{{ url('/users/delete') }}",
-                data: data,
-                success: function(response) {
+       // var confirmDelete = confirm("Are you sure you want to delete this user?");
+       // if (confirmDelete) {
+            // $.ajax({
+            //     type: 'DELETE',
+            //     url: "{{ url('/users/delete') }}",
+            //     data: data,
+            //     success: function(response) {
                     
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
+            //         location.reload();
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error(xhr.responseText);
+            //     }
+            // });
+       // }
     });
 
     // Use event delegation for change password button
