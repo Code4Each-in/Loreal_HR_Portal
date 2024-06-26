@@ -440,7 +440,7 @@ class EmployeeController extends Controller
 
     public function salary_slip()
     {
-        $userId = Auth::id();
+       $userId = Auth::id();
        $salary =  SalarySlip::where('emp_id', $userId)->get();
        $salary_slip_id = $salary[0]['id'];
        $salary_slip_meta =  SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
