@@ -10,6 +10,9 @@ use App\Models\UserDetail;
 use App\Models\GradeWiseSalaryMaster;
 use App\Models\SalarySlip;
 use App\Models\SalarySlipMetaData;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class EmployeeController extends Controller
 {
@@ -442,9 +445,32 @@ class EmployeeController extends Controller
     {
        $userId = Auth::id();
        $salary =  SalarySlip::where('emp_id', $userId)->get();
-       $salary_slip_id = $salary[0]['id'];
-       $salary_slip_meta =  SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
+      // $salary_slip_id = $salary[0]['id'];
+      // $salary_slip_meta =  SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
 
-       return view('Employee.salary_slip', compact('salary', 'salary_slip_meta'));
+       return view('Employee.salary_slip', compact('salary'));
     }
+
+    public function download_slip()
+    {
+        $salary_slip_id = request()->segment(2);
+        $salary_slip_meta = SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
+    
+        $data = [
+            'title' => 'Salary Slip',
+            'date' => date('m/d/Y'),
+            'users' => $salary_slip_meta
+        ];
+    
+        view()->share('Employee.salary_slip_download', $data);
+        $pdf = PDF::loadView('Employee.salary_slip_download', $data);
+    
+        // Download PDF file with download method
+        return $pdf->download('salary_slip.pdf');
+    }
+    
+    
+    
+    
 }
+ 
