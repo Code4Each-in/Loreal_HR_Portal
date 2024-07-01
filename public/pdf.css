@@ -20,7 +20,9 @@ h4 {
 .products {
     width: 100%;
     border-collapse: collapse;
-   margin-bottom: 30px;
+
+   margin-bottom: 20px;
+   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.22);
 }
 
 .products th,
@@ -30,8 +32,8 @@ h4 {
     text-align: left;
 }
 .products .table-heading{
-    background-color: #343a40; /* Dark background color */
-    color: #fff !important;
+    background-color: #5e5df0; /* Dark background color */
+    color: #fff !important; 
 }
 .products th {
    
@@ -47,7 +49,16 @@ h4 {
 .products .border-top td {
     border-top: 2px solid #ddd; /* Top border for specific row */
 }
-
+.text-design{
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+}
+.text-design1{
+    color: #464444;
+    font-weight: 500;
+    font-size: 20px;
+}
 section.salery-slip .main-title {
     display: flex;
     flex-direction: column;
@@ -58,12 +69,11 @@ section.salery-slip .main-title {
 
 .main-title h6 {
     font-size: 30px;
-    line-height: 40px;
+   
 }
 
 .main-title span.fw-normal {
     font-size: 20px;
-    line-height: 30px;
     font-weight: 600 !important;
 }
 .sub-title span {
@@ -133,6 +143,7 @@ padding: 30px 0px;
 font-size: 18px;
 font-weight: 600;
 line-height: 30px;
+
 }
 span.total-div.fw-bold {
 font-size: 20px;
@@ -167,6 +178,8 @@ font-size: 25px;
 }
 .net-pay-cont{
     margin-bottom: 20px;
+    color: #000;
+    font-weight: 600;
     text-align: right;
 }
 .text-center{
@@ -175,34 +188,73 @@ font-size: 25px;
 .mt-1{
     margin-top: 10px;
 }
-.form-contact{
-    display: flex;
-    justify-content:space-between ;
+.mt-2{
+    margin-top: 30px;
+}
+.text-black{
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.form-contact {
+    width: 100%;
+    margin:30px auto 30px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.22) ;
 }
 .div-class {
-    border: 1px solid #ccc; /* Example border styling */
-    padding: 10px; /* Example padding */
-   /* Example width */
-    display: flex !important;
     width: 100%;
-}
-
-    .first-div{
-        width: 50%;
-    }
-    .second-div{
-        width: 50%;
-    }
+    display: table;
+    padding: 20px 10px 0px;
     
-.div-class h3 {
-    margin-bottom: 5px; /* Example margin for the heading */
-    font-size: 18px; /* Example font size for the heading */
-   
+}
+.div-class1 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+.div-class2 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
 }
 
-.fill-form {
-    display: block; /* Display as block to occupy full width available */
-    border-bottom:2px solid #000; /* Example background color */
-    /* Example padding */
-   
+.div-class3 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+
+.first-div, .second-div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.first-div {
+    width: 25%;
+
+}
+.first-div h3{
+    font-size: 22px;
+    font-weight: 600;
+}
+.second-div {
+    width:75%;
+    text-align: left;
+    padding: 0px 20px 0px 5px;
+
+}
+.first-div h3 {
+    margin: 0;
+    font-size: 20px;
+}
+.second-div .fill-form {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding:10px 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
 }
