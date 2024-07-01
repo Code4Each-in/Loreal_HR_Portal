@@ -10,6 +10,10 @@ use App\Models\UserDetail;
 use App\Models\GradeWiseSalaryMaster;
 use App\Models\SalarySlip;
 use App\Models\SalarySlipMetaData;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
+use DateTime;
+
 
 class EmployeeController extends Controller
 {
@@ -334,7 +338,7 @@ class EmployeeController extends Controller
         {   
             $all_salary_head = [];
             $td_variables = [];
-           // dump($emp);
+          
             $grade      = $emp['user_detail'][0]['grade'];
             $basic_pay  = $emp['user_detail'][0]['base_pay'];
             $basic_per  = $emp['user_detail'][0]['basic_percentage'];
@@ -344,7 +348,7 @@ class EmployeeController extends Controller
             $vpp_per    = str_replace('%', '/100', $vpp_per);
            
             $only_salary_head = SalaryHead::all();
-           // $grade =  $all_emp[0]->grade;
+           
             $salaryhead_with_grades = GradeWiseSalaryMaster::where('grade', $grade)->get();
     
             foreach ($salaryhead_with_grades as $head) {
@@ -406,33 +410,46 @@ class EmployeeController extends Controller
             ];
            
         } 
+        // Check Weather employee already exist in salary slip table
+          $month = date('m');
+          $year = date('Y');
+        $empExists = SalarySlip::where('emp_id', $emp['id'])
+                                 ->where('month', $month)
+                                 ->where('year', $year)
+                                  ->get();
+                                  
+          
+           if ($empExists->isEmpty()) {
+      
+            $salary_slip_data = array(
+                'emp_id'           => $emp['id'],
+                //'month'            => "08",
+                'month'            => date('m'),
+                'year'             => date('Y'),
+                'grade'            => $emp['user_detail'][0]['grade'],
+                'base_pay'         => $emp['user_detail'][0]['base_pay'],
+                'basic_percentage' => $emp['user_detail'][0]['basic_percentage'],
+                'incentive'        => $emp['user_detail'][0]['incentive'],
+                'vpp_percentage'   => $emp['user_detail'][0]['vpp_percentage'],
+               );
+              
+               
+               $salary_slip = SalarySlip::create($salary_slip_data);
+               foreach($td_variables as $val)
+               {
+                   $salary_slip_meta = array(
+                       'salary_slip_id' => $salary_slip->id ,
+                       "meta_key"       => $val['head_title'],
+                       "meta_value"     =>  $val['amount']
+                   );
        
-        $salary_slip_data = array(
-         'emp_id'           => $emp['id'],
-         'month'            => date('m'),
-         'year'             => date('Y'),
-         'grade'            => $emp['user_detail'][0]['grade'],
-         'base_pay'         => $emp['user_detail'][0]['base_pay'],
-         'basic_percentage' => $emp['user_detail'][0]['basic_percentage'],
-         'incentive'        => $emp['user_detail'][0]['incentive'],
-         'vpp_percentage'   => $emp['user_detail'][0]['vpp_percentage'],
-        );
-       
-        
-        $salary_slip = SalarySlip::create($salary_slip_data);
-        
-
-        foreach($td_variables as $val)
-        {
-           // dump($val);
-            $salary_slip_meta = array(
-                'salary_slip_id' => $salary_slip->id ,
-                "meta_key"       => $val['head_title'],
-                "meta_value"     =>  $val['amount']
-            );
-            // dump($salary_slip_meta);
-             $SalarySlipMetaData = SalarySlipMetaData::create($salary_slip_meta);
+                    $SalarySlipMetaData = SalarySlipMetaData::create($salary_slip_meta);
+               }
         }
+        else{ // echo "else";
+            echo "Salary slip already exists for the specified month and year.";
+        }
+
         }
       
       
@@ -442,9 +459,48 @@ class EmployeeController extends Controller
     {
        $userId = Auth::id();
        $salary =  SalarySlip::where('emp_id', $userId)->get();
-       $salary_slip_id = $salary[0]['id'];
-       $salary_slip_meta =  SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
+      // $salary_slip_id = $salary[0]['id'];
+      // $salary_slip_meta =  SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
 
-       return view('Employee.salary_slip', compact('salary', 'salary_slip_meta'));
+       return view('Employee.salary_slip', compact('salary'));
     }
+
+    public function download_slip()
+    {
+        $salary_slip_id = request()->segment(2);
+
+        $sal_slip_detail =  SalarySlip::where('id', $salary_slip_id)->get();
+        $month = $sal_slip_detail[0]->month;
+        $dateObj   = DateTime::createFromFormat('!m', $month );
+        $monthName = $dateObj->format('F');
+        $year = $sal_slip_detail[0]->year;
+        $salary_slip_meta = SalarySlipMetaData::where('salary_slip_id', $salary_slip_id)->get();
+    
+         $f_name = Auth::user()->Fname;
+         $l_name = Auth::user()->Lname;
+         $phone = Auth::user()->phone;
+
+    
+        $data = [
+            'title' => 'Salary Slip',
+            'date' => date('m/d/Y'),
+            'month' => $monthName,
+            'year'   => $year,
+            'f_name' => $f_name,
+            'l_name' => $l_name,
+            'phone'  => $phone, 
+            'sal_head' => $salary_slip_meta
+        ];
+    
+        $pdf = PDF::loadView('Employee.salary_slip_download', $data);
+    
+        // Download PDF file with download method
+        return $pdf->download('salary_slip.pdf');
+    }
+    
+    
+    
+    
+    
 }
+ 

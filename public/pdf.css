@@ -1,0 +1,260 @@
+h4 {
+    margin: 0;
+}
+.w-full {
+    width: 100%;
+}
+.w-half {
+    width: 50%;
+}
+.margin-top {
+    margin-top: 1.25rem;
+}
+.footer {
+    font-size: 0.875rem;
+    padding: 1rem;
+    background-color: rgb(241 245 249);
+}
+
+
+.products {
+    width: 100%;
+    border-collapse: collapse;
+
+   margin-bottom: 20px;
+   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.22);
+}
+
+.products th,
+.products td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.products .table-heading{
+    background-color: #5e5df0; /* Dark background color */
+    color: #fff !important; 
+}
+.products th {
+   
+    color: #fff; /* White text color */
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.products td {
+    font-size: 14px;
+}
+
+.products .border-top td {
+    border-top: 2px solid #ddd; /* Top border for specific row */
+}
+.text-design{
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+}
+.text-design1{
+    color: #464444;
+    font-weight: 500;
+    font-size: 20px;
+}
+section.salery-slip .main-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.main-title h6 {
+    font-size: 30px;
+   
+}
+
+.main-title span.fw-normal {
+    font-size: 20px;
+    font-weight: 600 !important;
+}
+.sub-title span {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.form-contact .single-input {
+position: relative;
+margin-top: 40px;
+}
+
+.salery-slip .form-contact .single-input i {
+position: absolute;
+top: 5px;
+left: 15px;
+color: #de3842;
+}
+
+.salery-slip .form-contact .single-input input,
+.salery-slip .form-contact .single-input textarea {
+width: 100%;
+border: none;
+border-bottom: 2px solid #07395c;
+padding-left: 50px;
+padding-bottom: 15px;
+font-size: 15px;
+font-weight: 700;
+text-transform: uppercase;
+    transition: border .3s;
+}
+
+.salery-slip .form-contact .single-input input::placeholder,
+.salery-slip .form-contact .single-input textarea::placeholder {
+color: rgba(7, 57, 92, .3);
+}
+
+.salery-slip .form-contact .single-input input:focus,
+.salery-slip .form-contact .single-input textarea:focus {
+border-color: #df383f;
+}
+
+.salery-slip .form-contact .single-input textarea {
+height: 150px;
+min-height: 50px;
+}
+
+.salery-slip .form-contact .submit-input input {
+margin-top: 40px;
+padding: 15px 50px;
+background-color: #de3842;
+color: #fff;
+border: none;
+font-weight: 700;
+transition: background-color .3s;
+}
+
+.salery-slip .form-contact .submit-input input:hover {
+background-color: #07395c;
+}
+.form-contact {
+padding: 30px 0px;
+}
+
+.text-code {
+font-size: 18px;
+font-weight: 600;
+line-height: 30px;
+
+}
+span.total-div.fw-bold {
+font-size: 20px;
+}
+.div-border {
+border: 2px dotted #000;
+padding: 5px 15px;
+}
+span.mt-2.auth {
+font-size: 16px;
+font-weight: 600;
+}
+.salery-slip .form-contact .single-input i {
+position: absolute;
+top: 5px;
+left: 15px;
+color: #de3842;
+font-size: 25px;
+}
+
+.div-colured{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px auto;
+}
+.total-div{
+    text-align: right;
+}
+.code-text{
+    display: flex;
+    flex-direction: column;
+}
+.net-pay-cont{
+    margin-bottom: 20px;
+    color: #000;
+    font-weight: 600;
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+.mt-1{
+    margin-top: 10px;
+}
+.mt-2{
+    margin-top: 30px;
+}
+.text-black{
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.form-contact {
+    width: 100%;
+    margin:30px auto 30px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.22) ;
+}
+.div-class {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+.div-class1 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+.div-class2 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+
+.div-class3 {
+    width: 100%;
+    display: table;
+    padding: 20px 10px 0px;
+    
+}
+
+.first-div, .second-div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.first-div {
+    width: 25%;
+
+}
+.first-div h3{
+    font-size: 22px;
+    font-weight: 600;
+}
+.second-div {
+    width:75%;
+    text-align: left;
+    padding: 0px 20px 0px 5px;
+
+}
+.first-div h3 {
+    margin: 0;
+    font-size: 20px;
+}
+.second-div .fill-form {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding:10px 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+}

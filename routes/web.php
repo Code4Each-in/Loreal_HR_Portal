@@ -169,3 +169,6 @@ Route::get('/permissions', [DashboardController::class, 'permissions']);
 
  // Salary slip
    Route::get('/salary_slip', [EmployeeController::class, 'salary_slip'])->name('salary_slip.index');
+
+   // Download Salary Slip
+   Route::get('/download_slip/{id}', [EmployeeController::class, 'download_slip'])->name('download_slip.index');
